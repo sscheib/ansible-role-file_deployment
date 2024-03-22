@@ -1,21 +1,21 @@
 ---
 # NOTE: _fd_quiet_assert does not impact this task, as it first needs to be ensured that it actually is
 #       properly defined
-- name: 'Ensure mandatory variables, as well as variables, which have a default value, are set (boolean)'
+- name: Ensure mandatory variables, as well as variables, which have a default value, are set (boolean)
   ansible.builtin.assert:
     that:
-      - "lookup('ansible.builtin.vars', __t_var) is defined"
-      - "lookup('ansible.builtin.vars', __t_var) | bool | string == lookup('ansible.builtin.vars', __t_var) | string"
-      - "lookup('ansible.builtin.vars', __t_var) is boolean"
+      - lookup('ansible.builtin.vars', __t_var) is defined
+      - lookup('ansible.builtin.vars', __t_var) | bool | string == lookup('ansible.builtin.vars', __t_var) | string
+      - lookup('ansible.builtin.vars', __t_var) is boolean
     success_msg: "Variable '{{ __t_var }}' defined properly - value: '{{ lookup('ansible.builtin.vars', __t_var) }}'"
-    fail_msg: "Variable '{{ __t_var }}' failed to validate"
+    fail_msg: Variable '{{ __t_var }}' failed to validate
   loop:
-    - '_fd_quiet_assert'
+    - _fd_quiet_assert
   loop_control:
-    loop_var: '__t_var'
-    label: 'variable: {{ __t_var }}'
+    loop_var: __t_var
+    label: "variable: {{ __t_var }}"
 
-- name: 'Ensure _fd_packages is defined properly'
+- name: Ensure _fd_packages is defined properly
   ansible.builtin.assert:
     that:
       # destination is defined for all items
@@ -56,7 +56,6 @@
         selectattr('src', 'undefined') |
         length == 0
 
-    success_msg: 'Files are defined correctly'
-    fail_msg: 'One or more failed failed to validated correctly'
-    quiet: '{{ _fd_quiet_assert }}'
-...
+    success_msg: Files are defined correctly
+    fail_msg: One or more failed failed to validated correctly
+    quiet: "{{ _fd_quiet_assert }}"
