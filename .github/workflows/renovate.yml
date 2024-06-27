@@ -73,6 +73,7 @@ jobs:
           path: 'cache-download'
 
       - name: 'Extract Renovate cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
         run: |
           set -x
           # Skip if no cache is set, such as the first time it runs.
@@ -138,8 +139,8 @@ jobs:
           LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'info' }}"
 
       - name: 'Compress Renovate cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
         run: |
-          ls "${cache_dir}"
           # The -C is important, as otherwise we end up extracting the files with
           # their full path, ultimately leading to a nested directory situation.
           tar -czvf "${cache_archive}" -C "${cache_dir}" .

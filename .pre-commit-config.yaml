@@ -217,4 +217,7 @@ repos:
     rev: '37.415.0'
     hooks:
       - id: 'renovate-config-validator'
+        verbose: true
+        stages:
+          - 'pre-commit'
 ...

@@ -91,6 +91,7 @@ jobs:
           pre-commit run --verbose --all-files --show-diff-on-failure
 
       - name: 'Compress pre-commit cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
         run: |
           # The -C is important, as otherwise we end up extracting the files with
           # their full path, ultimately leading to a nested directory situation.
