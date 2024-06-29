@@ -59,25 +59,25 @@ jobs:
             molecule: '24.6.0'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16.8@sha256:22e6773b832d01602a6d822f8c947c79d46c6b932a466874776929adf39e7ed2'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.1@sha256:fa661580efb29a119489b71bc28e286a3f38bee89f312b756f3c0d4fd1df88c7'
             cache_key_suffix: 'rhel8-2.16'
             # renovate: datasource=pypi
             molecule: '24.6.0'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15.11@sha256:0cda496e21c9565b00ba7e2da8c4f85e56dbdcf7a22f07749e4177ec5c106186'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.1@sha256:fa661580efb29a119489b71bc28e286a3f38bee89f312b756f3c0d4fd1df88c7'
             cache_key_suffix: 'rhel8-2.15'
             # renovate: datasource=pypi
             molecule: '6.0.3'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14.13@sha256:8ae958de1fa41427b7fc972d96f5b97ff6e3d878de1dceba9de6bfd2377fb990'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.1@sha256:fa661580efb29a119489b71bc28e286a3f38bee89f312b756f3c0d4fd1df88c7'
             cache_key_suffix: 'rhel8-2.14'
             # renovate: datasource=pypi
             molecule: '6.0.3'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.13.10@sha256:6d7db6eebd6653c20c0e4dd93e51190001431d2183bd5435834664d39311876f'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.1@sha256:fa661580efb29a119489b71bc28e286a3f38bee89f312b756f3c0d4fd1df88c7'
             cache_key_suffix: 'rhel8-2.13'
             # renovate: datasource=pypi
             molecule: '6.0.3'
