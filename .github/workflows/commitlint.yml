@@ -8,9 +8,34 @@ permissions:
   contents: 'read'
 
 jobs:
+  commit-author:
+    runs-on: 'ubuntu-latest'
+    outputs:
+      last_commit_author: '${{ steps.last_commit.outputs.LAST_COMMIT_AUTHOR }}'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          egress-policy: 'block'
+          allowed-endpoints: >
+            github.com:443
+
+      - name: 'Checkout the repository'
+        id: 'last_commit'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: 'Get the author of the last commit'
+        run: |
+          lastCommitAuthor="$(git log -1 --pretty=%an)"
+          echo "Last commit author: ${lastCommitAuthor}"
+          echo LAST_COMMIT_AUTHOR="${lastCommitAuthor}" >> "${GITHUB_ENV}"
+
   commitlint:
     runs-on: 'ubuntu-latest'
-    if: "${{ github.actor != 'pre-commit-ci[bot]' && github.actor != 'Renovate' }}"
+    needs: 'commit-author'
+    if: "${{ needs.commit-author.outputs.LAST_COMMIT_AUTHOR != 'Renovate' }}"
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
