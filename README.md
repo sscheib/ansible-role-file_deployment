@@ -189,6 +189,8 @@ Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for different ways to help and d
 | RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13`   |
 | RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13`   |
 
+Test
+
 ## License
 
 [`GPL-2.0-or-later`](LICENSE)
