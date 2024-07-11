@@ -1,21 +1,14 @@
 ---
 name: 'molecule'
 on:  # yamllint disable-line rule:truthy
-  pull_request:
-    branches:
-      - 'main'
-    paths:
-      - '**'
-      - '!.github/'
-      - '.github/workflows/molecule.yml'
+  pull_request_target:
+    types:
+      - 'opened'
+      - 'synchronize'
 
   push:
     branches:
       - 'main'
-    paths:
-      - '**'
-      - '!.github/'
-      - '.github/workflows/molecule.yml'
 
   workflow_dispatch:
     inputs:

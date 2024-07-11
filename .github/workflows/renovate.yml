@@ -26,9 +26,11 @@ on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: '0 */3 * * *'
 
-  pull_request:
-    branches:
-      - 'main'
+  pull_request_target:
+    types:
+      - 'opened'
+      - 'synchronize'
+
     paths:
       - '.github/workflows/renovate.yml'
       - '.github/renovate.json5'
@@ -37,6 +39,7 @@ on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - 'main'
+
     paths:
       - '.github/workflows/renovate.yml'
       - '.github/renovate.json5'
