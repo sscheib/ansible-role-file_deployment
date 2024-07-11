@@ -10,7 +10,6 @@ permissions:
 jobs:
   commitlint:
     runs-on: 'ubuntu-latest'
-    if: "${{ github.actor != 'pre-commit-ci[bot]' && github.actor != 'Renovate' }}"
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1

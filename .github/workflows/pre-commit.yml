@@ -72,7 +72,7 @@ jobs:
           tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
 
       - name: 'Install Python'
-        uses: 'actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d' # v5.1.0
+        uses: 'actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f' # v5.1.1
         with:
           python-version: '3.11'
 
@@ -91,13 +91,14 @@ jobs:
           pre-commit run --verbose --all-files --show-diff-on-failure
 
       - name: 'Compress pre-commit cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
         run: |
           # The -C is important, as otherwise we end up extracting the files with
           # their full path, ultimately leading to a nested directory situation.
           tar -czf "${cache_archive}" -C "${cache_dir}" .
 
       - name: 'Upload compressed cache'
-        uses: 'actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808' # v4.3.3
+        uses: 'actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b' # v4.3.4
         if: "github.event.inputs.repoCache != 'disabled'"
         with:
           name: '${{ env.cache_key }}'

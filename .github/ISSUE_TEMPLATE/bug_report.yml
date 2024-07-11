@@ -1,0 +1,116 @@
+---
+name: '🐞 Bug'
+description: 'File a bug/issue'
+title: '[BUG] <title>'
+body:
+  - type: 'checkboxes'
+    attributes:
+      label: 'Is there an existing issue for this?'
+      description: 'Please search to see if an issue already exists for the bug you encountered.'
+      options:
+        - label: 'I have searched the existing issues'
+          required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Current Behavior'
+      description: "A concise description of what you're experiencing."
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Expected Behavior'
+      description: 'A concise description of what you expected to happen.'
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Steps To Reproduce'
+      description: >-
+        Steps to reproduce the behavior. Please ensure to provide a
+        [minimal reproducible example](http://stackoverflow.com/help/mcve)
+      placeholder: |
+        1. Set X to Y
+        2. Run X
+        3. etc.
+      render: 'markdown'
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Ansible, role and collection versions'
+      description: |
+        Verbatim output between of following commands
+
+        1. `ansible --version`
+
+        1. `ansible-galaxy collection list`
+
+        1. `ansible-galaxy role list`
+      placeholder: |
+        1. ansible --version
+
+        2. ansible-galaxy collection list
+
+        3. ansible-galaxy role list
+      render: 'markdown'
+    validations:
+      required: true
+
+  - type: 'dropdown'
+    attributes:
+      label: 'Ansible installation method'
+      description: 'How did you install Ansible?'
+      options:
+        - 'RPM'
+        - 'pip'
+        - 'Execution Environment (EE)'
+        - 'Build from source'
+      default: 0
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Execution Environment'
+      description: >-
+        If you selected Execution Environment (EE) as Ansible installation method, which EE did you use?
+
+        Optionally, provide your Execution Environment definition, if you've built a custom EE
+    validations:
+      required: true
+
+  - type: 'dropdown'
+    attributes:
+      label: 'Collection/Role installation source'
+      description: 'How did you install the Collection/Role?'
+      options:
+        - 'Ansible Galaxy'
+        - 'git'
+      default: 0
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Environment'
+      description: >-
+        Tell us about the environment. e.g. control node/target operating system versions, Python version, etc.
+      placeholder: |
+        1. Control node operating system: RHEL 8.10
+        2. Target node operating system: RHEL 9.4
+        3. Target node Python version: 3.12
+        4. etc.
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Anything else?'
+      description: 'Links? References? Anything that will give us more context about the issue you are encountering!'
+    validations:
+      required: false
+...

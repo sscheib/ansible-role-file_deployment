@@ -1,0 +1,16 @@
+---
+# yamllint disable-line rule:line-length
+# Ref: https://help.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
+
+# force the usage of the templates
+blank_issues_enabled: false
+
+contact_links:
+  - name: 'Help and Support'
+    url: 'https://github.com/sscheib/ansible-role-file_deployment/discussions'
+    about: 'Ask for help.'
+
+  - name: 'Code of Conduct'
+    url: 'https://github.com/sscheib/ansible-role-file_deployment/blob/main/CODE_OF_CONDUCT.md'
+    about: 'Be nice to other members of the community.'
+...

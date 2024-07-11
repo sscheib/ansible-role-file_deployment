@@ -1,0 +1,25 @@
+---
+name: '🚀 Feature Request'
+description: 'Suggest an idea for this project'
+title: '[FEAT] <title>'
+body:
+  - type: 'checkboxes'
+    attributes:
+      label: 'Is there an existing feature requests for this?'
+      description: >-
+        Please search to see if a feature requests already exists for the feature you would like to propose
+      options:
+        - label: 'I have searched the existing issues'
+          required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Motivation & Examples'
+      description: |
+        Tell us why the feature is useful.
+        Describe what the feature would look like, if it is implemented.
+
+        Please note, that we only consider adding new features if they are relevant to many users.
+    validations:
+      required: true
+...

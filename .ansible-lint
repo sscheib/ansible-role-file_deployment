@@ -19,4 +19,13 @@ warn_list:
   - 'experimental'
 write_list:
   - 'none'
+
+# required due to molecule
+mock_modules:
+  - 'containers.podman.podman_container'
+  - 'containers.podman.podman_container_info'
+
+# required due to molecule
+mock_roles:
+  - 'sscheib.file_deployment'
 ...
