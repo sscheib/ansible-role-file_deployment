@@ -46,8 +46,13 @@ on:  # yamllint disable-line rule:truthy
           - 'disabled'
           - 'reset'
 
+permissions:
+  contents: 'read'
+
 jobs:
   call-workflow:
+    permissions:
+      contents: 'read'
     name: 'include molecule workflow'
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||

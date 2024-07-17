@@ -66,6 +66,8 @@ jobs:
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
       github.ref == 'refs/heads/main'
+    permissions:
+      contents: 'read'
     outputs:
       require-result: '${{ steps.check-access.outputs.require-result }}'
     steps:

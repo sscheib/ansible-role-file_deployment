@@ -33,6 +33,8 @@ env:
 jobs:
   check-user-permissions:
     runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
       github.ref == 'refs/heads/main'
