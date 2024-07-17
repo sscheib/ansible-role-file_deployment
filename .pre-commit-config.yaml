@@ -70,6 +70,9 @@ repos:
       - id: 'detect-private-key'
         stages:
           - 'pre-commit'
+      - id: 'end-of-file-fixer'
+        stages:
+          - 'pre-commit'
       - id: 'mixed-line-ending'
         stages:
           - 'pre-commit'
