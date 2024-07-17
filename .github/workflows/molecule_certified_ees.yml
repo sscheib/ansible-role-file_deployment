@@ -1,5 +1,5 @@
 ---
-name: 'include molecule'
+name: 'molecule certified EEs'
 on:  # yamllint disable-line rule:truthy
 
   workflow_call:
@@ -35,9 +35,6 @@ jobs:
     runs-on: 'ubuntu-latest'
     permissions:
       contents: 'read'
-    if: >-
-      contains(github.event.pull_request.labels.*.name, 'run') ||
-      github.ref == 'refs/heads/main'
     outputs:
       require-result: '${{ steps.check-access.outputs.require-result }}'
     steps:

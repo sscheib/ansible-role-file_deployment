@@ -1,5 +1,5 @@
 ---
-name: 'molecule call workflow'
+name: 'wrapper workflow to call molecule certified EEs workflow'
 on:  # yamllint disable-line rule:truthy
   pull_request_target:
     types:
@@ -53,11 +53,11 @@ jobs:
   call-workflow:
     permissions:
       contents: 'write'
-    name: 'include molecule workflow'
+    name: 'Include molecule workflow'
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
       github.ref == 'refs/heads/main'
-    uses: './.github/workflows/molecule_certified_ees_include.yml'
+    uses: './.github/workflows/molecule_certified_ees.yml'
     with:
       repoCache: "${{ github.event.inputs.repoCache }}"
     secrets:
