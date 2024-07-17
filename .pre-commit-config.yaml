@@ -73,6 +73,7 @@ repos:
       - id: 'end-of-file-fixer'
         stages:
           - 'pre-commit'
+        exclude: '^molecule/default/files/test.file$'  # test file has no return on purpose
       - id: 'mixed-line-ending'
         stages:
           - 'pre-commit'
