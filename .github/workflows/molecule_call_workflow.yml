@@ -58,5 +58,5 @@ jobs:
     secrets:
       CRC_USERNAME: '${{ secrets.CRC_USERNAME }}'
       CRC_PASSWORD: '${{ secrets.CRC_PASSWORD }}'
-      GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      token: '${{ secrets.GITHUB_TOKEN }}'
 ...

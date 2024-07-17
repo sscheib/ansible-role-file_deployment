@@ -9,7 +9,7 @@ on:  # yamllint disable-line rule:truthy
         type: 'string'
 
     secrets:
-      GITHUB_TOKEN:
+      token:
         required: true
       CRC_USERNAME:
         required: true
@@ -54,7 +54,7 @@ jobs:
           require: 'write'
           username: '${{ github.triggering_actor }}'
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GITHUB_TOKEN: '${{ secrets.token }}'
 
       - name: 'Check User Permission'
         if: "steps.check-access.outputs.require-result == 'false'"
