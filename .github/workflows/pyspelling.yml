@@ -10,7 +10,7 @@ permissions:
   contents: 'read'
 
 jobs:
-  build:
+  pyspelling:
     name: 'pyspelling'
     runs-on: 'ubuntu-latest'
     permissions:
