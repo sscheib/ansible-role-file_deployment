@@ -38,6 +38,6 @@ jobs:
           fail-on-scopes: 'runtime,development,unknown'
           show-openssf-scorecard: true
           vulnerability-check: true
-          warn-on-openssf-scorecard-level: 7
+          warn-on-openssf-scorecard-level: 6
           warn-only: false
 ...
