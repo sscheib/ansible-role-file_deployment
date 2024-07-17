@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: 'file_deployment'
   namespace: 'sscheib'
-  author: 'Steffen Scheib'
+  author: 'Benny'
   description: 'Very simple role to deploy files'
   issue_tracker_url: 'https://github.com/sscheib/ansible-role-file_deployment/issues'
   license: 'GPL-2.0-or-later'
