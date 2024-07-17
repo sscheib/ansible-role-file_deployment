@@ -9,6 +9,7 @@
 <!--- Pick one below and delete the rest -->
 
 - Bugfix Pull Request
+- Continuous Integration (CI) Pull Request
 - Docs Pull Request
 - Feature Pull Request
 - Test Pull Request
