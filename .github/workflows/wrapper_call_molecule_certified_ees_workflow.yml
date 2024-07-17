@@ -7,6 +7,7 @@ on:  # yamllint disable-line rule:truthy
 
     paths:
       - '.github/workflows/molecule_certified_ees.yml'
+      - '.github/workflows/wrapper_call_molecule_certified_ees_workflow.yml'
       - 'defaults/**'
       - 'files/**'
       - 'handlers/**'
@@ -24,6 +25,7 @@ on:  # yamllint disable-line rule:truthy
 
     paths:
       - '.github/workflows/molecule_certified_ees.yml'
+      - '.github/workflows/wrapper_call_molecule_certified_ees_workflow.yml'
       - 'defaults/**'
       - 'files/**'
       - 'handlers/**'
