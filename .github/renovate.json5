@@ -3,7 +3,8 @@
   "extends": [
     "config:recommended",
     "helpers:pinGitHubActionDigests",
-    "docker:pinDigests"
+    "docker:pinDigests",
+    "mergeConfidence:all-badges"
   ],
   "assignees": [
     "sscheib"
