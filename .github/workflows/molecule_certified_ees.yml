@@ -1,211 +1,69 @@
 ---
 name: 'molecule certified EEs'
 on:  # yamllint disable-line rule:truthy
+  pull_request_target:
+    types:
+      - 'labeled'
 
-  workflow_call:
+    paths:
+      - '.github/workflows/molecule_certified_ees.yml'
+      - '.github/workflows/wf_call_molecule_certified_ees.yml'
+      - 'defaults/**'
+      - 'files/**'
+      - 'handlers/**'
+      - 'library/**'
+      - 'lookup_plugins/**'
+      - 'meta/**'
+      - 'module_utils/**'
+      - 'tasks/**'
+      - 'templates/**'
+      - 'vars/**'
+
+  push:
+    branches:
+      - 'main'
+
+    paths:
+      - '.github/workflows/molecule_certified_ees.yml'
+      - '.github/workflows/wf_call_molecule_certified_ees.yml'
+      - 'defaults/**'
+      - 'files/**'
+      - 'handlers/**'
+      - 'library/**'
+      - 'lookup_plugins/**'
+      - 'meta/**'
+      - 'module_utils/**'
+      - 'tasks/**'
+      - 'templates/**'
+      - 'vars/**'
+
+  workflow_dispatch:
     inputs:
       repoCache:
-        required: false
-        type: 'string'
-
-    secrets:
-      token:
-        required: true
-      CRC_USERNAME:
-        required: true
-      CRC_PASSWORD:
-        required: true
+        description: 'Reset or disable the cache?'
+        type: 'choice'
+        default: 'enabled'
+        options:
+          - 'enabled'
+          - 'disabled'
+          - 'reset'
 
 permissions:
   contents: 'read'
 
-# Adding these as env variables makes it easy to re-use them in different steps and in bash.
-env:
-  cache_archive: 'molecule_cache.tar.gz'
-  # This is the dir renovate provides
-  # If we set our own directory via cacheDir, we can run into permissions issues.
-  # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
-  # time gets faster, it also takes longer to upload the cache as it grows bigger.
-  cache_dir: '/tmp/.cache/molecule'
-  # This can be manually changed to bust the cache if neccessary.
-  cache_key: 'molecule-cache'
-
 jobs:
-  check-user-permissions:
-    runs-on: 'ubuntu-latest'
-    permissions:
-      contents: 'read'
-    outputs:
-      require-result: '${{ steps.check-access.outputs.require-result }}'
-    steps:
-      - name: 'Harden Runner'
-        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
-        with:
-          egress-policy: 'block'
-          allowed-endpoints: >
-            api.github.com:443
-            github.com:443
-
-      - name: 'Get User Permissions'
-        id: 'check-access'
-        uses: 'actions-cool/check-user-permission@956b2e73cdfe3bcb819bb7225e490cb3b18fd76e' # v2.2.1
-        with:
-          require: 'write'
-          username: '${{ github.triggering_actor }}'
-        env:
-          GITHUB_TOKEN: '${{ secrets.token }}'
-
-      - name: 'Check User Permission'
-        if: "steps.check-access.outputs.require-result == 'false'"
-        run: |
-          echo "${{ github.triggering_actor }} does not have permissions on this repo."
-          echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
-          echo "Job originally triggered by ${{ github.actor }}"
-
-  molecule-certified-ees:
-    runs-on: 'ubuntu-latest'
-    needs: 'check-user-permissions'
-    if: "needs.check-user-permissions.outputs.require-result == 'true'"
+  call-workflow:
+    name: 'Include molecule workflow'
     permissions:
       contents: 'write'
-    container:
-      image: '${{ matrix.container.image }}'
-      credentials:
-        username: '${{ secrets.crc_username }}'
-        password: '${{ secrets.crc_password }}'
-      options: '--privileged'
-    strategy:
-      matrix:
-        container:
-          #
-          # UBI 8
-          #
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17@sha256:4fde8ceeaecb0869b5b47e0e52caf988d765faab95dc181de7bab3d821d88487'
-            cache_key_suffix: 'rhel8-2.17'
-            # renovate yaml: datasource=pypi
-            molecule: '24.7.0'
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16@sha256:c24f160adbaf09000d4fea3300741b0b5a5d961d921684c089c116767bd2e7e3'
-            cache_key_suffix: 'rhel8-2.16'
-            # renovate yaml: datasource=pypi
-            molecule: '24.7.0'
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15@sha256:1be81d9d69d43700dc46ff95084c845191ff0146bf90ceb69e612b674487dd94'
-            cache_key_suffix: 'rhel8-2.15'
-            # renovate yaml: datasource=pypi
-            molecule: '6.0.3'
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14@sha256:8073b374c3654488c515770f82e2d3a4d293ad7f428eef36399a04b36899227d'
-            cache_key_suffix: 'rhel8-2.14'
-            # renovate yaml: datasource=pypi
-            molecule: '6.0.3'
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.13@sha256:8e67f956ffb1dba10773c458831c7b9241aeb7b2862e64e8f37220e562e5e96f'
-            cache_key_suffix: 'rhel8-2.13'
-            # renovate yaml: datasource=pypi
-            molecule: '6.0.3'
-
-          #
-          # UBI 9
-          #
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.17@sha256:68b4f5fdd7a0b977387e9a8150658a2df9f3974a45c84c4088907351a24c6973'
-            cache_key_suffix: 'rhel9-2.17'
-            # renovate yaml: datasource=pypi
-            molecule: '24.7.0'
-            additional_packages:
-              - 'python-unversioned-command'
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16@sha256:b6fae555d54e95cfb9f0ccc2120bfab4e91f24a1568c065eeb55fc6b5b1cfac7'
-            cache_key_suffix: 'rhel9-2.16'
-            # renovate yaml: datasource=pypi
-            molecule: '24.7.0'
-            additional_packages:
-              - 'python-unversioned-command'
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.15@sha256:9c2072bd7f9187f87bac11c4fcf3975bcd876e5b73dfdc84e1aebf2571ab5fdc'
-            cache_key_suffix: 'rhel9-2.15'
-            # renovate yaml: datasource=pypi
-            molecule: '6.0.3'
-            additional_packages:
-              - 'python-unversioned-command'
-
-    steps:
-      - name: 'Install NodeJS'
-        uses: 'actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b' # v4.0.3
-        with:
-          # renovate dep: datasource=npm depName=node
-          node-version: '20.15.1'
-
-      - name: 'Install podman'
-        run: 'microdnf install podman -y'
-
-      - name: 'Checkout repository'
-        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
-        with:
-          # check out the pull request's HEAD
-          ref: '${{ github.event.pull_request.head.sha }}'
-
-      - name: 'Download cache of the previous workflow run'
-        uses: 'dawidd6/action-download-artifact@bf251b5aa9c2f7eeb574a96ee720e24f801b7c11' # v6
-        if: "github.event.inputs.repoCache != 'disabled'"
-        continue-on-error: true
-        with:
-          name: '${{ env.cache_key }}-${{ matrix.container.cache_key_suffix }}'
-          path: 'cache-download'
-
-      - name: 'Extract molecule cache to improve performance'
-        if: "github.event.inputs.repoCache != 'disabled'"
-        run: |
-          set -x
-          # Skip if no cache is set, such as the first time it runs.
-          if [ ! -d cache-download ] ; then
-            echo "No cache found."
-            exit 0
-          fi
-
-          # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
-          mkdir -p "${cache_dir}"
-          tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
-
-      - name: 'Install additional packages'
-        if: "join(matrix.container.additional_packages, ' ') != ''"
-        run: |
-          microdnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
-
-      - name: 'Install Python packages'
-        run: |
-          pip3 install molecule==${{ matrix.container.molecule }}
-          mkdir -pv "${cache_dir}"
-
-      - name: 'Run molecule'
-        run: |
-          molecule test
-
-      - name: 'Compress molecule cache to improve performance'
-        if: "github.event.inputs.repoCache != 'disabled'"
-        run: |
-          # The -C is important, as otherwise we end up extracting the files with
-          # their full path, ultimately leading to a nested directory situation.
-          tar -czf "${cache_archive}" -C "${cache_dir}" .
-
-      - name: 'Upload compressed cache'
-        uses: 'actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b' # v4.3.4
-        if: "github.event.inputs.repoCache != 'disabled'"
-        with:
-          name: '${{ env.cache_key }}-${{ matrix.container.cache_key_suffix }}'
-          path: '${{ env.cache_archive }}'
-          # Since this is updated and restored on every run, we don't need to keep it
-          # for long. Just make sure this value is large enough that multiple renovate
-          # runs can happen before older cache archives are deleted.
-          retention-days: 1
+    if: >-
+      contains(github.event.pull_request.labels.*.name, 'run') ||
+      github.ref == 'refs/heads/main'
+    uses: './.github/workflows/wf_call_molecule_certified_ees.yml'
+    with:
+      repoCache: "${{ github.event.inputs.repoCache }}"
+    secrets:
+      CRC_USERNAME: '${{ secrets.CRC_USERNAME }}'
+      CRC_PASSWORD: '${{ secrets.CRC_PASSWORD }}'
+      token: '${{ secrets.GITHUB_TOKEN }}'
 ...
