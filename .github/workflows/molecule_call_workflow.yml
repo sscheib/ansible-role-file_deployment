@@ -52,7 +52,7 @@ permissions:
 jobs:
   call-workflow:
     permissions:
-      contents: 'read'
+      contents: 'write'
     name: 'include molecule workflow'
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
