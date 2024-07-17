@@ -1,7 +1,6 @@
 ---
 name: 'include: molecule certified EEs'
 on:  # yamllint disable-line rule:truthy
-
   workflow_call:
     inputs:
       repoCache:
