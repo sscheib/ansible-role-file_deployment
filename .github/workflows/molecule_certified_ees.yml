@@ -52,13 +52,46 @@ permissions:
   contents: 'read'
 
 jobs:
-  call-molecule-workflow:
-    name: 'Include molecule workflow'
-    permissions:
-      contents: 'write'
+  check-secrets:
+    name: 'Check if required secrets are available'
+    # only run the job if the job context's branch is main or the 'run' label is set
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
       github.ref == 'refs/heads/main'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+    outputs:
+      secrets-defined: '${{ steps.secret-check.outputs.secrets-defined }}'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          disable-sudo: true
+          egress-policy: 'audit'
+          # allowed-endpoints: >
+
+      - name: 'Check if all required secrets are defined'
+        id: 'secret-check'
+        shell: 'bash'
+        run: |
+          (
+            [[ "${{ secrets.CRC_USERNAME }}" != '' ]] &&
+            [[ "${{ secrets.CRC_PASSWORD }}" != '' ]]
+          ) || {
+            echo "secrets-defined=false" >> "${GITHUB_OUTPUT}";
+            exit 0;
+          };
+
+          # secrets not empty, so assuming defined
+          echo "secrets-defined=true" >> "${GITHUB_OUTPUT}";
+
+  call-molecule-workflow:
+    name: 'Include molecule workflow'
+    if: "needs.check-secrets.outputs.secrets-defined == 'true'"
+    permissions:
+      contents: 'write'
+    needs: 'check-secrets'
     uses: './.github/workflows/wf_call_molecule_certified_ees.yml'
     with:
       repoCache: "${{ github.event.inputs.repoCache }}"
