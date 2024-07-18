@@ -17,8 +17,36 @@ on:  # yamllint disable-line rule:truthy
 permissions: 'read-all'
 
 jobs:
+  check-secrets:
+    name: 'Check if required secrets are available'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+    outputs:
+      secrets-defined: '${{ steps.secret-check.outputs.secrets-defined }}'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          disable-sudo: true
+          egress-policy: 'block'
+
+      - name: 'Check if all required secrets are defined'
+        id: 'secret-check'
+        shell: 'bash'
+        run: |
+          [[ "${{ secrets.SCORECARD_TOKEN }}" != '' ]] || {
+            echo "secrets-defined=false" >> "${GITHUB_OUTPUT}";
+            exit 0;
+          };
+
+          # secrets not empty, so assuming defined
+          echo "secrets-defined=true" >> "${GITHUB_OUTPUT}";
+
   analysis:
     name: 'Scorecard analysis'
+    if: "needs.check-secrets.outputs.secrets-defined == 'true'"
+    needs: 'check-secrets'
     runs-on: 'ubuntu-latest'
     permissions:
       # Needed to upload the results to code-scanning dashboard.

@@ -10,8 +10,39 @@ permissions:
   contents: 'read'
 
 jobs:
+  check-secrets:
+    name: 'Check if required secrets are available'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+    outputs:
+      secrets-defined: '${{ steps.secret-check.outputs.secrets-defined }}'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          disable-sudo: true
+          egress-policy: 'block'
+
+      - name: 'Check if all required secrets are defined'
+        id: 'secret-check'
+        shell: 'bash'
+        run: |
+          (
+            [[ "${{ secrets.RELEASE_TOKEN }}" != '' ]] &&
+            [[ "${{ secrets.GALAXY_API_KEY }}" != '' ]]
+          ) || {
+            echo "secrets-defined=false" >> "${GITHUB_OUTPUT}";
+            exit 0;
+          };
+
+          # secrets not empty, so assuming defined
+          echo "secrets-defined=true" >> "${GITHUB_OUTPUT}";
+
   release:
     name: 'Publish to Ansible Galaxy'
+    if: "needs.check-secrets.outputs.secrets-defined == 'true'"
+    needs: 'check-secrets'
     runs-on: 'ubuntu-latest'
     permissions:
       contents: 'write'
@@ -42,6 +73,6 @@ jobs:
       - name: 'Publish to Ansible Galaxy'
         uses: 'robertdebock/galaxy-action@7d89099e09f4385ec4b53eb58c0d120f1ad806dd' # 1.2.1
         with:
-          galaxy_api_key: '${{ secrets.galaxy_api_key }}'
+          galaxy_api_key: '${{ secrets.GALAXY_API_KEY }}'
           git_branch: 'main'
 ...

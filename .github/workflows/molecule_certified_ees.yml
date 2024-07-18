@@ -68,8 +68,7 @@ jobs:
         uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
         with:
           disable-sudo: true
-          egress-policy: 'audit'
-          # allowed-endpoints: >
+          egress-policy: 'block'
 
       - name: 'Check if all required secrets are defined'
         id: 'secret-check'
