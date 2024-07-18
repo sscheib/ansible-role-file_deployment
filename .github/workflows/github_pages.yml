@@ -7,10 +7,15 @@ on:  # yamllint disable-line rule:truthy
 
   workflow_dispatch: {}
 
+permissions:
+  contents: 'read'
+
 jobs:
   build_and_deploy:
     name: 'Build and deploy documentation to GitHub Pages'
     runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'write'
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c' # v2.9.0
