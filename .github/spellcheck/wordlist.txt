@@ -9,3 +9,5 @@ mitigations
 RHEL
 UBI
 Dev
+Nav
+frontmatter

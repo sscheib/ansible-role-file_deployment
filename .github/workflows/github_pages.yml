@@ -1,0 +1,37 @@
+---
+name: 'Build and deploy documentation to GitHub Pages'
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build_and_deploy:
+    name: 'Build and deploy documentation to GitHub Pages'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c' # v2.9.0
+        with:
+          disable-sudo: true
+          egress-policy: 'audit'
+
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Cache dependencies'
+        uses: 'actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9' # v4.0.2
+        with:
+          path: 'vendor/bundle'
+          key: "${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}"
+          restore-keys: '${{ runner.os }}-gems-'
+
+      - name: 'Deploy to GitHub Pages'
+        uses: 'jeffreytse/jekyll-deploy-action@c1329290ab1cf2df48661ec1bea92e1d6990025b' # v0.6.0
+        with:
+          provider: 'github'
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          branch: 'gh-pages'
+          jekyll_src: './docs'
+          jekyll_cfg: './_config.yml'
+...
