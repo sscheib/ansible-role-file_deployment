@@ -5,6 +5,8 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - 'main'
 
+  workflow_dispatch: {}
+
 jobs:
   build_and_deploy:
     name: 'Build and deploy documentation to GitHub Pages'
