@@ -33,5 +33,5 @@ jobs:
           token: '${{ secrets.GITHUB_TOKEN }}'
           branch: 'gh-pages'
           jekyll_src: './docs'
-          jekyll_cfg: './_config.yml'
+          jekyll_cfg: './docs/config.yml'
 ...
