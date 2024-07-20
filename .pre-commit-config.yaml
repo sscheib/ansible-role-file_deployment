@@ -17,7 +17,7 @@ ci:
 
 repos:
   - repo: 'https://github.com/ansible/ansible-lint'
-    rev: 'v24.7.0'
+    rev: 'b4018c22f8fe8371bd6845d0cd62cebea54ce012' # v24.6.1
     hooks:
       - id: 'ansible-lint'
         stages:
