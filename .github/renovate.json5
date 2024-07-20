@@ -151,6 +151,13 @@
       "patch": {
         "enabled": true
       }
+    },
+    {
+      "description": "Enable digest pinning for pre-commit",
+      "matchFileNames": [
+        ".pre-commit-config.yaml"
+      ],
+      "pinDigests": true
     }
   ],
   "pre-commit": {
