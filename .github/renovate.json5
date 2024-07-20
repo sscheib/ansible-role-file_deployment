@@ -16,7 +16,7 @@
     "pinDigests": true
   },
   "pre-commit": {
-    "enabled": false
+    "enabled": true
   },
   "packageRules": [
     {
@@ -221,19 +221,6 @@
         "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>.*?)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    },
-    {
-      "description": "Pin digests for pre-commit hooks",
-      "customType": "regex",
-      "fileMatch": [
-        "^.pre-commit-config\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "repo: '(?<depName>https?://[^/]+?[^\']+?)'(?<indentation>\\s+?)rev: '(?<currentValue>v?\\d+?\.\\d+?\.\\d+?)'",
-        "repo: '(?<depName>https?://[^/]+?[^\']+?)'(?<indentation>\\s+?)rev: '(?<currentDigest>[a-z0-9]{40}|[a-z0-9]{64})' # (?<currentValue>v?\\d+?\.\\d+?\.\\d+?)"
-      ],
-      "autoReplaceStringTemplate": "repo: '{{{depName}}}{{{indentation}}}rev: '{{#if newDigest}}{{{newDigest}}}'{{#if newValue}} # {{{newValue}}}{{/if}}{{else}}{{{newValue}}}'{{/if}}",
-      "datasourceTemplate": "git-tags"
     }
   ]
 }
