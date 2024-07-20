@@ -225,6 +225,7 @@
         "repo: \\'?https?:\/\/(?<hostname>[^\/]+)\/(?<depName>\\S*?)\\'?\n\\s+rev: \\'?(?<currentValue>v?\\d+\\.\\d+\\.\\d+)\'?\n",
         "repo: \\'?https?:\/\/(?<hostname>[^\/]+)\/(?<depName>\\S*?)\\'?\n\\s+rev: \\'?(?<currentDigest>[a-z0-9]{40}|[a-z0-9]{64})\\'? # (?<currentValue>v?\\d+\\.\\d+\\.\\d+)\n"
       ],
+      "autoReplaceStringTemplate": "repo: \'{{{hostname}}}\/{{{depName}}}\'\n{{{indentation}}}rev: \'{{#if newDigest}}{{{newDigest}}}\' # {{{newValue}}}{{else}}{{{newValue}}}\'{{/if}}",
       "datasourceTemplate": "github-tags"
     }
   ]
