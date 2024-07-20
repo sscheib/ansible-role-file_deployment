@@ -160,9 +160,6 @@
       "pinDigests": true
     }
   ],
-  "pre-commit": {
-    "enabled": true
-  },
   "customManagers": [
     {
       "description": "Extract execution environments defined via image:",
