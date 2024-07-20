@@ -208,7 +208,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/renovatebot/pre-commit-hooks'
-    rev: 'd1b88e0c94b3172b85d165550c5f52d9cfa4a5e9' # 37.437.2
+    rev: '37.437.3' # 37.437.2
     hooks:
       - id: 'renovate-config-validator'
         verbose: true
