@@ -153,13 +153,6 @@
       "patch": {
         "enabled": true
       }
-    },
-    {
-      "description": "Enable digest pinning for pre-commit",
-      "matchFileNames": [
-        "^.pre-commit-config.yaml$"
-      ],
-      "pinDigests": true
     }
   ],
   "customManagers": [
@@ -204,7 +197,8 @@
       "description": "Extract custom dependency definitions",
       "customType": "regex",
       "fileMatch": [
-        "^.github/workflows/.+\\.ya?ml$"
+        "^.github/workflows/.+\\.ya?ml$",
+        "^.pre-config-commit.yaml$"
       ],
       "matchStrings": [
         "# renovate dep: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+)(?: registryUrl=(?<registryUrl>.*?))?\\s+[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
