@@ -91,7 +91,7 @@ repos:
         args:
           - '--markdown-linebreak-ext=md'
 
-  - repo: 'https://github.com/adrienverge/yamllint.git'
+  - repo: 'https://github.com/adrienverge/yamllint'
     rev: 'v1.35.1'
     hooks:
       - id: 'yamllint'
@@ -100,7 +100,7 @@ repos:
         pass_filenames: true
         verbose: true
 
-  - repo: 'https://github.com/facelessuser/pyspelling.git'
+  - repo: 'https://github.com/facelessuser/pyspelling'
     # once a release with the pre-commit hook definition is released, this should be replaced (current release: 2.10)
     rev: '63e4654f0be643ca0f1676227db24bb7f88dee29'
     hooks:
@@ -110,7 +110,7 @@ repos:
         pass_filenames: false
         verbose: true
 
-  - repo: 'https://github.com/tcort/markdown-link-check.git'
+  - repo: 'https://github.com/tcort/markdown-link-check'
     rev: 'v3.12.2'
     hooks:
       - id: 'markdown-link-check'
