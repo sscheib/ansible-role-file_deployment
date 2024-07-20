@@ -17,7 +17,7 @@ ci:
 
 repos:
   - repo: 'https://github.com/ansible/ansible-lint'
-    rev: 'v24.7.0'
+    rev: '95382d398ea1744bf6bfa47b030f14c38b3f6957' # v24.7.0
     hooks:
       - id: 'ansible-lint'
         stages:
@@ -36,7 +36,7 @@ repos:
         language_version: '3.11'
 
   - repo: 'https://github.com/pre-commit/pre-commit-hooks'
-    rev: 'v4.6.0'
+    rev: '2c9f875913ee60ca25ce70243dc24d5b6415598c' # v4.6.0
     hooks:
       - id: 'check-executables-have-shebangs'
         stages:
@@ -92,7 +92,7 @@ repos:
           - '--markdown-linebreak-ext=md'
 
   - repo: 'https://github.com/adrienverge/yamllint'
-    rev: 'v1.35.1'
+    rev: '81e9f98ffd059efe8aa9c1b1a42e5cce61b640c6' # v1.35.1
     hooks:
       - id: 'yamllint'
         stages:
@@ -101,7 +101,7 @@ repos:
         verbose: true
 
   - repo: 'https://github.com/tcort/markdown-link-check'
-    rev: 'v3.12.2'
+    rev: '71ccb4129a1fa86f6904f35c1b26348dfce1438d' # v3.12.2
     hooks:
       - id: 'markdown-link-check'
         stages:
@@ -114,7 +114,7 @@ repos:
           - '.markdown-link-check.json'
 
   - repo: 'https://github.com/igorshubovych/markdownlint-cli'
-    rev: 'v0.41.0'
+    rev: 'f295829140d25717bc79368d3f966fc1f67a824f' # v0.41.0
     hooks:
       - id: 'markdownlint'
         stages:
@@ -123,7 +123,7 @@ repos:
         pass_filenames: true
 
   - repo: 'https://github.com/alessandrojcm/commitlint-pre-commit-hook'
-    rev: 'v9.16.0'
+    rev: '3b9d11080048b6775a03ca3a7e949145f8fddb25' # v9.16.0
     hooks:
       - id: 'commitlint'
         stages:
@@ -135,7 +135,7 @@ repos:
           - 'commitlint-plugin-selective-scope@1.0.1'
 
   - repo: 'https://github.com/pre-commit/mirrors-jshint'
-    rev: 'v2.13.6'
+    rev: '882622d2d13597740358203e9f2e2ae5976cd149' # v2.13.6
     hooks:
       - id: 'jshint'
         stages:
@@ -144,14 +144,14 @@ repos:
           - 'javascript'
 
   - repo: 'https://github.com/gitleaks/gitleaks'
-    rev: 'v8.18.4'
+    rev: '02808f45d038526bfcceebcbf6421c1047997ff9' # v8.18.4
     hooks:
       - id: 'gitleaks'
         stages:
           - 'pre-commit'
 
   - repo: 'https://github.com/Checkmarx/kics'
-    rev: 'v2.1.1'
+    rev: 'b014f9cc1f6ded067101a719d70e5b28307f7fb8' # v2.1.1
     hooks:
       - id: 'kics-scan'
         verbose: true
@@ -159,7 +159,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/python-jsonschema/check-jsonschema'
-    rev: '0.29.0'
+    rev: '5341df58c614b35cc9358bbea5e2e14ac7d7c282' # 0.29.0
     hooks:
       - id: 'check-github-workflows'
         args:
@@ -169,7 +169,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/rhysd/actionlint'
-    rev: 'v1.7.1'
+    rev: '62dc61a45fc95efe8c800af7a557ab0b9165d63b' # v1.7.1
     hooks:
       - id: 'actionlint'
         verbose: true
@@ -177,7 +177,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/sirosen/texthooks'
-    rev: '0.6.6'
+    rev: '529812dfe6d2447e0a35f4bd079c44120646b58c' # 0.6.6
     hooks:
       - id: 'alphabetize-codeowners'
         verbose: true
@@ -200,7 +200,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/koalaman/shellcheck-precommit'
-    rev: 'v0.10.0'
+    rev: '2491238703a5d3415bb2b7ff11388bf775372f29' # v0.10.0
     hooks:
       - id: 'shellcheck'
         verbose: true
@@ -208,7 +208,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/renovatebot/pre-commit-hooks'
-    rev: '37.437.2'
+    rev: 'd1b88e0c94b3172b85d165550c5f52d9cfa4a5e9' # 37.437.2
     hooks:
       - id: 'renovate-config-validator'
         verbose: true
