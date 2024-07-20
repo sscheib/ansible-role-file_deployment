@@ -108,14 +108,15 @@
       "description": "Update renovate related dependencies once a week to avoid spamming",
       "matchDepNames": [
         "renovatebot/pre-commit-hooks",
-        "renovatebot/renovate"
+        "renovatebot/renovate",
+        "renovate"
       ],
       "groupName": "renovate"
     },
     {
       "description": "Disable digest pinning for the renovate image in the renovate workflow",
       "matchFileNames": [
-        ".github/workflows/renovate.ya?ml$"
+        "^.github/workflows/renovate.ya?ml$"
       ],
       "matchDepNames": [
         "renovatebot/renovate"
@@ -137,7 +138,7 @@
         "ansible-core"
       ],
       "matchFileNames": [
-        ".pre-commit-config.yaml"
+        "^.pre-commit-config.yaml$"
       ],
       "matchDatasources": [
         "pypi"
@@ -155,7 +156,7 @@
     {
       "description": "Enable digest pinning for pre-commit",
       "matchFileNames": [
-        ".pre-commit-config.yaml"
+        "^.pre-commit-config.yaml$"
       ],
       "pinDigests": false
     }
@@ -182,7 +183,8 @@
         "^.github/workflows/.*?\\.ya?ml$"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+-\\s+['\"]?(?<depName>[^=@:]+)(?:(?:==|@|:)\\s?(?<currentValue>[^'\"\\s]*))?"
+        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\s+-\s+['\"]?(?<depName>[^=@]+)(?:==|@)\s{0,}(?<currentValue>[^'\"\s\n]+)",
+        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+?(?:npm|pip[^\\s]+?)\\s+?install\\s+?(?<depName>[^=@]+)(?:(?:==|@)\\s?)(?<currentValue>[^\\s\\n]+)"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
