@@ -226,10 +226,10 @@
         "^.pre-commit-config\\.ya?ml$"
       ],
       "matchStrings": [
-        "repo: \'?https?://(?<hostname>[^/]+?)/(?<depName>[^\']+?)\'?(?<indentation>\\s+?)rev: \'?(?<currentValue>v?\\d+?\.\\d+?\.\\d+?)\'?",
-        "repo: \'?https?://(?<hostname>[^/]+?)/(?<depName>[^\']+?)\'?(?<indentation>\\s+?)rev: \'?(?<currentDigest>[a-z0-9]{40}|[a-z0-9]{64})\'? # (?<currentValue>v?\\d+?\.\\d+?\.\\d+?)"
+        "repo: 'https?://(?<hostname>[^/]+?)/(?<depName>[^\']+?)'(?<indentation>\\s+?)rev: '(?<currentValue>v?\\d+?\.\\d+?\.\\d+?)'",
+        "repo: 'https?://(?<hostname>[^/]+?)/(?<depName>[^\']+?)'(?<indentation>\\s+?)rev: '(?<currentDigest>[a-z0-9]{40}|[a-z0-9]{64})' # (?<currentValue>v?\\d+?\.\\d+?\.\\d+?)"
       ],
-      "autoReplaceStringTemplate": "repo: 'https://{{hostname}}/{{depName}}{{indentation}}rev: {{#if newDigest}}{{newDigest}}'{{#if newValue}} # {{newValue}}{{/if}}{{/if}}{{#unless newDigest}}{{newValue}}'{{/unless}}",
+      "autoReplaceStringTemplate": "repo: '{{{hostname}}}/{{{depName}}}{{{indentation}}}rev: '{{#if newDigest}}{{{newDigest}}}'{{#if newValue}} # {{{newValue}}}{{/if}}{{else}}{{{newValue}}}'{{/if}}",
       "datasourceTemplate": "github-tags"
     }
   ]
