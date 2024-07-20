@@ -107,9 +107,6 @@
         "renovatebot/pre-commit-hooks",
         "renovatebot/renovate"
       ],
-      "schedule": [
-        "on sunday"
-      ],
       "groupName": "renovate"
     },
     {
