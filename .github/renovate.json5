@@ -15,6 +15,9 @@
   "regex": {
     "pinDigests": true
   },
+  "pre-commit": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchFileNames": [
@@ -154,7 +157,7 @@
       "matchFileNames": [
         ".pre-commit-config.yaml"
       ],
-      "pinDigests": true
+      "pinDigests": false
     }
   ],
   "customManagers": [
