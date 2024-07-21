@@ -90,7 +90,7 @@ jobs:
           echo "secrets-defined=true" >> "${GITHUB_OUTPUT}";
 
   check-should-cache:
-    name: 'Check '
+    name: 'Check whether caching should be enabled'
     # only run the job if the job context's branch is main or the 'run' label is set
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
