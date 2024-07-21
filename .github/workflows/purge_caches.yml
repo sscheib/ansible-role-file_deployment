@@ -1,0 +1,43 @@
+---
+name: 'Purge caches'
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - 'main'
+
+  pull_request:
+    branches:
+      - 'main'
+
+    paths:
+      - '.github/workflows/purge_caches.yml'
+
+  # delete caches once a night
+  schedule:
+    - cron: '45 0 * * *'
+
+permissions:
+  contents: 'read'
+
+jobs:
+  purge-caches:
+    name: 'Purge caches'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      actions: 'write'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c' # v2.9.0
+        with:
+          disable-sudo: true
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+
+      - name: 'Purge caches older than two days (created and accessed)'
+        uses: 'MyAlbum/purge-cache@6bd5afa0f99fd6096c4e08ed0eb1730da34d78dc' # v2.2.0
+        with:
+          max-age: 172800
+          debug: true
+...
