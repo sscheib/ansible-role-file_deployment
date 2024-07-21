@@ -13,4 +13,24 @@
       ansible.builtin.raw: |
         apt-get install -y python3
       changed_when: true
+
+- name: 'Bootstrap Python on OpenWrt'
+  hosts: 'opkg'
+  gather_facts: false
+  vars:
+    install_full_python: true
+  roles:
+    - role: 'sscheib.openwrt_bootstrap'
+
+  pre_tasks:
+    - name: 'Create opkg lock file directory'
+      ansible.builtin.raw: |
+        mkdir -p /var/lock
+      changed_when: true
+
+  tasks:
+    - name: 'Install BASH and shadow-su'
+      ansible.builtin.raw: |
+        opkg install bash shadow-su
+      changed_when: true
 ...

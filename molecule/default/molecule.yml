@@ -52,6 +52,27 @@ platforms:
     groups:
       - 'apt'
 
+  - name: 'openwrt23.05'
+    image: 'docker.io/openwrt/rootfs:x86_64-openwrt-23.05'
+    sysctl:
+      net.ipv6.conf.all.disable_ipv6: 1
+    groups:
+      - 'opkg'
+
+  - name: 'openwrt22.03.5'
+    image: 'docker.io/openwrt/rootfs:x86_64-22.03.5'
+    sysctl:
+      net.ipv6.conf.all.disable_ipv6: 1
+    groups:
+      - 'opkg'
+
+  - name: 'openwrt21.02.7'
+    image: 'docker.io/openwrt/rootfs:x86_64-21.02.7'
+    sysctl:
+      net.ipv6.conf.all.disable_ipv6: 1
+    groups:
+      - 'opkg'
+
 scenario:
   create_sequence:
     - 'dependency'

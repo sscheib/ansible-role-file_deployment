@@ -42,6 +42,7 @@
             systemd: '{{ __t_container.systemd | default(omit) }}'
             state: 'started'
             command: "{{ __t_container.command | default('sleep 1d') }}"
+            sysctl: '{{ __t_container.sysctl | default(omit) }}'
             log_driver: 'json-file'
             label:
               molecule_instance: true

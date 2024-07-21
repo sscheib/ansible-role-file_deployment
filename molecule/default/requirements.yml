@@ -2,4 +2,8 @@
 collections:
   - name: 'containers.podman'
     version: '1.15.4'
+
+roles:
+  - name: 'sscheib.openwrt_bootstrap'
+    version: 'v1.0.3'
 ...
