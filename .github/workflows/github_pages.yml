@@ -1,5 +1,5 @@
 ---
-name: 'Build and deploy documentation to GitHub Pages'
+name: 'GitHub pages deployment'
 on:  # yamllint disable-line rule:truthy
   push:
     branches:
@@ -7,6 +7,7 @@ on:  # yamllint disable-line rule:truthy
 
     paths:
       - 'docs/**'
+      - '.github/workflows/github_pages.yml'
 
   workflow_dispatch: {}
 
@@ -24,8 +25,14 @@ jobs:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c' # v2.9.0
         with:
-          disable-sudo: true
-          egress-policy: 'audit'
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            cache.ruby-lang.org:443
+            geo.mirror.pkgbuild.com:443
+            github.com:443
+            index.rubygems.org:443
+            rubygems.org:443
 
       - name: 'Checkout the repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
