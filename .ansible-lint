@@ -28,4 +28,5 @@ mock_modules:
 # required due to molecule
 mock_roles:
   - 'sscheib.file_deployment'
+  - 'sscheib.openwrt_bootstrap'
 ...
