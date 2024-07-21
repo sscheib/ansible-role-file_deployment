@@ -20,6 +20,10 @@ on:  # yamllint disable-line rule:truthy
           - 'disabled'
           - 'reset'
 
+  # purge cache every Sunday at 0:00
+  schedule:
+    - cron: '0 0 * * 0'
+
 permissions:
   contents: 'read'
 
