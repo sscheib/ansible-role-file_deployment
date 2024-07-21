@@ -29,7 +29,7 @@ meaningful benefit.
 
 Lastly, the Ansible Dev Tools `EE` ships with both `podman` and `molecule` and we use whatever versions the `EE` ships.
 
-For a complete list of tested scenarios, please check the [test matrix](#test-scenarios).
+Below you'll find the complete test matrix for molecule.
 
 ## RHEL 9 (UBI) operating system control node
 
