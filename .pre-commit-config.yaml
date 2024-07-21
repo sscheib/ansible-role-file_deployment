@@ -34,7 +34,7 @@ repos:
         # https://github.com/ansible/ansible-lint/issues/611
         pass_filenames: false
         # renovate dep: datasource=python-version versioning=python depName=python
-        language_version: '3.12'
+        language_version: '3.12.3'
 
   - repo: 'https://github.com/pre-commit/pre-commit-hooks'
     rev: 'v4.6.0'
