@@ -4,7 +4,7 @@ on:  # yamllint disable-line rule:truthy
   workflow_call:
     inputs:
       repoCache:
-        required: false
+        required: true
         type: 'string'
 
     secrets:
@@ -156,14 +156,18 @@ jobs:
 
       - name: 'Download cache of the previous workflow run'
         uses: 'dawidd6/action-download-artifact@bf251b5aa9c2f7eeb574a96ee720e24f801b7c11' # v6
-        if: "github.event.inputs.repoCache != 'disabled'"
+        if: >-
+          github.event.inputs.repoCache != 'disabled' &&
+          github.event.inputs.repoCache != 'reset'
         continue-on-error: true
         with:
           name: '${{ env.cache_key }}-${{ matrix.container.cache_key_suffix }}'
           path: 'cache-download'
 
       - name: 'Extract molecule cache to improve performance'
-        if: "github.event.inputs.repoCache != 'disabled'"
+        if: >-
+          github.event.inputs.repoCache != 'disabled' &&
+          github.event.inputs.repoCache != 'reset'
         run: |
           set -x
           # Skip if no cache is set, such as the first time it runs.
@@ -204,7 +208,7 @@ jobs:
           name: '${{ env.cache_key }}-${{ matrix.container.cache_key_suffix }}'
           path: '${{ env.cache_archive }}'
           # Since this is updated and restored on every run, we don't need to keep it
-          # for long. Just make sure this value is large enough that multiple renovate
+          # for long. Just make sure this value is large enough that multiple molecule
           # runs can happen before older cache archives are deleted.
-          retention-days: 1
+          retention-days: 3
 ...
