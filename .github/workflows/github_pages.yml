@@ -17,7 +17,7 @@ permissions:
 jobs:
   build_and_deploy:
     name: 'Build and deploy documentation to GitHub Pages'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'write'
       deployments: 'write'

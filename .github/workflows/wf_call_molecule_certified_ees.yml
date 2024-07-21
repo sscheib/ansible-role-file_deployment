@@ -31,7 +31,7 @@ env:
 
 jobs:
   check-user-permissions:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
     outputs:
@@ -62,7 +62,7 @@ jobs:
           echo "Job originally triggered by ${{ github.actor }}"
 
   molecule-certified-ees:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     needs: 'check-user-permissions'
     if: "needs.check-user-permissions.outputs.require-result == 'true'"
     permissions:

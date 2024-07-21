@@ -22,7 +22,7 @@ permissions:
 jobs:
   purge-caches:
     name: 'Purge caches'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       actions: 'write'
     steps:

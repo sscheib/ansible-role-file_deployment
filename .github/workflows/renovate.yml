@@ -58,7 +58,7 @@ env:
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
     outputs:
@@ -90,7 +90,7 @@ jobs:
     name: 'Validate renovate configuration'
     if: "needs.check-secrets.outputs.secrets-defined == 'true'"
     needs: 'check-secrets'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
     steps:
@@ -123,7 +123,7 @@ jobs:
           npx --yes --package renovate -- renovate-config-validator --strict || exit 1
 
   check-user-permissions:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
     needs: 'validate-config'
@@ -155,7 +155,7 @@ jobs:
           echo "Job originally triggered by ${{ github.actor }}"
 
   renovate:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     needs: 'check-user-permissions'
     if: "needs.check-user-permissions.outputs.require-result == 'true'"
     permissions:
