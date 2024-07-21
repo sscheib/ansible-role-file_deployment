@@ -85,6 +85,7 @@ jobs:
       - name: 'Install Python'
         uses: 'actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f' # v5.1.1
         with:
+          # renovate dep: datasource=python-version versioning=python depName=python
           python-version: '3.11'
 
       - name: 'Install pre-commit'
