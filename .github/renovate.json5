@@ -111,17 +111,7 @@
         "renovatebot/renovate",
         "renovate"
       ],
-      "groupName": "renovate"
-    },
-    {
-      "description": "Disable digest pinning for the renovate image in the renovate workflow",
-      "matchFileNames": [
-        "^.github/workflows/renovate.ya?ml$"
-      ],
-      "matchDepNames": [
-        "renovatebot/renovate",
-        "renovate"
-      ],
+      "groupName": "renovate",
       "pinDigests": false
     },
     {
