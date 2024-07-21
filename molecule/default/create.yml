@@ -29,6 +29,14 @@
             )
           }}
 
+    - name: 'Set fact: Disable IPv6 via sysctl'
+      ansible.builtin.set_fact:
+        __t_sysctl:
+          net.ipv6.conf.all.disable_ipv6: 1
+      when:
+        - "lookup('ansible.builtin.env', 'MOLECULE_DISABLE_IPV6') is defined"
+        - "lookup('ansible.builtin.env', 'MOLECULE_DISABLE_IPV6') | bool"
+
     - name: 'Block: Handle container creation'
       block:
 
@@ -42,7 +50,7 @@
             systemd: '{{ __t_container.systemd | default(omit) }}'
             state: 'started'
             command: "{{ __t_container.command | default('sleep 1d') }}"
-            sysctl: '{{ __t_container.sysctl | default(omit) }}'
+            sysctl: '{{ __t_sysctl | default(omit) }}'
             log_driver: 'json-file'
             label:
               molecule_instance: true
