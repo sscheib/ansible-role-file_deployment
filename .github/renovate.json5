@@ -191,7 +191,7 @@
       "customType": "regex",
       "fileMatch": [
         "^.github/workflows/.+\\.ya?ml$",
-        "^.pre-config-commit.yaml$"
+        "^.pre-commit-config.yaml$"
       ],
       "matchStrings": [
         "# renovate dep: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+)(?: registryUrl=(?<registryUrl>.*?))?\\s+[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
