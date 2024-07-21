@@ -112,7 +112,10 @@
         "renovate"
       ],
       "groupName": "renovate",
-      "pinDigests": false
+      "pinDigests": false,
+      "schedule": [
+        "on sunday"
+      ]
     },
     {
       "description": "Limit NodeJS to minor updates",
