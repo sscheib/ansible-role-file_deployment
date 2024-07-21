@@ -173,6 +173,7 @@ jobs:
             cdn01.quay.io:443
             cdn02.quay.io:443
             cdn03.quay.io:443
+            endoflife.date:443
             galaxy.ansible.com:443
             ghcr.io:443
             github.com:443
