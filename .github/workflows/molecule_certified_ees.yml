@@ -62,7 +62,7 @@ jobs:
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
       github.ref == 'refs/heads/main'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
     outputs:
@@ -95,7 +95,7 @@ jobs:
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
       github.ref == 'refs/heads/main'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
     outputs:

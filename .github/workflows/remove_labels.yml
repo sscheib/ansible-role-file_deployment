@@ -13,7 +13,7 @@ permissions:
 jobs:
   remove-label:
     name: 'Remove run label on pull request synchronize'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-22.04'
     if: "github.base_ref == 'main'"
     permissions:
       pull-requests: 'write'
