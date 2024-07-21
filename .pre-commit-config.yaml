@@ -33,8 +33,11 @@ repos:
         # do not pass files to ansible-lint, see:
         # https://github.com/ansible/ansible-lint/issues/611
         pass_filenames: false
+        # patch level languages are not possible, unless a corresponding symlink is created for
+        # e.g. python3.12.4 -> python3.12. This would defeat the purpose of being very specific,
+        # therefore limitting the language to a minor version only
         # renovate dep: datasource=python-version versioning=python depName=python
-        language_version: '3.12.4'
+        language_version: '3.12'
 
   - repo: 'https://github.com/pre-commit/pre-commit-hooks'
     rev: 'v4.6.0'
