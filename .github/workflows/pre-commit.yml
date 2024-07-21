@@ -52,13 +52,14 @@ jobs:
 
       - name: 'Download cache of the previous workflow run'
         uses: 'dawidd6/action-download-artifact@bf251b5aa9c2f7eeb574a96ee720e24f801b7c11' # v6
-        if: "github.event.inputs.repoCache != 'disabled'"
+        if: "github.event.inputs.repoCache == 'enabled'"
         continue-on-error: true
         with:
           name: '${{ env.cache_key }}'
           path: 'cache-download'
 
       - name: 'Extract pre-commit cache to improve performance'
+        if: "github.event.inputs.repoCache == 'enabled'"
         run: |
           set -x
           # Skip if no cache is set, such as the first time it runs.
