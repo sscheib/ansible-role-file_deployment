@@ -109,7 +109,7 @@
       },
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)$",
       "rangeStrategy": "bump",
-      "groupName": "Debian images"
+      "groupName": "Debian molecule images"
     },
     {
       "description": "Update OpenWrt images only on the minor and patch level",
@@ -127,7 +127,7 @@
       },
       "versioning": "regex:^x86_64(?:-openwrt)?-(?<major>\\d+)\\.(?<minor>\\d+)(?:\\.(?<patch>\\d+))?$",
       "rangeStrategy": "bump",
-      "groupName": "Debian images"
+      "groupName": "OpenWrt molecule images"
     },
     {
       "description": "Update UBI images only on the minor and patch level",
@@ -147,7 +147,7 @@
       },
       "versioning": "redhat",
       "rangeStrategy": "bump",
-      "groupName": "RHEL UBI images"
+      "groupName": "RHEL UBI molecule images"
     },
     {
       "description": "These collections should be retrieved from console.redhat.com",
