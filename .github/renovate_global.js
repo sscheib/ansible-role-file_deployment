@@ -24,7 +24,7 @@ module.exports = {
       },
     },
     {
-      matchHost: 'registry.access.redhat.com',
+      matchHost: 'https://registry.access.redhat.com',
       username: '{{ secrets.CRC_USERNAME }}',
       password: '{{ secrets.CRC_PASSWORD }}',
     },
