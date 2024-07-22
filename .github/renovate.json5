@@ -160,7 +160,7 @@
         "^molecule/default/molecule.ya?ml$"
       ],
       "matchStrings": [
-        "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(@(?<currentDigest>sha256:[a-f0-9]+))?\'"
+        "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\'"
       ],
       "autoReplaceStringTemplate": "image: '{{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}'",
       "datasourceTemplate": "docker"
