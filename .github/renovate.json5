@@ -152,11 +152,12 @@
   ],
   "customManagers": [
     {
-      "description": "Extract execution environments defined via image:",
+      "description": "Extract execution environments and molecule platforms defined via image:",
       "customType": "regex",
       "fileMatch": [
         "^.github/workflows/molecule_certified_ees\.ya?ml$",
-        "^.github/workflows/molecule_community_ees.ya?ml$"
+        "^.github/workflows/molecule_community_ees.ya?ml$",
+        "^molecule/default/molecule.ya?ml$"
       ],
       "matchStrings": [
         "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(@(?<currentDigest>sha256:[a-f0-9]+))?\'"

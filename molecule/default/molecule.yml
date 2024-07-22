@@ -19,51 +19,60 @@ driver:
 
 platforms:
   - name: 'rhel9-ubi'
-    image: 'registry.access.redhat.com/ubi9/ubi'
+    # yamllint disable-line rule:line-length
+    image: 'registry.access.redhat.com/ubi9/ubi:9.4-1123.1719560047@sha256:c532187e38fcf6849fae56decd0c58b5ef87b47bfaf24ad9e092cf4c9106f577'
     groups:
       - 'dnf'
 
   - name: 'rhel8-ubi'
-    image: 'registry.access.redhat.com/ubi8/ubi'
+    # yamllint disable-line rule:line-length
+    image: 'registry.access.redhat.com/ubi8/ubi:8.10-1020@sha256:0a95276776dc776fc42ebaa0ce79aa0b3ac72ab762df1d262beef7b092c2b23e'
     groups:
       - 'dnf'
     skip_versions:
       - '2.17'
 
   - name: 'rhel7-ubi'
-    image: 'registry.access.redhat.com/ubi7/ubi'
+    # yamllint disable-line rule:line-length
+    image: 'registry.access.redhat.com/ubi7/ubi:7.9-1445@sha256:dce9f8caf5b4c3a3a511f71b0e2f23a6eada9bd1c8cc3c912f0e50b6d3b824fc'
     groups:
       - 'yum'
     skip_versions:
       - '2.17'
 
   - name: 'debian12'
-    image: 'docker.io/debian:bookworm'
+    # yamllint disable-line rule:line-length
+    image: 'docker.io/debian:12.6@sha256:1dc55ed6871771d4df68d393ed08d1ed9361c577cfeb903cd684a182e8a3e3ae'
     groups:
       - 'apt'
 
   - name: 'debian11'
-    image: 'docker.io/debian:bullseye'
+    # yamllint disable-line rule:line-length
+    image: 'docker.io/debian:11.10@sha256:b6b4a479a3bc1b8dfda5544f00b72aafb230bb835a43974a147b220c38df882e'
     groups:
       - 'apt'
 
   - name: 'debian10'
-    image: 'docker.io/debian:buster'
+    # yamllint disable-line rule:line-length
+    image: 'docker.io/debian:10.13@sha256:58ce6f1271ae1c8a2006ff7d3e54e9874d839f573d8009c20154ad0f2fb0a225'
     groups:
       - 'apt'
 
   - name: 'openwrt23.05'
-    image: 'docker.io/openwrt/rootfs:x86_64-openwrt-23.05'
+    # yamllint disable-line rule:line-length
+    image: 'docker.io/openwrt/rootfs:x86_64-openwrt-23.05@sha256:d3d466cf9570d558c6c28cfef1a1d7cbda8c4eaff2c4645af513de66c3b89ef1'
     groups:
       - 'opkg'
 
   - name: 'openwrt22.03.5'
-    image: 'docker.io/openwrt/rootfs:x86_64-22.03.5'
+    # yamllint disable-line rule:line-length
+    image: 'docker.io/openwrt/rootfs:x86_64-22.03.5@sha256:44f7e55b4cc9954d03aeb3cf7ebf624cd57d8938ba49073addc45301ec89b73d'
     groups:
       - 'opkg'
 
   - name: 'openwrt21.02.7'
-    image: 'docker.io/openwrt/rootfs:x86_64-21.02.7'
+    # yamllint disable-line rule:line-length
+    image: 'docker.io/openwrt/rootfs:x86_64-21.02.7@sha256:7fc2353153c65d64a35a5fb4dc21a15bb048d812c19df3d8d4ea97745349ef79'
     groups:
       - 'opkg'
 
