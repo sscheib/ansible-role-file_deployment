@@ -181,6 +181,7 @@ jobs:
             objects.githubusercontent.com:443
             pkg-containers.githubusercontent.com:443
             pypi.org:443
+            registry.access.redhat.com:443
             registry.npmjs.org:443
             registry.redhat.io:443
             rubygems.org:443
