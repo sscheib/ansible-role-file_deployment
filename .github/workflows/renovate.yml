@@ -167,6 +167,7 @@ jobs:
         with:
           egress-policy: 'block'
           allowed-endpoints: >
+            auth.docker.io:443
             api.github.com:443
             console.redhat.com:443
             cdn.quay.io:443
