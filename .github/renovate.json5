@@ -69,11 +69,16 @@
       }
     },
     {
-      "description": "Update execution environments only on the patch level",
+      "description": "Update execution environments and molecule platforms only on the patch level",
       "matchDepNames": [
+        "docker.io/debian",
+        "docker.io/openwrt/rootfs",
+        "ghcr.io/ansible-community/community-ee-base",
+        "registry.access.redhat.com/ubi7/ubi",
+        "registry.access.redhat.com/ubi8/ubi",
+        "registry.access.redhat.com/ubi9/ubi",
         "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9",
-        "ghcr.io/ansible-community/community-ee-base"
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
       ],
       "major": {
         "enabled": false
