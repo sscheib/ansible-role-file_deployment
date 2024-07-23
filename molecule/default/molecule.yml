@@ -42,13 +42,13 @@ platforms:
 
   - name: 'debian12'
     # yamllint disable-line rule:line-length
-    image: 'docker.io/debian:12.6@sha256:1dc55ed6871771d4df68d393ed08d1ed9361c577cfeb903cd684a182e8a3e3ae'
+    image: 'docker.io/debian:12.6@sha256:45f2e735295654f13e3be10da2a6892c708f71a71be845818f6058982761a6d3'
     groups:
       - 'apt'
 
   - name: 'debian11'
     # yamllint disable-line rule:line-length
-    image: 'docker.io/debian:11.10@sha256:b6b4a479a3bc1b8dfda5544f00b72aafb230bb835a43974a147b220c38df882e'
+    image: 'docker.io/debian:11.10@sha256:7aef2e7d061743fdb57973dac3ddbceb0b0912746ca7e0ee7535016c38286561'
     groups:
       - 'apt'
 
@@ -60,13 +60,13 @@ platforms:
 
   - name: 'openwrt23.05'
     # yamllint disable-line rule:line-length
-    image: 'docker.io/openwrt/rootfs:x86_64-openwrt-23.05@sha256:d3d466cf9570d558c6c28cfef1a1d7cbda8c4eaff2c4645af513de66c3b89ef1'
+    image: 'docker.io/openwrt/rootfs:x86_64-23.05.4@sha256:adff7daae4e37f0007fd44e6e7dec0758e4ce3c7f2d907449f28062c0213fa96'
     groups:
       - 'opkg'
 
   - name: 'openwrt22.03.5'
     # yamllint disable-line rule:line-length
-    image: 'docker.io/openwrt/rootfs:x86_64-22.03.5@sha256:44f7e55b4cc9954d03aeb3cf7ebf624cd57d8938ba49073addc45301ec89b73d'
+    image: 'docker.io/openwrt/rootfs:x86_64-22.03.7@sha256:59f4017a8e4b1d5970657a5278aad95de77d8f5cc726d6be0c92238d6dc384c8'
     groups:
       - 'opkg'
 
