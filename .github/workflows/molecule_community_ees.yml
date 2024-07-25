@@ -37,7 +37,27 @@ on:  # yamllint disable-line rule:truthy
       - 'templates/**'
       - 'vars/**'
 
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      moleculeDebug:
+        description: 'Enable Molecule debug?'
+        type: 'choice'
+        default: 'false'
+        options:
+          - 'true'
+          - 'false'
+
+      ansibleVerbosity:
+        description: 'Enable Ansible verbosity?'
+        type: 'choice'
+        default: '0'
+        options:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
 
 permissions:
   contents: 'read'
@@ -149,5 +169,21 @@ jobs:
 
       - name: 'Run molecule'
         run: |
+          # check if any debug options are enabled
+          (
+            [[ "${{ github.event.inputs.moleculeDebug }}" == "" ]] ||
+            [[ "${{ github.event.inputs.moleculeDebug }}" != "true" ]]
+          ) || {
+            export MOLECULE_DEBUG=1;
+          };
+
+          export ANSIBLE_VERBOSITY=2
+          (
+            [[ "${{ github.event.inputs.ansibleVerbosity }}" == "" ]] ||
+            [[ "${{ github.event.inputs.ansibleVerbosity }}" -gt 0 ]]
+          ) || {
+            export ANSIBLE_VERBOSITY="${{ github.event.inputs.ansibleVerbosity }}";
+          };
+
           molecule test
 ...
