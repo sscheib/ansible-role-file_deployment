@@ -204,6 +204,13 @@
       "patch": {
         "enabled": true
       }
+    },
+    {
+      "description": "Remove container registry names to avoid too long commit message subjects",
+      "matchDatasources": [
+        "docker"
+      ],
+      "commitMessageTopic": "{{{replace '(?:registry(?:\.access)?\.redhat\.(?:io|com)|docker\.io|ghcr\.io)\/' '' depName}}}"
     }
   ],
   "customManagers": [
