@@ -180,7 +180,7 @@ jobs:
           export ANSIBLE_VERBOSITY=0
           (
             [[ "${{ github.event.inputs.ansibleVerbosity }}" == "" ]] ||
-            [[ "${{ github.event.inputs.ansibleVerbosity }}" -gt 0 ]]
+            [[ "${{ github.event.inputs.ansibleVerbosity }}" -eq 0 ]]
           ) || {
             export ANSIBLE_VERBOSITY="${{ github.event.inputs.ansibleVerbosity }}";
           };
