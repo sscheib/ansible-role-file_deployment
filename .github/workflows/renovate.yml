@@ -114,7 +114,7 @@ jobs:
         uses: 'actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b' # v4.0.3
         with:
           # renovate dep: datasource=npm depName=node
-          node-version: '20.15.1'
+          node-version: '20.16.0'
 
       - name: 'Install renovate and run renovate-config-validator'
         run: |
