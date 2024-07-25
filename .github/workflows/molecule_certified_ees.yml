@@ -50,6 +50,26 @@ on:  # yamllint disable-line rule:truthy
           - 'disabled'
           - 'reset'
 
+      moleculeDebug:
+        description: 'Enable Molecule debug?'
+        type: 'choice'
+        default: 'false'
+        options:
+          - 'true'
+          - 'false'
+
+      ansibleVerbosity:
+        description: 'Enable Ansible verbosity?'
+        type: 'choice'
+        default: '0'
+        options:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+
   # schedule to reset caches once a week on Monday
   schedule:
     - cron: '30 2 * * 1'
@@ -145,6 +165,8 @@ jobs:
     uses: './.github/workflows/wf_call_molecule_certified_ees.yml'
     with:
       repoCache: "${{ needs.check-should-cache.outputs.repo-cache }}"
+      moleculeDebug: "${{ github.event.inputs.moleculeDebug }}"
+      ansibleVerbosity: "${{ github.event.inputs.ansibleVerbosity }}"
     secrets:
       CRC_USERNAME: '${{ secrets.CRC_USERNAME }}'
       CRC_PASSWORD: '${{ secrets.CRC_PASSWORD }}'

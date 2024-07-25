@@ -7,6 +7,14 @@ on:  # yamllint disable-line rule:truthy
         required: true
         type: 'string'
 
+      moleculeDebug:
+        required: true
+        type: 'string'
+
+      ansibleVerbosity:
+        required: true
+        type: 'string'
+
     secrets:
       token:
         required: true
@@ -192,6 +200,20 @@ jobs:
 
       - name: 'Run molecule'
         run: |
+          # check if any debug options are enabled
+          (
+            [[ "${{ github.event.inputs.moleculeDebug }}" == "" ]] ||
+            [[ "${{ github.event.inputs.moleculeDebug }}" != "true" ]]
+          ) || {
+            export MOLECULE_DEBUG=1;
+          };
+
+          (
+            [[ "${{ github.event.inputs.ansibleVerbosity }}" == "" ]] ||
+            [[ "${{ github.event.inputs.ansibleVerbosity }}" -eq 0 ]]
+          ) || {
+            export ANSIBLE_VERBOSITY="${{ github.event.inputs.ansibleVerbosity }}";
+          };
           molecule test
 
       - name: 'Compress molecule cache to improve performance'
