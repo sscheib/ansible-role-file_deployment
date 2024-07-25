@@ -177,7 +177,6 @@ jobs:
             export MOLECULE_DEBUG=1;
           };
 
-          export ANSIBLE_VERBOSITY=0
           (
             [[ "${{ github.event.inputs.ansibleVerbosity }}" == "" ]] ||
             [[ "${{ github.event.inputs.ansibleVerbosity }}" -eq 0 ]]
