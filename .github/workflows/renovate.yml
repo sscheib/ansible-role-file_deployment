@@ -86,47 +86,19 @@ jobs:
           # secrets not empty, so assuming defined
           echo "secrets-defined=true" >> "${GITHUB_OUTPUT}";
 
-  validate-config:
-    name: 'Validate renovate configuration'
+  call-renovate-configuration-workflow:
+    name: 'Include workflow to validate renovate configuration'
     if: "needs.check-secrets.outputs.secrets-defined == 'true'"
     needs: 'check-secrets'
-    runs-on: 'ubuntu-22.04'
     permissions:
-      contents: 'read'
-    steps:
-      - name: 'Harden Runner'
-        uses: 'step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c' # v2.9.0
-        with:
-          disable-sudo: true
-          egress-policy: 'block'
-          allowed-endpoints: >
-            api.github.com:443
-            github.com:443
-            nodejs.org:443
-            objects.githubusercontent.com:443
-            registry.npmjs.org:443
-            rubygems.org:443
-
-      - name: 'Checkout the repository'
-        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
-
-      - name: 'Install NodeJS'
-        uses: 'actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b' # v4.0.3
-        with:
-          # renovate dep: datasource=npm depName=node
-          node-version: '20.16.0'
-
-      - name: 'Install renovate and run renovate-config-validator'
-        run: |
-          # renovate: datasource=npm
-          npm install renovate@38.8.3
-          npx --yes --package renovate -- renovate-config-validator --strict || exit 1
+      contents: 'write'
+    uses: './.github/workflows/renovate_configuration_check.yml'
 
   check-user-permissions:
     runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
-    needs: 'validate-config'
+    needs: 'call-renovate-configuration-workflow'
     outputs:
       require-result: '${{ steps.check-access.outputs.require-result }}'
     steps:
