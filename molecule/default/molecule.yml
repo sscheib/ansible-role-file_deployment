@@ -66,7 +66,7 @@ platforms:
 
   - name: 'openwrt22.03'
     # yamllint disable-line rule:line-length
-    image: 'docker.io/openwrt/rootfs:x86_64-22.03.7@sha256:59f4017a8e4b1d5970657a5278aad95de77d8f5cc726d6be0c92238d6dc384c8'
+    image: 'docker.io/openwrt/rootfs:x86_64-22.03.7@sha256:f6e5b98399ae4ff89fc1a2de2da5b94c520c8f82aa1e5c717fb190da8b3313ed'
     groups:
       - 'opkg'
 
