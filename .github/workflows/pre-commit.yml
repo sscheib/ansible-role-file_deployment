@@ -91,7 +91,7 @@ jobs:
       - name: 'Install pre-commit'
         run: |
           # renovate: datasource=pypi
-          pip3 install pre-commit==3.7.1
+          pip3 install pre-commit==3.8.0
           mkdir -pv "${cache_dir}"
 
       - name: 'Run pre-commit'
