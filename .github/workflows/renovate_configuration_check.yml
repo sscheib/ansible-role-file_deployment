@@ -48,6 +48,6 @@ jobs:
       - name: 'Install renovate and run renovate-config-validator'
         run: |
           # renovate: datasource=npm
-          npm install renovate@38.8.3
+          npm install renovate@38.8.4
           npx --yes --package renovate -- renovate-config-validator --strict || exit 1
 ...
