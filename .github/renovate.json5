@@ -49,10 +49,10 @@
         "enabled": true
       },
       "rangeStrategy": "bump",
-      "excludeDepNames": [
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9",
-        "ghcr.io/ansible-community/community-ee-base"
+      "matchDepNames": [
+        "!registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
+        "!registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9",
+        "!ghcr.io/ansible-community/community-ee-base"
       ]
     },
     {
