@@ -119,7 +119,7 @@ jobs:
       - name: 'Install renovate and run renovate-config-validator'
         run: |
           # renovate: datasource=npm
-          npm install renovate@37.438.2
+          npm install renovate@38.8.3
           npx --yes --package renovate -- renovate-config-validator --strict || exit 1
 
   check-user-permissions:
@@ -270,7 +270,7 @@ jobs:
         with:
           # yamllint disable-line rule:line-length
           # renovate self-update: datasource=docker depName=renovatebot/renovate registryUrl=https://ghcr.io
-          renovate-version: '37.438.2'
+          renovate-version: '38.8.3'
           configurationFile: '.github/renovate_global.js'
           token: '${{ secrets.RENOVATE_TOKEN }}'
         env:
