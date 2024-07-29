@@ -58,6 +58,7 @@ jobs:
         if: "${{ github.event_name == 'pull_request' }}"
         with:
           provider: 'test'
+          token: '${{ secrets.GITHUB_TOKEN }}'
           jekyll_src: './docs'
           jekyll_cfg: '_config.yml'
 
