@@ -9,6 +9,14 @@ on:  # yamllint disable-line rule:truthy
       - 'docs/**'
       - '.github/workflows/github_pages.yml'
 
+  pull_request:
+    branches:
+      - 'main'
+
+    paths:
+      - 'docs/**'
+      - '.github/workflows/github_pages.yml'
+
   workflow_dispatch: {}
 
 permissions:
@@ -39,13 +47,23 @@ jobs:
 
       - name: 'Cache dependencies'
         uses: 'actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9' # v4.0.2
+        if: "${{ github.event_name != 'pull_request' }}"
         with:
           path: 'vendor/bundle'
           key: "${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}"
           restore-keys: '${{ runner.os }}-gems-'
 
+      - name: 'Test Jekyll build'
+        uses: 'jeffreytse/jekyll-deploy-action@c1329290ab1cf2df48661ec1bea92e1d6990025b' # v0.6.0
+        if: "${{ github.event_name == 'pull_request' }}"
+        with:
+          provider: 'test'
+          jekyll_src: './docs'
+          jekyll_cfg: '_config.yml'
+
       - name: 'Deploy to GitHub Pages'
         uses: 'jeffreytse/jekyll-deploy-action@c1329290ab1cf2df48661ec1bea92e1d6990025b' # v0.6.0
+        if: "${{ github.event_name != 'pull_request' }}"
         with:
           provider: 'github'
           token: '${{ secrets.GITHUB_TOKEN }}'
