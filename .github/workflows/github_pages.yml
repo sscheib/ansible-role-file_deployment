@@ -50,6 +50,7 @@ jobs:
           provider: 'github'
           token: '${{ secrets.GITHUB_TOKEN }}'
           branch: 'gh-pages'
+          cname: 'file-deployment.ansible-role.scheib.me'
           jekyll_src: './docs'
           jekyll_cfg: '_config.yml'
 ...
