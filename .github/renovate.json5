@@ -172,8 +172,7 @@
       "groupName": "renovate",
       "pinDigests": false,
       "schedule": [
-        "on sunday after 6pm",
-        "on sunday before 10pm"
+        "* 18-22 * * 7"
       ]
     },
     {
