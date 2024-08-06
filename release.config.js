@@ -28,16 +28,22 @@ module.exports = {
         'assets': [
           'docs/CHANGELOG.md'
         ],
-        'message': 'chore(release): Create release <%= nextRelease.version %>\n\n<%= nextRelease.notes %>'
+        'message': 'chore(release): Create release <%= nextRelease.version %>'
       }
     ],
     [
       '@semantic-release/github',
       {
-        "assignees": [
-          "@sscheib"
+        'assets': [
+          {
+            'path': 'docs/CHANGELOG.md',
+            'label': 'change log'
+          }
         ],
-        "discussionCategoryName": "Announcements"
+        'assignees': [
+          '@sscheib'
+        ],
+        'discussionCategoryName': 'Announcements'
       }
     ]
   ]
