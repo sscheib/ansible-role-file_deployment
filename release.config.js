@@ -38,7 +38,7 @@ module.exports = {
         'assets': [
           {
             'path': 'docs/CHANGELOG.md',
-            'label': 'change log'
+            'label': 'CHANGELOG.md'
           }
         ],
         'assignees': [
