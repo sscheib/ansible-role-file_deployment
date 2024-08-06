@@ -1,5 +1,12 @@
 # Change log
 
+## [1.4.5](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.4...v1.4.5) (2024-08-06)
+
+
+### Bug Fixes
+
+* ignoring auto-generated contents ([2bae6f4](https://github.com/sscheib/ansible-role-file_deployment/commit/2bae6f46bb4f34292bd3a738e5f797c3911cdb6b))
+
 ## [1.4.4](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.3...v1.4.4) (2024-08-06)
 
 
