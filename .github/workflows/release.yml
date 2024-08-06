@@ -68,6 +68,11 @@ jobs:
 
       - name: 'Create a semantic release'
         uses: 'cycjimmy/semantic-release-action@cb425203a562475bca039ba4dbf90c7f9ac790f4' # v4.1.0
+        with:
+          semantic-release: 'v24.0.0'
+          extra_plugins: |
+            @semantic-release/changelog@6.0.3
+            @semantic-release/git@10.0.1
         env:
           GH_TOKEN: '${{ secrets.RELEASE_TOKEN }}'
 
