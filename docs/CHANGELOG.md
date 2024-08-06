@@ -1,3 +1,12 @@
+# Change log
+
+## [1.4.3](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.2...v1.4.3) (2024-08-06)
+
+
+### Bug Fixes
+
+* adding title to CHANGELOG.md ([14b6aa5](https://github.com/sscheib/ansible-role-file_deployment/commit/14b6aa578b22ae23f3920019e915ad96e6906373))
+
 ## [1.4.2](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.1...v1.4.2) (2024-08-06)
 
 
