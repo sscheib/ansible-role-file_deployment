@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.1...v1.4.2) (2024-08-06)
+
+
+### Bug Fixes
+
+* ensuring max commit line length is not hit and attach CHANGELOG.md to release ([f53d27d](https://github.com/sscheib/ansible-role-file_deployment/commit/f53d27d5ad85f0e97d3c9ef119949b7e52bc23b5))
+
 ## [1.4.1](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.0...v1.4.1) (2024-08-06)
 
 
