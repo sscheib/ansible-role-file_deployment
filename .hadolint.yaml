@@ -1,0 +1,22 @@
+---
+diable-ignore-params: false
+failure-threshold: 'style'
+format: 'tty'
+label-schema:
+  org.opencontainers.image.authors: 'text'
+  org.opencontainers.image.base.name: 'text'
+  org.opencontainers.image.description: 'text'
+  org.opencontainers.image.documentation: 'text'
+  org.opencontainers.image.licenses: 'spdx'
+  org.opencontainers.image.title: 'text'
+  org.opencontainers.image.url: 'text'
+  org.opencontainers.image.vendor: 'text'
+no-fail: false
+no-color: false
+strict-labels: true
+trustedRegistries:
+  - 'docker.io'
+  - 'registry.access.redhat.com'
+  - 'registry.redhat.io'
+  - 'ghcr.io'
+...

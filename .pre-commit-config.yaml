@@ -228,4 +228,13 @@ repos:
           - 'pre-commit'
         pass_filenames: false
         verbose: true
+
+  - repo: 'https://github.com/hadolint/hadolint'
+    rev: 'v2.12.0'
+    hooks:
+      - id: 'hadolint-docker'
+        stages:
+          - 'pre-commit'
+        pass_filenames: true
+        verbose: true
 ...
