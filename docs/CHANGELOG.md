@@ -1,5 +1,12 @@
 # Change log
 
+## [1.4.4](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.3...v1.4.4) (2024-08-06)
+
+
+### Bug Fixes
+
+* allowing uploads.github.com ([97f5707](https://github.com/sscheib/ansible-role-file_deployment/commit/97f57074df16fd44190cab997969cdfc708bc109))
+
 ## [1.4.3](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.2...v1.4.3) (2024-08-06)
 
 
