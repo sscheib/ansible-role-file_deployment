@@ -38,5 +38,10 @@ module.exports = {
       username: '{{ secrets.GHCR_USERNAME }}',
       password: '{{ secrets.GHCR_TOKEN }}',
     },
+    {
+      matchHost: "registry.npmjs.org",
+      timeout: 240000,
+      enableHttp2: false
+    },
   ],
 };
