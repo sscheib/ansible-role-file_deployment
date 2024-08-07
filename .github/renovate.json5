@@ -274,6 +274,17 @@
         "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>.*?)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "description": "Extract dependencies in Containerfiles specified via ENV PACKAGE_NAME_VERSION=\"N\"",
+      "customType": "regex",
+      "fileMatch": [
+        "^docs/Containerfile"
+      ],
+      "matchStrings": [
+        "# renovate:\\s+?datasource=(?<datasource>.+?)\\s+?depName=(?<depName>.+?)(\\s+?versioning=(?<versioning>.+?))?\\s+?ENV\\s+?.+?_VERSION=\"(?<currentValue>.*)\"(?:\\s+)?"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }
