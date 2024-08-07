@@ -159,6 +159,7 @@ jobs:
             registry.access.redhat.com:443
             registry.npmjs.org:443
             registry.redhat.io:443
+            repology.org:443
             rubygems.org:443
             sso.redhat.com:443
             www.python.org:443
