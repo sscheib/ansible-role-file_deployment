@@ -9,6 +9,14 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   contents: 'read'
 
+# adding the extra_plugins as environment variables allows renovate to update the versions
+env:
+  # renovate dep: datasource=npm depName=semantic-release/changelog
+  semantic_release_changelog_version: '6.0.3'
+
+  # renovate dep: datasource=npm depName=semantic-release/git
+  semantic_release_git_version: '10.0.1'
+
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'
@@ -70,10 +78,11 @@ jobs:
       - name: 'Create a semantic release'
         uses: 'cycjimmy/semantic-release-action@cb425203a562475bca039ba4dbf90c7f9ac790f4' # v4.1.0
         with:
-          semantic_version: 'v24.0.0'
+          # renovate dep: datasource=npm depName=semantic-release
+          semantic_version: '24.0.0'
           extra_plugins: |
-            @semantic-release/changelog@6.0.3
-            @semantic-release/git@10.0.1
+            @semantic-release/changelog@${semantic_release_changelog_version}
+            @semantic-release/git@${semantic_release_git_version}
         env:
           GH_TOKEN: '${{ secrets.RELEASE_TOKEN }}'
 

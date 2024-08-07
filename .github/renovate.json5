@@ -260,7 +260,8 @@
         "^.pre-commit-config.yaml$"
       ],
       "matchStrings": [
-        "# renovate dep: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+)(?: registryUrl=(?<registryUrl>.*?))?\\s+[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
+        "# renovate dep: datasource=(?<datasource>.*?)\\s+?(\\s+?versioning=(?<versioning>.*?))?depName=(?<depName>[^\\s]+)(?: registryUrl=(?<registryUrl>.*?))?\\s+[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)",
+        "# renovate dep: datasource=(?<datasource>.*?)\\s+?(\\s+?versioning=(?<versioning>.*?))?depName=(?<depName>[^\\s]+)\\s+[^\:]+?:\\s+?'(?<currentValue>[^'\"\\s]+)"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
