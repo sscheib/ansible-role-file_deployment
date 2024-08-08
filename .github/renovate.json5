@@ -21,12 +21,12 @@
   "packageRules": [
     {
       "matchFileNames": [
-        ".github/workflows/*.yml",
-        ".pre-commit-config.yaml",
-        "collections/requirements.yml",
-        "roles/requirements.yml",
-        "requirements.yml",
-        "requirements.txt"
+        "^\\.github/workflows/.+?\\.ya?ml$",
+        "^\\.pre-commit-config\\.yaml$",
+        "^collections/requirements\\.ya?ml$",
+        "^roles/requirements\\.ya?ml$",
+        "^requirements\\.ya?ml$$",
+        "^requirements\\.txt$"
       ],
       "major": {
         "enabled": true
@@ -39,8 +39,8 @@
     {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
       "matchFileNames": [
-        "^.github/workflows/molecule_certified_ees\.ya?ml$",
-        "^.github/workflows/molecule_community_ees.ya?ml$"
+        "^\\.github/workflows/molecule_certified_ees\\.ya?ml$",
+        "^\\.github/workflows/molecule_community_ees\\.ya?ml$"
       ],
       "minor": {
         "enabled": true
@@ -190,7 +190,7 @@
         "ansible-core"
       ],
       "matchFileNames": [
-        "^.pre-commit-config.yaml$"
+        "^\\.pre-commit-config\\.yaml$"
       ],
       "matchDatasources": [
         "pypi"
@@ -213,9 +213,9 @@
       "commitMessageTopic": "{{{replace '(?:registry(?:\.access)?\.redhat\.(?:io|com)|docker\.io|ghcr\.io)\/' '' depName}}}"
     },
     {
-      "description": "Wait two weeks for Python updates to allow GitHub action to include the latest version",
+      "description": "Wait two weeks for Python updates to allow GitHub action setup-python to include the latest version",
       "matchFileNames": [
-        "^.github/workflows/pre-commit.ya?ml$"
+        "^\\.github/workflows/pre-commit\\.ya?ml$"
       ],
       "matchDepNames": [
         "python"
@@ -228,9 +228,9 @@
       "description": "Extract execution environments and molecule platforms defined via image:",
       "customType": "regex",
       "fileMatch": [
-        "^.github/workflows/molecule_certified_ees\.ya?ml$",
-        "^.github/workflows/molecule_community_ees.ya?ml$",
-        "^molecule/default/molecule.ya?ml$"
+        "^\\.github/workflows/molecule_certified_ees\\.ya?ml$",
+        "^\\.github/workflows/molecule_community_ees\\.ya?ml$",
+        "^molecule/default/molecule\\.ya?ml$"
       ],
       "matchStrings": [
         "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\'"
@@ -242,8 +242,8 @@
       "description": "Extract in-line dependencies for Python and NodeJS",
       "customType": "regex",
       "fileMatch": [
-        "^.pre-commit-config.yaml$",
-        "^.github/workflows/.*?\\.ya?ml$"
+        "^\\.pre-commit-config\\.yaml$",
+        "^\\.github/workflows/.+?\\.ya?ml$"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\s+-\s+['\"]?(?<depName>[^=@]+)(?:==|@)\s{0,}(?<currentValue>[^'\"\s\n]+)",
@@ -255,7 +255,7 @@
       "description": "Extract in-line dependencies defined in YAML, e.g. molecule: 'X.Y.Z'",
       "customType": "regex",
       "fileMatch": [
-        "^.github/workflows/.*?\\.ya?ml$"
+        "^\\.github/workflows/.*?\\.ya?ml$"
       ],
       "matchStrings": [
         "# renovate yaml: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+(?<depName>[^:]+):\\s+?'(?:(?<currentValue>[^'\"\\s]*))?"
@@ -266,8 +266,8 @@
       "description": "Extract custom dependency definitions",
       "customType": "regex",
       "fileMatch": [
-        "^.github/workflows/.+\\.ya?ml$",
-        "^.pre-commit-config.yaml$"
+        "^\\.github/workflows/.+?\\.ya?ml$",
+        "^\\.pre-commit-config\\.yaml$"
       ],
       "matchStrings": [
         "# renovate dep: datasource=(?<datasource>.*?)(\\s+?versioning=(?<versioning>.*?))?\\s+?depName=(?<depName>[^\\s]+)(?:\\s+registryUrl=(?<registryUrl>.*?))?\\s+[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
@@ -278,7 +278,7 @@
       "description": "Extract renovate container version",
       "customType": "regex",
       "fileMatch": [
-        "^.github/workflows/renovate\\.ya?ml$"
+        "^\\.github/workflows/renovate\\.ya?ml$"
       ],
       "matchStrings": [
         "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>.*?)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
@@ -289,7 +289,7 @@
       "description": "Extract dependencies in Containerfiles specified via ENV PACKAGE_NAME_VERSION=\"N\"",
       "customType": "regex",
       "fileMatch": [
-        "^docs/Containerfile"
+        "^docs/Containerfile$"
       ],
       "matchStrings": [
         "# renovate:\\s+?datasource=(?<datasource>.+?)\\s+?depName=(?<depName>.+?)(\\s+?versioning=(?<versioning>.+?))?\\s+?ENV\\s+?.+?_VERSION=\"(?<currentValue>.*)\"(?:\\s+)?"
