@@ -87,7 +87,6 @@ jobs:
         with:
           # renovate dep: datasource=python-version versioning=python depName=python
           python-version: '3.12.5'
-          check-latest: true
 
       - name: 'Install pre-commit'
         run: |
