@@ -211,6 +211,16 @@
         "docker"
       ],
       "commitMessageTopic": "{{{replace '(?:registry(?:\.access)?\.redhat\.(?:io|com)|docker\.io|ghcr\.io)\/' '' depName}}}"
+    },
+    {
+      "description": "Wait two weeks for Python updates to allow GitHub action to include the latest version",
+      "matchFileNames": [
+        "^.github/workflows/pre-commit.ya?ml$"
+      ],
+      "matchDepNames": [
+        "python"
+      ],
+      "minimumReleaseAge": "14 days"
     }
   ],
   "customManagers": [
