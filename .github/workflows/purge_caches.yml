@@ -36,7 +36,7 @@ jobs:
             github.com:443
 
       - name: 'Purge caches older than two days (created and accessed)'
-        uses: 'MyAlbum/purge-cache@6bd5afa0f99fd6096c4e08ed0eb1730da34d78dc' # v2.2.0
+        uses: 'MyAlbum/purge-cache@6bd5afa0f99fd6096c4e08ed0eb1730da34d78dc' # 2.2.0
         with:
           max-age: 172800
           debug: true
