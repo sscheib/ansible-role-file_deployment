@@ -18,6 +18,7 @@
   "pre-commit": {
     "enabled": true
   },
+  "internalChecksFilter": "strict",
   "packageRules": [
     {
       "matchFileNames": [
@@ -213,14 +214,14 @@
       "commitMessageTopic": "{{{replace '(?:registry(?:\.access)?\.redhat\.(?:io|com)|docker\.io|ghcr\.io)\/' '' depName}}}"
     },
     {
-      "description": "Wait two weeks for Python updates to allow GitHub action setup-python to include the latest version",
+      "description": "Wait three weeks for Python updates to allow GitHub action setup-python to include the latest version",
       "matchFileNames": [
         "^\\.github/workflows/pre-commit\\.ya?ml$"
       ],
       "matchDepNames": [
         "python"
       ],
-      "minimumReleaseAge": "14 days"
+      "minimumReleaseAge": "21 days"
     }
   ],
   "customManagers": [
