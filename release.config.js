@@ -29,7 +29,7 @@ module.exports = {
         'assets': [
           'docs/CHANGELOG.md'
         ],
-        'message': 'chore(release): create release <%= nextRelease.version %>'
+        'message': 'chore(release): create release <%= nextRelease.version %>\n\nSigned-off-by: semantic-release-bot <semantic-release-bot@martynus.net>'
       }
     ],
     [

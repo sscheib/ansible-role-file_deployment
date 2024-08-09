@@ -4,7 +4,8 @@
     "config:recommended",
     "helpers:pinGitHubActionDigests",
     "docker:pinDigests",
-    "mergeConfidence:all-badges"
+    "mergeConfidence:all-badges",
+    ":gitSignOff"
   ],
   "assignees": [
     "sscheib"
