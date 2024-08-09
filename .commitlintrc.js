@@ -8,7 +8,7 @@ module.exports = {
         'header-max-length': [2, 'always', 100],
         'subject-case': [
             2,
-            'always',
+            'never',
             ['sentence-case'],
         ],
         'subject-empty': [2, 'never'],
