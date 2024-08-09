@@ -9,6 +9,7 @@ ci:
     - 'check-renovate'
     - 'commitlint'
     - 'gitleaks'
+    - 'hadolint'
     - 'kics-scan'
     - 'markdown-link-check'
     - 'markdownlint'
