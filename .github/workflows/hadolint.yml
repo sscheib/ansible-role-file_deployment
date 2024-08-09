@@ -39,4 +39,5 @@ jobs:
         with:
           config: './.hadolint.yaml'
           dockerfile: 'docs/Containerfile'
+          verbose: true
 ...
