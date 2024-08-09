@@ -29,7 +29,7 @@ module.exports = {
         'assets': [
           'docs/CHANGELOG.md'
         ],
-        'message': 'chore(release): Create release <%= nextRelease.version %>'
+        'message': 'chore(release): create release <%= nextRelease.version %>'
       }
     ],
     [
