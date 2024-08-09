@@ -35,7 +35,7 @@ module.exports = {
     },
     {
       matchHost: 'ghcr.io',
-      username: '{{ secrets.GHCR_USERNAME }}',
+      username: '{{ process.env.GHCR_USERNAME }}',
       password: '{{ secrets.GHCR_TOKEN }}',
     },
     {
