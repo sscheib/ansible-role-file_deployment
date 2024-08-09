@@ -9,7 +9,7 @@ module.exports = {
         'subject-case': [
             2,
             'never',
-            ['start-case', 'pascal-case', 'upper-case'],
+            ['sentence-case'],
         ],
         'subject-empty': [2, 'never'],
         'subject-full-stop': [2, 'never', '.'],
