@@ -42,7 +42,7 @@ permissions: 'read-all'
 
 concurrency:
   group: 'ci-${{ github.workflow }}-${{ github.ref }}'
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
