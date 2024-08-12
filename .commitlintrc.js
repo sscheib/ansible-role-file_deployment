@@ -9,7 +9,7 @@ module.exports = {
         'subject-case': [
             2,
             'always',
-            ['lower-case'],
+            ['sentence-case'],
         ],
         'signed-off-by': [2, 'always', 'Signed-off-by:'],
         'subject-empty': [2, 'never'],
