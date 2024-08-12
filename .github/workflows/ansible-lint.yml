@@ -4,10 +4,29 @@ on:  # yamllint disable-line rule:truthy
   pull_request:
     branches:
       - 'main'
+
+    paths:
+      - '.github/workflows/ansible-lint.yml'
+      - 'defaults/**'
+      - 'files/**'
+      - 'handlers/**'
+      - 'library/**'
+      - 'lookup_plugins/**'
+      - 'meta/**'
+      - 'module_utils/**'
+      - 'molecule/**'
+      - 'tasks/**'
+      - 'templates/**'
+      - 'vars/**'
+
   workflow_dispatch: {}
 
 permissions:
   contents: 'read'
+
+concurrency:
+  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: true
 
 jobs:
   build:

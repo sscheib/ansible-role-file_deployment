@@ -40,6 +40,10 @@ on:  # yamllint disable-line rule:truthy
 # Declare default permissions as read only
 permissions: 'read-all'
 
+concurrency:
+  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: true
+
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
   # cache for the actual renovate run
