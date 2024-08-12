@@ -1,0 +1,7 @@
+---
+misconfigurations:
+  - id: 'AVD-DS-0026'
+    paths:
+      - 'docs/Containerfile'
+    statement: 'Healthchecks for a build image is not required'
+...

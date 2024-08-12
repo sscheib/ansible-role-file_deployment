@@ -1,0 +1,61 @@
+---
+name: 'Trivy'
+on:  # yamllint disable-line rule:truthy
+  schedule:
+    - cron: '43 17 * * 4'
+
+  pull_request:
+    branches:
+      - 'main'
+
+  push:
+    branches:
+      - 'main'
+
+  workflow_dispatch: {}
+
+permissions: 'read-all'
+
+concurrency:
+  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  analysis:
+    name: 'Trivy'
+    runs-on: 'ubuntu-22.04'
+    permissions:
+      security-events: 'write'
+
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
+        with:
+          egress-policy: 'audit'
+          disable-sudo: true
+
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+        with:
+          persist-credentials: false
+
+      - name: 'Scan repository with Trivy'
+        uses: 'aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8' # v0.24.0
+        with:
+          scan-type: 'fs'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          trivy-config: 'trivy.yaml'
+
+      - name: 'Upload artifact'
+        uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
+        with:
+          name: 'Trivy SARIF file'
+          path: 'trivy-results.sarif'
+          retention-days: 5
+
+      - name: 'Upload to code-scanning'
+        uses: 'github/codeql-action/upload-sarif@eb055d739abdc2e8de2e5f4ba1a8b246daa779aa' # v3.26.0
+        with:
+          sarif_file: 'trivy-results.sarif'
+...
