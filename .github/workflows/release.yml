@@ -9,6 +9,10 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   contents: 'read'
 
+concurrency:
+  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: false
+
 # adding the extra_plugins as environment variables allows renovate to update the versions
 env:
   # renovate dep: datasource=npm depName=@semantic-release/changelog
