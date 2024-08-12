@@ -1,0 +1,2 @@
+# produced by the hooks in https://github.com/mxab/pre-commit-trivy.git
+.pre-commit-trivy-cache

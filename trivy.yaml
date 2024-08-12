@@ -1,0 +1,43 @@
+---
+quiet: false
+debug: true
+insecure: false
+timeout: '10m'
+format: 'table'
+report: 'all'
+ignorefile: '.trivyignore.yaml'
+exit-code: 0
+exit-on-eol: 0
+severity:
+  - 'UNKNOWN'
+  - 'LOW'
+  - 'MEDIUM'
+  - 'HIGH'
+  - 'CRITICAL'
+pkg-types:
+  - 'os'
+  - 'library'
+
+scan:
+  show-suppressed: true
+  skip-dirs:
+    - 'docs/_site/'
+    - 'docs/.jekyll_cache'
+  skip-files: []
+  offline: false
+  scanners:
+    - 'vuln'
+    - 'misconfig'
+    - 'secret'
+    - 'license'
+  parallel: 5
+  sbom-sources:
+    - 'oci'
+  include-dev-deps: true
+
+vulnerability:
+  ignore-unfixed: false
+  ignore-status:
+    - 'end_of_life'
+  skip-vex-repo-update: true
+...
