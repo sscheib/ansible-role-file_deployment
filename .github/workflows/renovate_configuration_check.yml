@@ -7,6 +7,7 @@ on:  # yamllint disable-line rule:truthy
 
     paths:
       - '.github/workflows/renovate.yml'
+      - '.github/workflows/renovate_configuration_check.yml'
       - '.github/renovate.json5'
       - '.github/renovate_global.js'
 
