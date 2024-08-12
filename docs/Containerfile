@@ -1,6 +1,16 @@
 FROM docker.io/ruby:3.3.4-alpine3.20@sha256:9fc2d9dd146a47fddcf2b69e3174d92ee1a654fbbe73f97b858505394748ac6e
 
 #
+# build arguments
+#
+
+ARG USERNAME="jekyll"
+ARG GROUPNAME="jekyll"
+ARG UID="1000"
+ARG GID="1000"
+ARG JEKYLL_WORKDIR="/srv/jekyll"
+
+#
 # package definitions
 #
 
@@ -25,10 +35,22 @@ LABEL org.opencontainers.image.title="jekyll-build"
 LABEL org.opencontainers.image.url="https://github.com/sscheib/ansible-role-file_deployment"
 LABEL org.opencontainers.image.vendor="Steffen Scheib <steffen@scheib.me>"
 
+# create user and group
+RUN set -eux; \
+    addgroup \
+      --gid "${GID}" \
+      --system \
+      "${GROUPNAME}" \
+    && \
+    adduser \
+      --home "${JEKYLL_WORKDIR}" \
+      --ingroup "${GROUPNAME}" \
+      --system \
+      --uid "${UID}" \
+      "${USERNAME}"
 
-ENV SETUPDIR="/setup"
-COPY "Gemfile"* "${SETUPDIR}/"
-WORKDIR "${SETUPDIR}"
+COPY "Gemfile"* "${JEKYLL_WORKDIR}/"
+RUN chown "${USERNAME}":"${GROUPNAME}" "${JEKYLL_WORKDIR}/Gemfile"*
 
 # install build dependencies
 RUN set -eux; \
@@ -43,6 +65,9 @@ RUN set -eux; \
       dumb-init="${DUMB_INIT_VERSION}" \
     ;
 
+USER "${USERNAME}"
+WORKDIR "${JEKYLL_WORKDIR}"
+
 # install bundler
 RUN set -eux; \
     gem install bundler -v "${BUNDLER_VERSION}"
@@ -51,6 +76,7 @@ RUN set -eux; \
 RUN set -eux; \
     bundler install
 
+USER "root"
 # remove build dependencies
 RUN set -eux; \
     apk del --no-cache build-deps
@@ -58,12 +84,16 @@ RUN set -eux; \
 # clean up
 RUN set -eux; \
     rm -rf \
-      "${SETUPDIR}" \
       /usr/gem/cache \
-#      /root/.bundle/cache \
+      "${JEKYLL_WORKDIR}/.bundle/cache" \
+      "${JEKYLL_WORKDIR}/.cache" \
+      "${JEKYLL_WORKDIR}/Gemfile"* \
     ;
 
-WORKDIR "/srv/jekyll"
+RUN chown -R "${USERNAME}":"${GROUPNAME}" "${JEKYLL_WORKDIR}"
+
+USER "${USERNAME}"
+WORKDIR "${JEKYLL_WORKDIR}"
 EXPOSE 4000
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["bundler", "exec", "jekyll", "serve", "--host", "0.0.0.0"]
