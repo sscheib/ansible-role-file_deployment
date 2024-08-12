@@ -1,3 +1,4 @@
+# kics-scan disable=6b376af8-cfe8-49ab-a08d-f32de23661a4 - WORKDIR Path Not Absolute
 FROM docker.io/ruby:3.3.4-alpine3.20@sha256:9fc2d9dd146a47fddcf2b69e3174d92ee1a654fbbe73f97b858505394748ac6e
 
 #
@@ -49,6 +50,7 @@ RUN set -eux; \
       --uid "${UID}" \
       "${USERNAME}"
 
+# prepare workdir
 COPY "Gemfile"* "${JEKYLL_WORKDIR}/"
 RUN chown "${USERNAME}":"${GROUPNAME}" "${JEKYLL_WORKDIR}/Gemfile"*
 
@@ -76,8 +78,8 @@ RUN set -eux; \
 RUN set -eux; \
     bundler install
 
-USER "root"
 # remove build dependencies
+USER "root"
 RUN set -eux; \
     apk del --no-cache build-deps
 
@@ -90,6 +92,7 @@ RUN set -eux; \
       "${JEKYLL_WORKDIR}/Gemfile"* \
     ;
 
+# ensure files are owned by the correct user and group
 RUN chown -R "${USERNAME}":"${GROUPNAME}" "${JEKYLL_WORKDIR}"
 
 USER "${USERNAME}"
