@@ -22,6 +22,7 @@ This is a *very* simple role that will copy files to the managed nodes using `an
 | [![molecule community EEs](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/molecule_community_ees.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/molecule_community_ees.yml) | |
 | [![Dependency Review](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/dependency_review.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/dependency_review.yml) | |
 | [![hadolint](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/hadolint.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/hadolint.yml) | |
+| [![Trivy](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/trivy.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/trivy.yml) | |
 <!-- markdownlint-enable MD013 -->
 
 **Note**: The badges don't follow a specific order. Wherever possible, a general badge refers to the corresponding workflow that implements the respective action, which allows
