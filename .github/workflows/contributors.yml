@@ -25,6 +25,12 @@ jobs:
           egress-policy: 'audit'
           disable-sudo: true
 
+      - name: "Get today's date"
+        shell: 'bash'
+        run: |
+          endDate="$(date +'%Y-%m-%d')"
+          echo "END_DATE=${endDate}" >> "${GITHUB_ENV}"
+
       - name: 'Gather contributors'
         uses: 'github/contributors@135b0430e856ade27175cbd1d4e1e11b0dd8ef95' # v1.4.3
         env:
@@ -32,6 +38,7 @@ jobs:
           LINK_TO_PROFILE: true
           REPOSITORY: '${{ github.repository }}'
           START_DATE: '1970-01-01'
+          END_DATE: '${{ env.END_DATE }}'
 
       - name: 'Create issue'
         uses: 'peter-evans/create-issue-from-file@24452a72d85239eacf1468b0f1982a9f3fec4c94' # v5.0.0
