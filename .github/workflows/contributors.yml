@@ -31,6 +31,7 @@ jobs:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           LINK_TO_PROFILE: true
           REPOSITORY: '${{ github.repository }}'
+          START_DATE: '1970-01-01'
 
       - name: 'Create issue'
         uses: 'peter-evans/create-issue-from-file@24452a72d85239eacf1468b0f1982a9f3fec4c94' # v5.0.0
