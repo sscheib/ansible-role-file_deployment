@@ -62,10 +62,6 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   contents: 'read'
 
-concurrency:
-  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
-  cancel-in-progress: true
-
 jobs:
   molecule-community-ees:
     runs-on: 'ubuntu-22.04'
