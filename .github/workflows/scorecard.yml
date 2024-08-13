@@ -16,10 +16,6 @@ on:  # yamllint disable-line rule:truthy
 # Declare default permissions as read only.
 permissions: 'read-all'
 
-concurrency:
-  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
-  cancel-in-progress: true
-
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'

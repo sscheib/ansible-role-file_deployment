@@ -13,10 +13,6 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   contents: 'read'
 
-concurrency:
-  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
-  cancel-in-progress: true
-
 jobs:
   build:
     name: 'markdown-link-check'

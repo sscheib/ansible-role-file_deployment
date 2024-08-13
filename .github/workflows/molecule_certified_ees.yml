@@ -77,10 +77,6 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   contents: 'read'
 
-concurrency:
-  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
-  cancel-in-progress: true
-
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'

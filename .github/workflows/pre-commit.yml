@@ -27,10 +27,6 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   contents: 'read'
 
-concurrency:
-  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
-  cancel-in-progress: true
-
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
   cache_archive: 'pre-commit_cache.tar.gz'
