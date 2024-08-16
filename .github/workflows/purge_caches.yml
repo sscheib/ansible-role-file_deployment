@@ -56,13 +56,13 @@ jobs:
             for (const cache of caches.data.actions_caches) {
 
               let accessedDate = null;
-              if (object.getAttribute("last_accessed_at")) {
-                accessedDate = Date.parse(caches.data.actions_caches.last_accessed_at);
+              if (cache.getAttribute("last_accessed_at")) {
+                accessedDate = Date.parse(cache.last_accessed_at);
               }
 
               let createdDate = null;
-              if (object.getAttribute("last_accessed_at")) {
-                createdDate = Date.parse(caches.data.actions_caches.created_at);
+              if (cache.getAttribute("last_accessed_at")) {
+                createdDate = Date.parse(cache.created_at);
               }
 
               // older than 2 days for either created or accessed
@@ -73,11 +73,13 @@ jobs:
                 console.log(
                   'Deleting cache ' + cache.key + ' (ID: ' + cache.id + ' )'
                 );
+
                 github.rest.actions.deleteActionsCacheById({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   cache_id: cache.id,
                 })
+
                 deletedCaches++;
               }
             }
