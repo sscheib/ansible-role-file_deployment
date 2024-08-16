@@ -8,6 +8,7 @@ on:  # yamllint disable-line rule:truthy
       - '**.md'
       - '.github/workflows/markdown-link-check.yml'
 
+  merge_group: {}
   workflow_dispatch: {}
 
 permissions:

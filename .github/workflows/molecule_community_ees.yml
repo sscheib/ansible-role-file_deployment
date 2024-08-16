@@ -37,6 +37,7 @@ on:  # yamllint disable-line rule:truthy
       - 'templates/**'
       - 'vars/**'
 
+  merge_group: {}
   workflow_dispatch:
     inputs:
       moleculeDebug:
