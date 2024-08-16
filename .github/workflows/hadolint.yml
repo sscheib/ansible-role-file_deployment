@@ -7,6 +7,7 @@ on:  # yamllint disable-line rule:truthy
     paths:
       - 'docs/Containerfile'
 
+  merge_group: {}
   workflow_dispatch: {}
 
 permissions:

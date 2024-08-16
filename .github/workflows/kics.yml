@@ -1,12 +1,14 @@
 ---
 name: 'KICS'
 on:  # yamllint disable-line rule:truthy
-  schedule:
-    - cron: '43 18 * * 4'
   pull_request:
     branches:
       - 'main'
+
+  merge_group: {}
   workflow_dispatch: {}
+  schedule:
+    - cron: '43 18 * * 4'
 
 permissions: 'read-all'
 

@@ -5,6 +5,7 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - 'main'
   push: {}
+  merge_group: {}
   workflow_dispatch: {}
 
 permissions:
