@@ -40,4 +40,48 @@ jobs:
         with:
           max-age: 172800
           debug: true
+
+      - name: 'Purge caches older than two days (created and accessed)'
+        uses: 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea' # v7.0.1
+        with:
+          script: |
+            console.log('Clearing caches')
+            const caches = await github.rest.actions.getActionsCacheList({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+
+            const today = new Date().getTime();
+            let deletedCaches = 0;
+            for (const cache of caches.data.actions_caches) {
+
+              let accessedDate = null;
+              if (object.getAttribute("last_accessed_at")) {
+                accessedDate = Date.parse(caches.data.actions_caches.last_accessed_at);
+              }
+
+              let createdDate = null;
+              if (object.getAttribute("last_accessed_at")) {
+                createdDate = Date.parse(caches.data.actions_caches.created_at);
+              }
+
+              // older than 2 days for either created or accessed
+              if (
+                (accessedDate !== null && today - accessedDate > 60 * 60 * 1000 * 24 * 2) ||
+                (createdDate !== null && today - createdDate > 60 * 60 * 1000 * 24 * 2)
+              ) {
+                console.log(
+                  'Deleting cache ' + cache.key + ' (ID: ' + cache.id + ' )'
+                );
+                github.rest.actions.deleteActionsCacheById({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  cache_id: cache.id,
+                })
+                deletedCaches++;
+              }
+            }
+            console.log(
+              'Number of deleted caches ' + deletedCaches
+            );
 ...
