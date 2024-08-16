@@ -227,8 +227,8 @@
       "matchFileNames": [
         "^\\.github/workflows/pre-commit\\.ya?ml$"
       ],
-      "matchDepNames": [
-        "python"
+      "matchDatasources": [
+        "python-version"
       ],
       "minimumReleaseAge": "21 days"
     }
