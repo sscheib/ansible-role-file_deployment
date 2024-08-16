@@ -24,7 +24,8 @@ on:  # yamllint disable-line rule:truthy
           - 'fatal'
 
   schedule:
-    - cron: '0 */3 * * *'
+    # run renovate once an hour
+    - cron: '0 * * * *'
     # schedule to reset the cache once a week on Monday night
     - cron: '30 0 * * 1'
 
