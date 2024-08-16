@@ -76,14 +76,18 @@ jobs:
             const caches = await github.rest.actions.getActionsCacheList({
               owner: context.repo.owner,
               repo: context.repo.repo,
+              per_page: 100,
             });
 
             const today = new Date().getTime();
             let deletedCaches = 0;
+            console.log(
+              'Total caches retrieved: ' + caches.data.actions_caches.length
+            );
             for (const cache of caches.data.actions_caches) {
 
               console.log(
-                'Checking cache ' + cache.key + ' (ID: ' + cache.id + ' )'
+                'Checking cache ' + cache.key + ' (ID: ' + cache.id + ')'
               );
 
               let accessedDate = null;
@@ -102,7 +106,7 @@ jobs:
                 (createdDate !== null && today - createdDate > 60 * 60 * 1000 * 24 * 2)
               ) {
                 console.log(
-                  'Deleting cache ' + cache.key + ' (ID: ' + cache.id + ' )'
+                  'Deleting cache ' + cache.key + ' (ID: ' + cache.id + ')'
                 );
 
                 github.rest.actions.deleteActionsCacheById({
@@ -115,6 +119,6 @@ jobs:
               }
             }
             console.log(
-              'Number of deleted caches ' + deletedCaches
+              'Number of deleted caches: ' + deletedCaches
             );
 ...
