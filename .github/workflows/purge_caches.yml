@@ -56,12 +56,12 @@ jobs:
             for (const cache of caches.data.actions_caches) {
 
               let accessedDate = null;
-              if (cache.getAttribute("last_accessed_at")) {
+              if (cache.last_accessed_at !== undefined) {
                 accessedDate = Date.parse(cache.last_accessed_at);
               }
 
               let createdDate = null;
-              if (cache.getAttribute("last_accessed_at")) {
+              if (cache.last_accessed_at !== undefined) {
                 createdDate = Date.parse(cache.created_at);
               }
 
