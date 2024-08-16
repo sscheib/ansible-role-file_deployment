@@ -9,7 +9,6 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - 'main'
 
-  merge_group: {}
   workflow_dispatch:
     inputs:
       repoCache:

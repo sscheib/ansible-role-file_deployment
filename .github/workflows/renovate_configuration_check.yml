@@ -11,7 +11,6 @@ on:  # yamllint disable-line rule:truthy
       - '.github/renovate.json5'
       - '.github/renovate_global.js'
 
-  merge_group: {}
   workflow_dispatch: {}
   workflow_call: {}
 

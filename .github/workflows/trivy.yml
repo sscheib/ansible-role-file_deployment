@@ -12,7 +12,6 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - 'main'
 
-  merge_group: {}
   workflow_dispatch: {}
 
 permissions: 'read-all'

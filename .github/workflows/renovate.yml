@@ -28,7 +28,6 @@ on:  # yamllint disable-line rule:truthy
     # schedule to reset the cache once a week on Monday night
     - cron: '30 0 * * 1'
 
-  merge_group: {}
   push:
     branches:
       - 'main'

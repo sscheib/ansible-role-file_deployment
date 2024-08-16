@@ -12,7 +12,6 @@ on:  # yamllint disable-line rule:truthy
     paths:
       - '.github/workflows/purge_caches.yml'
 
-  merge_group: {}
   # delete caches once a night
   schedule:
     - cron: '45 0 * * *'

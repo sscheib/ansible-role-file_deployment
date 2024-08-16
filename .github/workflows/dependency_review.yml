@@ -5,8 +5,6 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - 'main'
 
-  merge_group: {}
-
 permissions:
   contents: 'read'
 
