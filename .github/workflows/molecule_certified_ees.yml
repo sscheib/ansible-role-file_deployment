@@ -100,10 +100,6 @@ permissions:
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'
-    # only run the job if the job context's branch is main or the 'run' label is set
-    if: >-
-      contains(github.event.pull_request.labels.*.name, 'run') ||
-      github.ref == 'refs/heads/main'
     runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
@@ -133,10 +129,13 @@ jobs:
 
   check-should-cache:
     name: 'Check whether caching should be enabled'
-    # only run the job if the job context's branch is main or the 'run' label is set
+    # only run the job if the job context's branch is main or the 'run' label is set or
+    # the secrets are defined (due to a contributor raising the PR)
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
-      github.ref == 'refs/heads/main'
+      github.ref == 'refs/heads/main' ||
+      needs.check-secrets.outputs.secrets-defined == 'true'
+    needs: 'check-secrets'
     runs-on: 'ubuntu-22.04'
     permissions:
       contents: 'read'
