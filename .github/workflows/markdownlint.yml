@@ -8,7 +8,6 @@ on:  # yamllint disable-line rule:truthy
       - '**.md'
       - '.github/workflows/markdownlint.yml'
 
-  merge_group: {}
   workflow_dispatch: {}
 
 permissions:

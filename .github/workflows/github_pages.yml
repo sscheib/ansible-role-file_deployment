@@ -17,7 +17,6 @@ on:  # yamllint disable-line rule:truthy
       - 'docs/**'
       - '.github/workflows/github_pages.yml'
 
-  merge_group: {}
   workflow_dispatch: {}
 
 permissions:
