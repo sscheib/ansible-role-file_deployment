@@ -20,8 +20,41 @@ permissions:
   contents: 'read'
 
 jobs:
+  check-user-permissions:
+    runs-on: 'ubuntu-22.04'
+    permissions:
+      contents: 'read'
+    outputs:
+      require-result: '${{ steps.check-access.outputs.require-result }}'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
+        with:
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+
+      - name: 'Get User Permissions'
+        id: 'check-access'
+        uses: 'actions-cool/check-user-permission@956b2e73cdfe3bcb819bb7225e490cb3b18fd76e' # v2.2.1
+        with:
+          require: 'write'
+          username: '${{ github.triggering_actor }}'
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: 'Check User Permission'
+        if: "steps.check-access.outputs.require-result == 'false'"
+        run: |
+          echo "${{ github.triggering_actor }} does not have permissions on this repo."
+          echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
+          echo "Job originally triggered by ${{ github.actor }}"
+
   purge-caches:
     name: 'Purge caches'
+    if: "needs.check-user-permissions.outputs.require-result == 'true'"
+    needs: 'check-user-permissions'
     runs-on: 'ubuntu-22.04'
     permissions:
       actions: 'write'
@@ -36,12 +69,6 @@ jobs:
             github.com:443
 
       - name: 'Purge caches older than two days (created and accessed)'
-        uses: 'MyAlbum/purge-cache@6bd5afa0f99fd6096c4e08ed0eb1730da34d78dc' # 2.2.0
-        with:
-          max-age: 172800
-          debug: true
-
-      - name: 'Purge caches older than two days (created and accessed)'
         uses: 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea' # v7.0.1
         with:
           script: |
@@ -54,6 +81,10 @@ jobs:
             const today = new Date().getTime();
             let deletedCaches = 0;
             for (const cache of caches.data.actions_caches) {
+
+              console.log(
+                'Checking cache ' + cache.key + ' (ID: ' + cache.id + ' )'
+              );
 
               let accessedDate = null;
               if (cache.last_accessed_at !== undefined) {
