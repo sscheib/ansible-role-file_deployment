@@ -1,0 +1,9 @@
+---
+comment-summary-in-pr: 'on-failure'
+fail-on-severity: 'low'
+fail-on-scopes: 'runtime,development,unknown'
+show-openssf-scorecard: true
+vulnerability-check: true
+warn-on-openssf-scorecard-level: 3
+warn-only: false
+...
