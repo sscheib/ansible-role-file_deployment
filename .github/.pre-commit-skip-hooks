@@ -4,9 +4,10 @@ check-github-workflows
 check-renovate
 commitlint
 gitleaks
-hadolint
+hadolint-docker
 kics-scan
 markdown-link-check
 markdownlint
 pyspelling
+renovate-config-validator
 yamllint
