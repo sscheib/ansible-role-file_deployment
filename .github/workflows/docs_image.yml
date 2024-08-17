@@ -13,6 +13,10 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   contents: 'read'
 
+concurrency:
+  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: false
+
 jobs:
   build-docs-image:
     name: 'Build docs image'
@@ -41,7 +45,7 @@ jobs:
         with:
           context: 'git'
           flavor: |
-            latest=true
+            latest=auto
 
           images: |
             name=ghcr.io/${{ github.repository }}/jekyll-build,enable=true
@@ -51,9 +55,11 @@ jobs:
             type=semver,pattern={{version}},enable=true
             type=semver,pattern={{major}}.{{minor}},enable=true
             type=sha,format=long,enable=true
+
           labels: |
             org.opencontainers.image.description=Build documentation using Jekyl
             org.opencontainers.image.title=jekyll-build
+
           annotations: |
             org.opencontainers.image.description=Build documentation using Jekyl
             org.opencontainers.image.title=jekyll-build
