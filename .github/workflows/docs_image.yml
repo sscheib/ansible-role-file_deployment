@@ -48,7 +48,7 @@ jobs:
         uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # v3.3.0
         with:
           registry: 'ghcr.io'
-          username: '${{ github.actor }}'
+          username: '${{ github.repository_owner }}'
           password: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: 'Build and push image'
@@ -58,4 +58,5 @@ jobs:
           file: './docs/Containerfile'
           tags: '${{ steps.metadata.outputs.tags }}'
           labels: '${{ steps.metadata.outputs.labels }}'
+          push: true
 ...
