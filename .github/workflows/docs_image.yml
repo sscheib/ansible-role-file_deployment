@@ -45,15 +45,12 @@ jobs:
         with:
           context: 'git'
           flavor: |
-            latest=auto
+            latest=true
 
           images: |
             name=ghcr.io/${{ github.repository }}/jekyll-build,enable=true
 
           tags: |
-            type=ref,event=tag,enable=true
-            type=semver,pattern={{version}},enable=true
-            type=semver,pattern={{major}}.{{minor}},enable=true
             type=sha,format=long,enable=true
 
           labels: |
