@@ -70,11 +70,18 @@ jobs:
 
       - name: 'Build and push image'
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
+        id: 'build-push'
         with:
           context: './docs'
           file: './docs/Containerfile'
-#          tags: 'ghcr.io/${{ github.repository }}/jekyll:latest'
           tags: '${{ steps.metadata.outputs.tags }}'
           labels: '${{ steps.metadata.outputs.labels }}'
           push: true
+
+      - name: 'Generate artifact attestation'
+        uses: 'actions/attest-build-provenance@310b0a4a3b0b78ef57ecda988ee04b132db73ef8' # v1.4.1
+        with:
+          subject-name: 'ghcr.io/${{ github.repository }}/jekyll-build'
+          subject-digest: '${{ steps.build-push.outputs.digest }}'
+          push-to-registry: true
 ...
