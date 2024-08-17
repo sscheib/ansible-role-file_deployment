@@ -55,8 +55,8 @@ jobs:
             type=pep440,pattern={{major}}.{{minor}},enable=true
             type=sha,format=long,enable=true
             type=edge,enable=true
-            type=raw,description=Build documentation using Jekyll,enable=true
-            type=raw,title=jekyll-build,enable=true
+            type=raw,description,value=Build documentation using Jekyll,enable=true
+            type=raw,title,value=jekyll-build,enable=true
 
       - name: 'Login to ghcr.io'
         uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # v3.3.0
