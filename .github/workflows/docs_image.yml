@@ -8,6 +8,7 @@ on:  # yamllint disable-line rule:truthy
       - 'docs/Containerfile'
       - '.github/workflows/docs_image.yml'
 
+  workflow_call: {}
   workflow_dispatch: {}
 
 permissions:
@@ -18,9 +19,41 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check-user-permissions:
+    runs-on: 'ubuntu-22.04'
+    permissions:
+      contents: 'read'
+    outputs:
+      require-result: '${{ steps.check-access.outputs.require-result }}'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
+        with:
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+
+      - name: 'Get User Permissions'
+        id: 'check-access'
+        uses: 'actions-cool/check-user-permission@956b2e73cdfe3bcb819bb7225e490cb3b18fd76e' # v2.2.1
+        with:
+          require: 'write'
+          username: '${{ github.triggering_actor }}'
+        env:
+          GITHUB_TOKEN: '${{ secrets.token }}'
+
+      - name: 'Check User Permission'
+        if: "steps.check-access.outputs.require-result == 'false'"
+        run: |
+          echo "${{ github.triggering_actor }} does not have permissions on this repo."
+          echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
+          echo "Job originally triggered by ${{ github.actor }}"
+
   build-docs-image:
     name: 'Build docs image'
-    if: "github.event_name != 'pull_request'"
+    if: "needs.check-user-permissions.outputs.require-result == 'true'"
+    needs: 'check-user-permissions'
     runs-on: 'ubuntu-22.04'
     permissions:
       packages: 'write'
@@ -30,8 +63,21 @@ jobs:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
         with:
-          egress-policy: 'audit'
           disable-sudo: true
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            auth.docker.io:443
+            dl-cdn.alpinelinux.org:443
+            fulcio.sigstore.dev:443
+            ghcr.io:443
+            github.com:443
+            index.rubygems.org:443
+            pkg-containers.githubusercontent.com:443
+            production.cloudflare.docker.com:443
+            registry-1.docker.io:443
+            rekor.sigstore.dev:443
+            rubygems.org:443
 
       - name: 'Checkout the repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
