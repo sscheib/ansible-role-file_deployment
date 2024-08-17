@@ -34,18 +34,18 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-#
-#      - name: 'Extract repository metadata'
-#        id: 'metadata'
-#        uses: 'docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81' # v5.5.1
-#        with:
-#          images: '${{ github.repository }}_docs_image'
-#          tags: |
-#            type=ref,event=branch
-#            type=ref,event=pr
-#            type=semver,pattern={{version}}
-#            type=semver,pattern={{major}}.{{minor}}
-#
+
+      - name: 'Extract repository metadata'
+        id: 'metadata'
+        uses: 'docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81' # v5.5.1
+        with:
+          images: 'ghcr.io/${{ github.repository }}/jekyll'
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
       - name: 'Login to ghcr.io'
         uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # v3.3.0
         with:
@@ -58,8 +58,8 @@ jobs:
         with:
           context: './docs'
           file: './docs/Containerfile'
-          tags: 'ghcr.io/${{ github.repository }}/docs:latest'
-#          tags: '${{ steps.metadata.outputs.tags }}'
-#          labels: '${{ steps.metadata.outputs.labels }}'
+#          tags: 'ghcr.io/${{ github.repository }}/jekyll:latest'
+          tags: '${{ steps.metadata.outputs.tags }}'
+          labels: '${{ steps.metadata.outputs.labels }}'
           push: true
 ...
