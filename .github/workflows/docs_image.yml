@@ -58,7 +58,7 @@ jobs:
         with:
           context: './docs'
           file: './docs/Containerfile'
-          tags: 'ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest'
+          tags: 'ghcr.io/${{ github.repository }}:latest'
 #          tags: '${{ steps.metadata.outputs.tags }}'
 #          labels: '${{ steps.metadata.outputs.labels }}'
           push: true
