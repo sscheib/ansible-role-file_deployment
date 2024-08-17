@@ -39,12 +39,24 @@ jobs:
         id: 'metadata'
         uses: 'docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81' # v5.5.1
         with:
-          images: 'ghcr.io/${{ github.repository }}/jekyll'
+          context: 'git'
+          flavor: |
+            latest=true
+
+          images: |
+            name=ghcr.io/${{ github.repository }}/jekyll,enable=true
+
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=schedule,pattern={{date 'YYYYMMDD-hhmmss' tz='UTC'}},enable=true
+            type=ref,event=tag,enable=true
+            type=semver,pattern={{version}},enable=true
+            type=semver,pattern={{major}}.{{minor}},enable=true
+            type=pep440,pattern={{version}},enable=true
+            type=pep440,pattern={{major}}.{{minor}},enable=true
+            type=sha,format=long,enable=true
+            type=edge,enable=true
+            type=raw,description=Build documentation using Jekyll,enable=true
+            type=raw,title=jekyll-build,enable=true
 
       - name: 'Login to ghcr.io'
         uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # v3.3.0
