@@ -73,14 +73,13 @@ jobs:
         with:
           script: |
             console.log('Clearing caches');
-            const caches = await github.paginate('GET /repos/{owner}/{repo}/actions/caches',
-              {
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                per_page: 100,
-              }
-            );
+            const caches = await github.paginate("GET /repos/{owner}/{repo}/actions/caches", {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
 
+            console.log(caches);
             const today = new Date().getTime();
             let deletedCaches = 0;
             console.log(
