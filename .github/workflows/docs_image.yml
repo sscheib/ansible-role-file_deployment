@@ -118,8 +118,8 @@ jobs:
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         id: 'build-push'
         with:
-          cache-from: 'type=gha'
-          cache-to: 'type=gha,mode=max'
+          cache-from: 'type=registry,ref=ghcr.io/${{ github.repository }}/jekyll-build:buildcache'
+          cache-to: 'type=registry,ref=ghcr.io/${{ github.repository }}/jekyll-build:buildcache,mode=max'
           context: './docs'
           file: './docs/Containerfile'
           labels: '${{ steps.metadata.outputs.labels }}'
