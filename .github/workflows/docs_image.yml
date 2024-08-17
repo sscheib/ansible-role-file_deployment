@@ -6,6 +6,7 @@ on:  # yamllint disable-line rule:truthy
       - 'main'
     paths:
       - 'docs/Containerfile'
+      - '.github/workflows/docs_image.yml'
 
   workflow_dispatch: {}
 
@@ -20,7 +21,7 @@ jobs:
     permissions:
       packages: 'write'
       attestations: 'write'
-      id-token: 'write'
+      id-token: 'read'
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
@@ -28,36 +29,37 @@ jobs:
           egress-policy: 'audit'
           disable-sudo: true
 
-      - name: 'Checkout the repository'
-        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: 'Extract repository metadata'
-        id: 'metadata'
-        uses: 'docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81' # v5.5.1
-        with:
-          images: '${{ github.repository }}_docs_image'
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-
-      - name: 'Login to ghcr.io'
-        uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # v3.3.0
-        with:
-          registry: 'ghcr.io/${{ github.repository_owner }}'
-          username: '${{ github.repository_owner }}'
-          password: '${{ secrets.GITHUB_TOKEN }}'
+#      - name: 'Checkout the repository'
+#        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+#        with:
+#          fetch-depth: 0
+#          persist-credentials: false
+#
+#      - name: 'Extract repository metadata'
+#        id: 'metadata'
+#        uses: 'docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81' # v5.5.1
+#        with:
+#          images: '${{ github.repository }}_docs_image'
+#          tags: |
+#            type=ref,event=branch
+#            type=ref,event=pr
+#            type=semver,pattern={{version}}
+#            type=semver,pattern={{major}}.{{minor}}
+#
+#      - name: 'Login to ghcr.io'
+#        uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # v3.3.0
+#        with:
+#          registry: 'ghcr.io/${{ github.repository_owner }}'
+#          username: '${{ github.repository_owner }}'
+#          password: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: 'Build and push image'
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         with:
           context: './docs'
           file: './docs/Containerfile'
-          tags: '${{ steps.metadata.outputs.tags }}'
-          labels: '${{ steps.metadata.outputs.labels }}'
+          tags: 'latest'
+#          tags: '${{ steps.metadata.outputs.tags }}'
+#          labels: '${{ steps.metadata.outputs.labels }}'
           push: true
 ...
