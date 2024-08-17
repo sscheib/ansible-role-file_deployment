@@ -79,13 +79,12 @@ jobs:
               per_page: 100,
             });
 
-            console.log(caches);
             const today = new Date().getTime();
             let deletedCaches = 0;
             console.log(
-              'Total caches retrieved: ' + caches.data.actions_caches.length
+              'Total caches retrieved: ' + caches.length
             );
-            for (const cache of caches.data.actions_caches) {
+            for (const cache of caches) {
 
               console.log(
                 'Checking cache ' + cache.key + ' (ID: ' + cache.id + ')'
