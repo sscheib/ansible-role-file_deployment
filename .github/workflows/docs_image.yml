@@ -47,17 +47,13 @@ jobs:
             name=ghcr.io/${{ github.repository }}/jekyll-build,enable=true
 
           tags: |
-            type=schedule,pattern={{date 'YYYYMMDD-hhmmss' tz='UTC'}},enable=true
             type=ref,event=tag,enable=true
             type=semver,pattern={{version}},enable=true
             type=semver,pattern={{major}}.{{minor}},enable=true
-            type=pep440,pattern={{version}},enable=true
-            type=pep440,pattern={{major}}.{{minor}},enable=true
             type=sha,format=long,enable=true
-            type=edge,enable=true
           labels: |
-            org.opencontainers.image.title=Build documentation using Jekyl
-            org.opencontainers.image.description=jekyll-build
+            org.opencontainers.image.description=Build documentation using Jekyl
+            org.opencontainers.image.title=jekyll-build
 
       - name: 'Login to ghcr.io'
         uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # v3.3.0
