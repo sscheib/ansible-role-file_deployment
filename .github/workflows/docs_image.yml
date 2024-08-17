@@ -29,11 +29,11 @@ jobs:
           egress-policy: 'audit'
           disable-sudo: true
 
-#      - name: 'Checkout the repository'
-#        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
-#        with:
-#          fetch-depth: 0
-#          persist-credentials: false
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 #
 #      - name: 'Extract repository metadata'
 #        id: 'metadata'
@@ -56,7 +56,7 @@ jobs:
       - name: 'Build and push image'
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         with:
-#          context: './docs'
+          context: './docs'
           file: './docs/Containerfile'
           tags: 'latest'
 #          tags: '${{ steps.metadata.outputs.tags }}'
