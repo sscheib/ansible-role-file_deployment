@@ -27,8 +27,8 @@ jobs:
           account: 'user'
           token: '${{ secrets.GITHUB_TOKEN }}'
           image-names: 'jekyll-build'
-          cut-off: '4h'
+          cut-off: '1m'
           tag-selection: 'both'
-          keep-n-most-recent: '3'
+          keep-n-most-recent: '1'
           rust-log: 'container_retention_policy=debug'
 ...
