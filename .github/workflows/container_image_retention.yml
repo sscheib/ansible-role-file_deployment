@@ -69,14 +69,11 @@ jobs:
             api.github.com:443
             github.com:443
 
-      - uses: 'snok/container-retention-policy@4f22ef80902ad409ed55a99dc5133cc1250a0d03' # v3.0.0
+      - name: 'Delete container versions'
+        uses: 'actions/delete-package-versions@e5bc658cc4c965c472efe991f8beea3981499c55' # v5.0.0
         with:
-          account: 'user'
+          package-name: 'jekyll-build'
+          package-type: 'container'
+          min-versions-to-keep: 1
           token: '${{ secrets.GITHUB_TOKEN }}'
-          image-names: 'jekyll-build'
-          cut-off: '1m'
-          image-tags: '!latest !buildcache'
-          tag-selection: 'both'
-          keep-n-most-recent: '1'
-          rust-log: 'container_retention_policy=debug'
 ...
