@@ -94,7 +94,7 @@ jobs:
             latest=true
 
           images: |
-            name=ghcr.io/${{ github.repository }}/jekyll-build,enable=true
+            name=ghcr.io/${{ github.repository_owner }}/jekyll-build,enable=true
 
           tags: |
             type=sha,format=long,enable=true
@@ -121,8 +121,8 @@ jobs:
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         id: 'build-push'
         with:
-          cache-from: 'type=registry,ref=ghcr.io/${{ github.repository }}/jekyll-build:buildcache'
-          cache-to: 'type=registry,ref=ghcr.io/${{ github.repository }}/jekyll-build:buildcache,mode=max'
+          cache-from: 'type=registry,ref=ghcr.io/${{ github.repository_owner }}/jekyll-build:buildcache'
+          cache-to: 'type=registry,ref=ghcr.io/${{ github.repository_owner }}/jekyll-build:buildcache,mode=max'
           context: './docs'
           file: './docs/Containerfile'
           labels: '${{ steps.metadata.outputs.labels }}'
@@ -133,7 +133,7 @@ jobs:
       - name: 'Generate artifact attestation'
         uses: 'actions/attest-build-provenance@310b0a4a3b0b78ef57ecda988ee04b132db73ef8' # v1.4.1
         with:
-          subject-name: 'ghcr.io/${{ github.repository }}/jekyll-build'
+          subject-name: 'ghcr.io/${{ github.repository_owner }}/jekyll-build'
           subject-digest: '${{ steps.build-push.outputs.digest }}'
           push-to-registry: true
 ...
