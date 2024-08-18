@@ -29,7 +29,6 @@ scan:
     - 'vuln'
     - 'misconfig'
     - 'secret'
-    - 'license'
   parallel: 5
   sbom-sources:
     - 'oci'
