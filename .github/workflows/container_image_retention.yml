@@ -38,4 +38,5 @@ jobs:
           dry-run: true
           tag-selection: 'both'
           keep-n-most-recent: '3'
+          rust-log: 'container_retention_policy=debug'
 ...
