@@ -89,10 +89,6 @@ jobs:
           name: 'jekyll-artifact'
           path: './docs/_site/'
 
-      - run: |
-          ls -la ./docs/
-          ls -la ./docs/_site
-
       - name: 'Gather information about the GitHub pages deployment'
         uses: 'actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b' # v5.0.0
         id: 'pages-info'
