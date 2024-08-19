@@ -47,7 +47,8 @@ jobs:
 
       - name: 'Build Jekyll site'
         run: |
-          docker run --rm --privileged --volume "./docs:/srv/jekyll" ghcr.io/sscheib/jekyll-build:latest
+          docker run --rm --privileged --volume "./docs:/srv/jekyll" ghcr.io/sscheib/jekyll-build:latest \
+            bundler exec jekyll build --disable-disk-cache
 
       - name: 'Gather information about the GitHub pages deployment'
         uses: 'actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b' # v5.0.0
