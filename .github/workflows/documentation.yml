@@ -1,0 +1,71 @@
+---
+name: 'Generate and publish documentation'
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - 'main'
+
+    paths:
+      - 'docs/**.md'
+      - '.github/workflows/documentation.yml'
+
+  pull_request:
+    branches:
+      - 'main'
+
+    paths:
+      - 'docs/**.md'
+      - '.github/workflows/github_pages.yml'
+
+  workflow_dispatch: {}
+
+permissions:
+  contents: 'read'
+
+concurrency:
+  group: 'ci-${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: false
+
+jobs:
+  generate_documentation:
+    name: 'Build and deploy documentation to GitHub Pages'
+    runs-on: 'ubuntu-22.04'
+    permissions:
+      id-token: 'write'
+      pages: 'write'
+    environment:
+      name: 'github-pages'
+      url: '${{ steps.pages-info.outputs.page_url }}'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
+        with:
+          egress-policy: 'audit'
+
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Build Jekyll site'
+        run: |
+          docker run --rm --volume "./docs:/srv/jekyll" ghcr.io/sscheib/jekyll-build:latest
+
+      - name: 'Gather information about the GitHub pages deployment'
+        uses: 'actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b' # v5.0.0
+        id: 'pages-info'
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          enablement: false
+
+      - name: 'Upload GitHub pages artifact'
+        uses: 'actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa' # v3.0.1
+        with:
+          name: 'github-pages'
+          path: './docs/_site'
+          retention-days: 1
+
+      - name: 'Deploy GitHub pages'
+        uses: 'actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e' # v4.0.5
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          artifact_name: 'github-pages'
+...
