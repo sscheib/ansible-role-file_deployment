@@ -47,6 +47,7 @@ jobs:
 
       - name: 'Build Jekyll site'
         run: |
+          mkdir ./docs/_site && chown -R 1000:1000 ./docs/_site
           docker run --rm --privileged --volume "./docs:/srv/jekyll" ghcr.io/sscheib/jekyll-build:latest \
             bundler exec jekyll build --disable-disk-cache
 
