@@ -60,7 +60,7 @@ jobs:
 
           # build documentation
           docker run --rm --volume "./docs:/srv/jekyll" "${{ env.jekyll_image }}" \
-            bundler exec jekyll build --disable-cache
+            bundler exec jekyll build --disable-disk-cache
 
       - name: 'Upload artifact to pass the build to the deploy job'
         if: "${{ github.event_name != 'pull_request' }}"
