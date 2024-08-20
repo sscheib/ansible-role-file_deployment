@@ -95,7 +95,7 @@ jobs:
           echo "Info: Defined repository name: ${repositoryName}"
           echo "REPOSITORY_NAME=${repositoryName}" >> "${GITHUB_ENV}"
 
-          declare -r imageName="ghcr.io/${{ github.repository_owner }}/${REPOSITORY_NAME}-jekyll"
+          declare -r imageName="ghcr.io/${{ github.repository_owner }}/${repositoryName}-jekyll"
           echo "Info: Defined image name: ${imageName}"
           echo "IMAGE_NAME=${imageName}" >> "${GITHUB_ENV}"
 
