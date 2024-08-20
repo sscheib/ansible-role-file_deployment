@@ -90,8 +90,14 @@ jobs:
         run: |
           # fail if a variable is unbound or any command fails, as well as make pipes fail
           set -eu && set -o pipefail
-          echo REPOSITORY_NAME="$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')" >> "${GITHUB_ENV}"
-          echo IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/${REPOSITORY_NAME}-jekyll" >> "${GITHUB_ENV}"
+
+          declare -r repositoryName="$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')"
+          echo "Info: Defined repository name: ${repositoryName}"
+          echo "REPOSITORY_NAME=${repositoryName}" >> "${GITHUB_ENV}"
+
+          declare -r imageName="ghcr.io/${{ github.repository_owner }}/${REPOSITORY_NAME}-jekyll"
+          echo "Info: Defined image name: ${imageName}"
+          echo "IMAGE_NAME=${imageName}" >> "${GITHUB_ENV}"
 
           #
           # prepare a CalVer release version
@@ -139,7 +145,7 @@ jobs:
             nextVersion="${baseVersion}.0"
           fi
 
-          echo "Next version for image: ${nextVersion}"
+          echo "INFO: Next version for image: ${nextVersion}"
           echo "NEXT_VERSION=${nextVersion}" >> "${GITHUB_ENV}"
 
       - name: 'Extract repository metadata'
