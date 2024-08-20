@@ -90,9 +90,6 @@ jobs:
           # fail if a variable is unbound or any command fails, as well as make pipes fail
           set -eu && set -o pipefail
 
-          # install podman to be able to search for images
-          sudo apt-get install podman -y
-
           declare -r repositoryName="$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')"
           echo "Info: Defined repository name: ${repositoryName}"
           echo "REPOSITORY_NAME=${repositoryName}" >> "${GITHUB_ENV}"
