@@ -121,7 +121,7 @@ jobs:
             "--list-tags",
             "--format",
             "{{.Tag}}",
-            "${IMAGE_NAME}"
+            "${imageName}"
           )
 
           # check whether there has been a release this month
