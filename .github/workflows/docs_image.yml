@@ -86,6 +86,62 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: 'Prepare variables for building the image'
+        run: |
+          # fail if a variable is unbound or any command fails, as well as make pipes fail
+          set -eu && set -o pipefail
+          echo REPOSITORY_NAME="$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')" >> "${GITHUB_ENV}"
+          echo IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/${REPOSITORY_NAME}-jekyll" >> "${GITHUB_ENV}"
+
+          #
+          # prepare a CalVer release version
+          #
+
+          # current month with a removed prefixed zero (e.g. 1, 4, 10 etc)
+          declare -r month="$(date +'%m' | sed 's/^0//')"
+
+          # current two digit year (eg. 24)
+          declare -r year="$(date +'%y')"
+
+          # current base version with a prefixed v (e.g. v24.8, v23,12, etc)
+          declare -r baseVersion="v${year}.${month}"
+
+          # regular expression for tags to filter/ignore
+          declare -r ignoreTags="^(latest|buildcache)$|^sha([[:digit:]]+?)?-"
+
+          # docker arguments to search for tags
+          declare -ra dockerArguments=(
+            "search",
+            "--list-tags",
+            "--format",
+            "{{.Tag}}",
+            "${IMAGE_NAME}"
+          )
+
+          # check whether there has been a release this month
+          #
+          declare highestVersion=""
+          if docker "${dockerArguments[@]}" | grep -qvE "${ignoreTags}"; then
+
+            # sort the versions with the highest showing first and select it
+            highestVersion="$(docker "${dockerArguments[@]}" | sort -Vr | head -n1)"
+            [[ "${highestVersion}" =~ ^v([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+)$ ]] || {
+              echo "ERROR: Unable to detect highest version from string '${highestVersion}'";
+              exit 1;
+            };
+
+            # extract current patch version and increment it by one (e.g. 24.8.1 -> 24.8.2, etc.)
+            patchVersion="${BASH_REMATCH[3]}"
+            nextPatchVersion="$((patchVersion+1))"
+            nextVersion="${baseVersion}.${nextPatchVersion}"
+          else
+            # no version found for this month, creating the first (e.g. v24.8.0)
+            nextVersion="${baseVersion}.0"
+          fi
+
+          echo "Next version for image: ${nextVersion}"
+          echo "NEXT_VERSION=${nextVersion}" >> "${GITHUB_ENV}"
+
       - name: 'Extract repository metadata'
         id: 'metadata'
         uses: 'docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81' # v5.5.1
@@ -95,10 +151,11 @@ jobs:
             latest=true
 
           images: |
-            name=ghcr.io/${{ github.repository_owner }}/jekyll-build,enable=true
+            name=${{ env.IMAGE_NAME }},enable=true
 
           tags: |
             type=sha,format=long,enable=true
+            type=raw,${{ env.NEXT_VERSION }}
 
           labels: |
             org.opencontainers.image.description=Build documentation using Jekyl
@@ -122,19 +179,19 @@ jobs:
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         with:
           annotations: '${{ steps.metadata.outputs.annotations }}'
-          cache-from: 'type=registry,ref=ghcr.io/${{ github.repository_owner }}/jekyll-build:buildcache'
+          cache-from: 'type=registry,ref=${{ env.IMAGE_NAME }}:buildcache'
           context: './docs'
           file: './docs/Containerfile'
           labels: '${{ steps.metadata.outputs.labels }}'
           load: true
           push: false
-          tags: '${{ github.repository_owner }}/jekyll-build:test'
+          tags: '${{ env.IMAGE_NAME }}:test'
 
       - name: 'Scan container image with Trivy'
         uses: 'aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8' # 0.24.0
         with:
           format: 'sarif'
-          image-ref: '${{ github.repository_owner }}/jekyll-build:test'
+          image-ref: '${{ env.IMAGE_NAME }}:test'
           output: 'trivy-results.sarif'
           trivy-config: 'trivy.yaml'
           scan-type: 'image'
@@ -156,8 +213,8 @@ jobs:
         id: 'build-push'
         with:
           annotations: '${{ steps.metadata.outputs.annotations }}'
-          cache-from: 'type=registry,ref=ghcr.io/${{ github.repository_owner }}/jekyll-build:buildcache'
-          cache-to: 'type=registry,ref=ghcr.io/${{ github.repository_owner }}/jekyll-build:buildcache,mode=max'
+          cache-from: 'type=registry,ref=${{ env.IMAGE_NAME }}:buildcache'
+          cache-to: 'type=registry,ref=${{ env.IMAGE_NAME }}:buildcache,mode=max'
           context: './docs'
           file: './docs/Containerfile'
           labels: '${{ steps.metadata.outputs.labels }}'
@@ -168,7 +225,7 @@ jobs:
       - name: 'Generate artifact attestation'
         uses: 'actions/attest-build-provenance@310b0a4a3b0b78ef57ecda988ee04b132db73ef8' # v1.4.1
         with:
-          subject-name: 'ghcr.io/${{ github.repository_owner }}/jekyll-build'
+          subject-name: '${{ env.IMAGE_NAME }}'
           subject-digest: '${{ steps.build-push.outputs.digest }}'
           push-to-registry: true
 ...
