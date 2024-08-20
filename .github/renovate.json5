@@ -305,6 +305,17 @@
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
     {
+      "description": "Extract Jekyll docs image",
+      "customType": "regex",
+      "fileMatch": [
+        "^\\.github/workflows/github_pages\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "\\s+?jekyll_image:\\s+?[\\'\"](?<depName>[^:]+):(?<currentValue>[^@]+)@(?<currentDigest>[^\\'\"]+)"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
       "description": "Extract dependencies in Containerfiles specified via ENV PACKAGE_NAME_VERSION=\"N\"",
       "customType": "regex",
       "fileMatch": [
