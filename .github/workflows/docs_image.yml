@@ -91,6 +91,9 @@ jobs:
           # fail if a variable is unbound or any command fails, as well as make pipes fail
           set -eu && set -o pipefail
 
+          # install podman to be able to search for images
+          sudo apt-get install podman -y
+
           declare -r repositoryName="$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')"
           echo "Info: Defined repository name: ${repositoryName}"
           echo "REPOSITORY_NAME=${repositoryName}" >> "${GITHUB_ENV}"
@@ -115,8 +118,8 @@ jobs:
           # regular expression for tags to filter/ignore
           declare -r ignoreTags="^(latest|buildcache)$|^sha([[:digit:]]+?)?-"
 
-          # docker arguments to search for tags
-          declare -ra dockerArguments=(
+          # podman arguments to search for tags
+          declare -ra podmanArguments=(
             "search",
             "--list-tags",
             "--format",
@@ -127,10 +130,10 @@ jobs:
           # check whether there has been a release this month
           #
           declare highestVersion=""
-          if docker "${dockerArguments[@]}" | grep -qvE "${ignoreTags}"; then
+          if podman "${podmanArguments[@]}" | grep -qvE "${ignoreTags}"; then
 
             # sort the versions with the highest showing first and select it
-            highestVersion="$(docker "${dockerArguments[@]}" | sort -Vr | head -n1)"
+            highestVersion="$(podman "${podmanArguments[@]}" | sort -Vr | head -n1)"
             [[ "${highestVersion}" =~ ^v([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+)$ ]] || {
               echo "ERROR: Unable to detect highest version from string '${highestVersion}'";
               exit 1;
