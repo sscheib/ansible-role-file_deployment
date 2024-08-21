@@ -8,6 +8,13 @@ on:  # yamllint disable-line rule:truthy
       - 'docs/Containerfile'
       - '.github/workflows/docs_image.yml'
 
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - 'docs/Containerfile'
+      - '.github/workflows/docs_image.yml'
+
   workflow_call: {}
   workflow_dispatch: {}
 
@@ -50,53 +57,39 @@ jobs:
           echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
           echo "Job originally triggered by ${{ github.actor }}"
 
-  build-docs-image:
-    name: 'Build docs image'
+  prepare-vars:
+    name: 'Prepare variables for building the container image'
     if: "needs.check-user-permissions.outputs.require-result == 'true'"
     needs: 'check-user-permissions'
     runs-on: 'ubuntu-22.04'
-    permissions:
-      attestations: 'write'
-      id-token: 'write'
-      packages: 'write'
-      security-events: 'write'
+    container:
+      # yamllint disable-line rule:line-length
+      image: 'registry.access.redhat.com/ubi9/podman:9.4-12@sha256:ebfabcb68ba7c60a4bf0c85fc83495bdd18fa55d544122d9dcd352af11bcd633'
+    outputs:
+      repository-name: '${{ steps.prepare-vars.outputs.repository-name }}'
+      image-name: '${{ steps.prepare-vars.outputs.image-name }}'
+      next-version: '${{ steps.prepare-vars.outputs.next-version }}'
+      current-digest: '${{ steps.prepare-vars.outputs.current-digest }}'
+      current-version: '${{ steps.prepare-vars.outputs.current-version }}'
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
         with:
-          egress-policy: 'block'
-          allowed-endpoints: >
-            api.github.com:443
-            auth.docker.io:443
-            dl-cdn.alpinelinux.org:443
-            fulcio.sigstore.dev:443
-            ghcr.io:443
-            github.com:443
-            index.rubygems.org:443
-            pkg-containers.githubusercontent.com:443
-            production.cloudflare.docker.com:443
-            registry-1.docker.io:443
-            rekor.sigstore.dev:443
-            rubygems.org:443
-
-      - name: 'Checkout the repository'
-        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
+          egress-policy: 'audit'
 
       - name: 'Prepare variables for building the image'
+        id: 'prepare-vars'
         run: |
           # fail if a variable is unbound or any command fails, as well as make pipes fail
           set -eu && set -o pipefail
 
           declare -r repositoryName="$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')"
           echo "Info: Defined repository name: ${repositoryName}"
-          echo "REPOSITORY_NAME=${repositoryName}" >> "${GITHUB_ENV}"
+          echo "repository-name=${repositoryName}" >> "${GITHUB_OUTPUT}"
 
           declare -r imageName="ghcr.io/${{ github.repository_owner }}/${repositoryName}-jekyll"
           echo "Info: Defined image name: ${imageName}"
-          echo "IMAGE_NAME=${imageName}" >> "${GITHUB_ENV}"
+          echo "image-name=${imageName}" >> "${GITHUB_OUTPOUT}"
 
           #
           # prepare a CalVer release version
@@ -144,8 +137,52 @@ jobs:
             nextVersion="${baseVersion}.0"
           fi
 
+          # retrieve digest of the highestVersion
+          currentDigest="$(podman inspect "${imageName}":"${highestVersion}" --format {{.Digest}})"
+
+          echo "INFO: Digest of ${imageName}:${highestVersion}: ${currentDigest}"
+          echo "current-digest=${currentDigest}" >> "${GITHUB_OUTPUT}"
+          echo "current-version=${highestVersion}" >> "${GITHUB_OUTPUT}"
+
           echo "INFO: Next version for image: ${nextVersion}"
-          echo "NEXT_VERSION=${nextVersion}" >> "${GITHUB_ENV}"
+          echo "next-version=${nextVersion}" >> "${GITHUB_OUTPUT}"
+
+  build-docs-image:
+    name: 'Build docs image'
+    if: "needs.check-user-permissions.outputs.require-result == 'true'"
+    needs:
+      - 'check-user-permissions'
+      - 'prepare-vars'
+    runs-on: 'ubuntu-22.04'
+    permissions:
+      attestations: 'write'
+      id-token: 'write'
+      packages: 'write'
+      security-events: 'write'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
+        with:
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            auth.docker.io:443
+            dl-cdn.alpinelinux.org:443
+            fulcio.sigstore.dev:443
+            ghcr.io:443
+            github.com:443
+            index.rubygems.org:443
+            pkg-containers.githubusercontent.com:443
+            production.cloudflare.docker.com:443
+            registry-1.docker.io:443
+            rekor.sigstore.dev:443
+            rubygems.org:443
+
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: 'Extract repository metadata'
         id: 'metadata'
@@ -156,11 +193,11 @@ jobs:
             latest=true
 
           images: |
-            name=${{ env.IMAGE_NAME }},enable=true
+            name=${{ needs.prepare-vars.outputs.image-name }},enable=true
 
           tags: |
             type=sha,format=long,enable=true
-            type=raw,${{ env.NEXT_VERSION }}
+            type=raw,${{ needs.prepare-vars.outputs.image-name }}
 
           labels: |
             org.opencontainers.image.description=Build documentation using Jekyl
@@ -184,24 +221,51 @@ jobs:
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         with:
           annotations: '${{ steps.metadata.outputs.annotations }}'
-          cache-from: 'type=registry,ref=${{ env.IMAGE_NAME }}:buildcache'
+          cache-from: 'type=registry,ref=${{ needs.prepare-vars.outputs.image-name }}:buildcache'
           context: './docs'
           file: './docs/Containerfile'
           labels: '${{ steps.metadata.outputs.labels }}'
           load: true
           push: false
-          tags: '${{ env.IMAGE_NAME }}:test'
+          tags: '${{ needs.prepare-vars.outputs.image-name }}:test'
+
+      - name: 'Get digest of the test image'
+        run: |
+          # tr -d '\0' is required to avoid this warning in BASH:
+          # warning: command substitution: ignored null byte in input
+          #
+          # This merely warns about a null-byte being passed, see:
+          # https://git.savannah.gnu.org/cgit/bash.git/tree/subst.c
+          testImageDigest="$( \
+            docker inspect ${{ needs.prepare-vars.outputs.image-name }}:test \
+            grep -Poz '"RepoDigests":\s\[\n\s+?"[^@]+?@\K[^"]+' | \
+            tr -d '\0' \
+          )"
+
+          echo "INFO: Digest of ${{ needs.prepare-vars.outputs.image-name }}:test: ${testImageDigest}"
+          echo "INFO: Digest of"\
+                 "${{ needs.prepare-vars.outputs.image-name }}:${{ needs.prepare-vars.outputs.current-version }}:"\
+                 "${{ needs.prepare-vars.outputs.current-digest }}"
+
+          declare publishImage="false"
+          [[ ${{ needs.prepare-vars.outputs.current-digest }} == "${testImageDigest}" ]]; || {
+            echo "INFO: Digest are not identical, will publish a new version";
+            publishImage="true";
+          };
+          echo "PUBLISH_IMAGE=${publishImage}" >> "${GITHUB_ENV}"
 
       - name: 'Scan container image with Trivy'
+        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
         uses: 'aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8' # 0.24.0
         with:
           format: 'sarif'
-          image-ref: '${{ env.IMAGE_NAME }}:test'
+          image-ref: '${{ needs.prepare-vars.outputs.image-name }}:test'
           output: 'trivy-results.sarif'
           trivy-config: 'trivy.yaml'
           scan-type: 'image'
 
       - name: 'Upload artifact'
+        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
         uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
         with:
           name: 'Trivy docs container SARIF file'
@@ -209,17 +273,19 @@ jobs:
           retention-days: 5
 
       - name: 'Upload to code-scanning'
+        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
         uses: 'github/codeql-action/upload-sarif@883d8588e56d1753a8a58c1c86e88976f0c23449' # v3.26.3
         with:
           sarif_file: 'trivy-results.sarif'
 
       - name: 'Build and push image'
+        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         id: 'build-push'
         with:
           annotations: '${{ steps.metadata.outputs.annotations }}'
-          cache-from: 'type=registry,ref=${{ env.IMAGE_NAME }}:buildcache'
-          cache-to: 'type=registry,ref=${{ env.IMAGE_NAME }}:buildcache,mode=max'
+          cache-from: 'type=registry,ref=${{ needs.prepare-vars.outputs.image-name }}:buildcache'
+          cache-to: 'type=registry,ref=${{ needs.prepare-vars.outputs.image-name }}:buildcache,mode=max'
           context: './docs'
           file: './docs/Containerfile'
           labels: '${{ steps.metadata.outputs.labels }}'
@@ -228,9 +294,10 @@ jobs:
           tags: '${{ steps.metadata.outputs.tags }}'
 
       - name: 'Generate artifact attestation'
+        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
         uses: 'actions/attest-build-provenance@310b0a4a3b0b78ef57ecda988ee04b132db73ef8' # v1.4.1
         with:
-          subject-name: '${{ env.IMAGE_NAME }}'
+          subject-name: '${{ needs.prepare-vars.outputs.image-name }}'
           subject-digest: '${{ steps.build-push.outputs.digest }}'
           push-to-registry: true
 ...
