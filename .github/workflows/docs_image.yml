@@ -221,7 +221,6 @@ jobs:
           tags: '${{ needs.prepare-vars.outputs.image-name }}:test'
 
       - name: 'Scan ${{ needs.prepare-vars.outputs.image-name }}:test with Trivy'
-        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8' # 0.24.0
         with:
           format: 'sarif'
@@ -231,15 +230,15 @@ jobs:
           scan-type: 'image'
 
       - name: 'Upload artifact'
-        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
         with:
-          name: 'Trivy scan test build of ${{ needs.prepare-vars.outputs.next-version }}'
+          name: >-
+            Trivy scan test build of ${{ needs.prepare-vars.outputs.repository-name }}-jekyll
+            ${{ needs.prepare-vars.outputs.next-version }}
           path: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           retention-days: 5
 
       - name: 'Upload to code-scanning'
-        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'github/codeql-action/upload-sarif@883d8588e56d1753a8a58c1c86e88976f0c23449' # v3.26.3
         with:
           sarif_file: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
@@ -283,9 +282,7 @@ jobs:
         if: "${{ github.event_name }} != 'pull_request'"
         uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
         with:
-          name: >-
-            Trivy scan ${{ needs.prepare-vars.outputs.repository-name }}-jekyll
-            ${{ needs.prepare-vars.outputs.next-version }}
+          name: 'Trivy scan of ${{ needs.prepare-vars.outputs.next-version }}'
           path: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           retention-days: 5
 
