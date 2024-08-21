@@ -89,7 +89,7 @@ jobs:
 
           declare -r imageName="ghcr.io/${{ github.repository_owner }}/${repositoryName}-jekyll"
           echo "Info: Defined image name: ${imageName}"
-          echo "image-name=${imageName}" >> "${GITHUB_OUTPOUT}"
+          echo "image-name=${imageName}" >> "${GITHUB_OUTPUT}"
 
           #
           # prepare a CalVer release version
