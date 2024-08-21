@@ -283,7 +283,7 @@ jobs:
         uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
         with:
           name: >-
-            Trivy scan ${{ needs.prepare-vars.outputs.image-name }}:${{ needs.prepare-vars.outputs.next-version }}
+            Trivy scan ${{ needs.prepare-vars.outputs.image-name }} ${{ needs.prepare-vars.outputs.next-version }}
           path: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           retention-days: 5
 
