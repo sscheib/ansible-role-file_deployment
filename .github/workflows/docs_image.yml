@@ -133,7 +133,7 @@ jobs:
             nextVersion="${baseVersion}.0"
           fi
 
-          echo "INFO: Digest of ${imageName}:${highestVersion}: ${currentDigest}"
+          echo "INFO: Current version of image: ${currentVersion}"
           echo "current-version=${highestVersion}" >> "${GITHUB_OUTPUT}"
 
           echo "INFO: Next version for image: ${nextVersion}"
