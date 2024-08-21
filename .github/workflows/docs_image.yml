@@ -133,14 +133,7 @@ jobs:
             nextVersion="${baseVersion}.0"
           fi
 
-          # pull the image
-          podman pull "${imageName}":"${highestVersion}"
-
-          # retrieve digest of the highestVersion
-          currentDigest="$(podman inspect "${imageName}":"${highestVersion}" --format {{.Digest}})"
-
           echo "INFO: Digest of ${imageName}:${highestVersion}: ${currentDigest}"
-          echo "current-digest=${currentDigest}" >> "${GITHUB_OUTPUT}"
           echo "current-version=${highestVersion}" >> "${GITHUB_OUTPUT}"
 
           echo "INFO: Next version for image: ${nextVersion}"
@@ -196,7 +189,7 @@ jobs:
 
           tags: |
             type=sha,format=long,enable=true
-            type=raw,${{ needs.prepare-vars.outputs.image-name }}
+            type=raw,${{ needs.prepare-vars.outputs.next-version }}
 
           labels: |
             org.opencontainers.image.description=Build documentation using Jekyl
@@ -228,62 +221,32 @@ jobs:
           push: false
           tags: '${{ needs.prepare-vars.outputs.image-name }}:test'
 
-      - name: 'Get digest of the test image'
-        run: |
-          # fail if a variable is unbound or any command fails, as well as make pipes fail
-          set -eux && set -o pipefail
-
-          # tr -d '\0' is required to avoid this warning in BASH:
-          # warning: command substitution: ignored null byte in input
-          #
-          # This merely warns about a null-byte being passed, see:
-          # https://git.savannah.gnu.org/cgit/bash.git/tree/subst.c
-          docker image ls
-          docker inspect ${{ needs.prepare-vars.outputs.image-name }}:test
-          testImageDigest="$( \
-            docker inspect ${{ needs.prepare-vars.outputs.image-name }}:test | \
-            grep -Poz '"RepoDigests":\s\[\n\s+?"[^@]+?@\K[^"]+' | \
-            tr -d '\0' \
-          )"
-
-          echo "INFO: Digest of ${{ needs.prepare-vars.outputs.image-name }}:test: ${testImageDigest}"
-          echo "INFO: Digest of"\
-                 "${{ needs.prepare-vars.outputs.image-name }}:${{ needs.prepare-vars.outputs.current-version }}:"\
-                 "${{ needs.prepare-vars.outputs.current-digest }}"
-
-          declare publishImage="false"
-          [[ ${{ needs.prepare-vars.outputs.current-digest }} == "${testImageDigest}" ]] || {
-            echo "INFO: Digest are not identical, will publish a new version";
-            publishImage="true";
-          };
-          echo "PUBLISH_IMAGE=${publishImage}" >> "${GITHUB_ENV}"
-
-      - name: 'Scan container image with Trivy'
-        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
+      - name: 'Scan ${{ needs.prepare-vars.outputs.image-name }}:test with Trivy'
+        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8' # 0.24.0
         with:
           format: 'sarif'
           image-ref: '${{ needs.prepare-vars.outputs.image-name }}:test'
-          output: 'trivy-results.sarif'
+          output: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           trivy-config: 'trivy.yaml'
           scan-type: 'image'
 
       - name: 'Upload artifact'
-        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
+        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
         with:
-          name: 'Trivy docs container SARIF file'
-          path: 'trivy-results.sarif'
+          name: 'Trivy scan ${{ needs.prepare-vars.outputs.image-name }}:test'
+          path: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           retention-days: 5
 
       - name: 'Upload to code-scanning'
-        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
+        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'github/codeql-action/upload-sarif@883d8588e56d1753a8a58c1c86e88976f0c23449' # v3.26.3
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
 
       - name: 'Build and push image'
-        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
+        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85' # v6.7.0
         id: 'build-push'
         with:
@@ -298,10 +261,36 @@ jobs:
           tags: '${{ steps.metadata.outputs.tags }}'
 
       - name: 'Generate artifact attestation'
-        if: "${{ env.PUBLISH_IMAGE == 'true' }}"
+        if: "${{ github.event_name }} != 'pull_request'"
         uses: 'actions/attest-build-provenance@310b0a4a3b0b78ef57ecda988ee04b132db73ef8' # v1.4.1
         with:
-          subject-name: '${{ needs.prepare-vars.outputs.image-name }}'
+          subject-name: '${{ needs.prepare-vars.outputs.image-name }}:${{ needs.prepare-vars.outputs.next-version }}'
           subject-digest: '${{ steps.build-push.outputs.digest }}'
           push-to-registry: true
+
+      - name: >-
+          Scan ${{ needs.prepare-vars.outputs.image-name }}:${{ needs.prepare-vars.outputs.next-version }} with Trivy
+        if: "${{ github.event_name }} != 'pull_request'"
+        uses: 'aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8' # 0.24.0
+        with:
+          format: 'sarif'
+          image-ref: '${{ needs.prepare-vars.outputs.image-name }}:${{ needs.prepare-vars.outputs.next-version }}'
+          output: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
+          trivy-config: 'trivy.yaml'
+          scan-type: 'image'
+
+      - name: 'Upload artifact'
+        if: "${{ github.event_name }} != 'pull_request'"
+        uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
+        with:
+          name: >-
+            Trivy scan ${{ needs.prepare-vars.outputs.image-name }}:${{ needs.prepare-vars.outputs.next-version }}
+          path: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
+          retention-days: 5
+
+      - name: 'Upload to code-scanning'
+        if: "${{ github.event_name }} != 'pull_request'"
+        uses: 'github/codeql-action/upload-sarif@883d8588e56d1753a8a58c1c86e88976f0c23449' # v3.26.3
+        with:
+          sarif_file: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
 ...
