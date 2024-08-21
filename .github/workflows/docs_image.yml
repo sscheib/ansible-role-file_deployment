@@ -133,6 +133,9 @@ jobs:
             nextVersion="${baseVersion}.0"
           fi
 
+          # pull the image
+          podman pull "${imageName}":"${highestVersion}"
+
           # retrieve digest of the highestVersion
           currentDigest="$(podman inspect "${imageName}":"${highestVersion}" --format {{.Digest}})"
 
