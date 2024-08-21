@@ -239,6 +239,7 @@ jobs:
           # This merely warns about a null-byte being passed, see:
           # https://git.savannah.gnu.org/cgit/bash.git/tree/subst.c
           docker image ls
+          docker inspect ${{ needs.prepare-vars.outputs.image-name }}:test
           testImageDigest="$( \
             docker inspect ${{ needs.prepare-vars.outputs.image-name }}:test | \
             grep -Poz '"RepoDigests":\s\[\n\s+?"[^@]+?@\K[^"]+' | \
