@@ -65,6 +65,7 @@ jobs:
     container:
       # yamllint disable-line rule:line-length
       image: 'registry.access.redhat.com/ubi9/podman:9.4-12@sha256:ebfabcb68ba7c60a4bf0c85fc83495bdd18fa55d544122d9dcd352af11bcd633'
+      options: '--privileged'
     outputs:
       repository-name: '${{ steps.prepare-vars.outputs.repository-name }}'
       image-name: '${{ steps.prepare-vars.outputs.image-name }}'
@@ -72,11 +73,6 @@ jobs:
       current-digest: '${{ steps.prepare-vars.outputs.current-digest }}'
       current-version: '${{ steps.prepare-vars.outputs.current-version }}'
     steps:
-      - name: 'Harden Runner'
-        uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
-        with:
-          egress-policy: 'audit'
-
       - name: 'Prepare variables for building the image'
         id: 'prepare-vars'
         run: |
@@ -109,10 +105,10 @@ jobs:
 
           # podman arguments to search for tags
           declare -ra podmanArguments=(
-            "search",
-            "--list-tags",
-            "--format",
-            "{{.Tag}}",
+            "search"
+            "--list-tags"
+            "--format"
+            "{{.Tag}}"
             "${imageName}"
           )
 
