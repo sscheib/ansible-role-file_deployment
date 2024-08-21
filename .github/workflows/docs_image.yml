@@ -234,7 +234,7 @@ jobs:
         if: "${{ github.event_name }} != 'pull_request'"
         uses: 'actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a' # v4.3.6
         with:
-          name: 'Trivy scan ${{ needs.prepare-vars.outputs.image-name }}:test'
+          name: 'Trivy scan test build of ${{ needs.prepare-vars.outputs.next-version }}'
           path: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           retention-days: 5
 
