@@ -70,7 +70,6 @@ jobs:
       repository-name: '${{ steps.prepare-vars.outputs.repository-name }}'
       image-name: '${{ steps.prepare-vars.outputs.image-name }}'
       next-version: '${{ steps.prepare-vars.outputs.next-version }}'
-      current-digest: '${{ steps.prepare-vars.outputs.current-digest }}'
       current-version: '${{ steps.prepare-vars.outputs.current-version }}'
     steps:
       - name: 'Prepare variables for building the image'
@@ -133,7 +132,7 @@ jobs:
             nextVersion="${baseVersion}.0"
           fi
 
-          echo "INFO: Current version of image: ${currentVersion}"
+          echo "INFO: Current version of image: ${highestVersion}"
           echo "current-version=${highestVersion}" >> "${GITHUB_OUTPUT}"
 
           echo "INFO: Next version for image: ${nextVersion}"
