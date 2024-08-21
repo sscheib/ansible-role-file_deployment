@@ -81,7 +81,7 @@ jobs:
         id: 'prepare-vars'
         run: |
           # fail if a variable is unbound or any command fails, as well as make pipes fail
-          set -eu && set -o pipefail
+          set -eux && set -o pipefail
 
           declare -r repositoryName="$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')"
           echo "Info: Defined repository name: ${repositoryName}"
