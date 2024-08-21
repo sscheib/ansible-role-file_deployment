@@ -131,6 +131,7 @@
       "description": "Update UBI images only on the minor and patch level",
       "matchDepNames": [
         "registry.access.redhat.com/ubi9/ubi",
+        "registry.access.redhat.com/ubi9/podman",
         "registry.access.redhat.com/ubi8/ubi",
         "registry.access.redhat.com/ubi7/ubi"
       ],
