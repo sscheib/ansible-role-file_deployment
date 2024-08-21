@@ -249,6 +249,7 @@
       "fileMatch": [
         "^\\.github/workflows/molecule_certified_ees\\.ya?ml$",
         "^\\.github/workflows/molecule_community_ees\\.ya?ml$",
+        "^\\.github/workflows/docs_image\\.ya?ml$",
         "^molecule/default/molecule\\.ya?ml$"
       ],
       "matchStrings": [
