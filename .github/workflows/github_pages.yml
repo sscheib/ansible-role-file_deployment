@@ -29,7 +29,7 @@ concurrency:
 env:
   # Jekyll image to use
   # yamllint disable-line rule:line-length
-  jekyll_image: 'ghcr.io/sscheib/jekyll-build:latest@sha256:4c56a86bde58094306b43d7d1b63fdbb61bce3dd36640c3eaf69403a1238a754'
+  jekyll_image: 'ghcr.io/sscheib/jekyll-build:latest@sha256:f7cb2e2a612c4cfe079cae1549cff09f7e591e245b09b7090a73fdc4a71239ae'
 
 jobs:
   build:
