@@ -230,6 +230,9 @@ jobs:
 
       - name: 'Get digest of the test image'
         run: |
+          # fail if a variable is unbound or any command fails, as well as make pipes fail
+          set -eux && set -o pipefail
+
           # tr -d '\0' is required to avoid this warning in BASH:
           # warning: command substitution: ignored null byte in input
           #
@@ -247,7 +250,7 @@ jobs:
                  "${{ needs.prepare-vars.outputs.current-digest }}"
 
           declare publishImage="false"
-          [[ ${{ needs.prepare-vars.outputs.current-digest }} == "${testImageDigest}" ]]; || {
+          [[ ${{ needs.prepare-vars.outputs.current-digest }} == "${testImageDigest}" ]] || {
             echo "INFO: Digest are not identical, will publish a new version";
             publishImage="true";
           };
