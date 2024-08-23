@@ -74,6 +74,6 @@ jobs:
         with:
           package-name: 'jekyll-build'
           package-type: 'container'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 10
           token: '${{ secrets.GITHUB_TOKEN }}'
 ...

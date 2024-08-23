@@ -111,6 +111,8 @@ jobs:
             "search"
             "--list-tags"
             "--no-trunc"
+            "--limit"
+            "999999"
             "--format"
             "{{.Tag}}"
             "${imageName}"
