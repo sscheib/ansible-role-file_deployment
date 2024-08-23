@@ -110,6 +110,7 @@ jobs:
           declare -ra podmanArguments=(
             "search"
             "--list-tags"
+            "--no-trunc"
             "--format"
             "{{.Tag}}"
             "${imageName}"
