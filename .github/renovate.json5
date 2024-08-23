@@ -23,8 +23,7 @@
   "internalChecksFilter": "strict",
   "bundler": {
     "fileMatch": [
-      "^docs/Gemfile$",
-      "^docs/Gemfile.lock$"
+      "^docs/Gemfile$"
     ]
   },
   "packageRules": [
@@ -33,8 +32,6 @@
         "^\\.github/workflows/.+?\\.ya?ml$",
         "^\\.pre-commit-config\\.yaml$",
         "^collections/requirements\\.ya?ml$",
-        "^docs/Gemfile$",
-        "^docs/Gemfile.lock$",
         "^roles/requirements\\.ya?ml$",
         "^requirements\\.ya?ml$$",
         "^requirements\\.txt$"
@@ -266,6 +263,9 @@
         "bundler"
       ],
       "rangeStrategy": "update-lockfile",
+      "matchFiles": [
+        "^docs/Gemfile$"
+      ],
       "groupName": "Bundler dependencies"
     }
   ],
