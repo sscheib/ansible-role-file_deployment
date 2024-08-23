@@ -21,6 +21,12 @@
     "enabled": true
   },
   "internalChecksFilter": "strict",
+  "bundler": {
+    "fileMatch": [
+      "^docs/Gemfile$",
+      "^docs/Gemfile.lock$"
+    ]
+  },
   "packageRules": [
     {
       "matchFileNames": [
