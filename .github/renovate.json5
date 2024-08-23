@@ -234,6 +234,17 @@
       "minimumReleaseAge": "21 days"
     },
     {
+      "description": "Enable auto-merge specifically for python-jsonschema/check-jsonschema as it is versioned in the 0.x version range",
+      "matchDepNames": [
+        "python-jsonschema/check-jsonschema"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true
+    },
+    {
       "description": "Enable auto-merge for minor and patch updates but exclude version 0.x, as these can introduce breaking changes at any time as per SemVer conventions",
       "matchUpdateTypes": [
         "minor",
