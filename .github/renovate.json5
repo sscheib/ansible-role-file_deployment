@@ -27,6 +27,8 @@
         "^\\.github/workflows/.+?\\.ya?ml$",
         "^\\.pre-commit-config\\.yaml$",
         "^collections/requirements\\.ya?ml$",
+        "^docs/Gemfile$",
+        "^docs/Gemfile.lock$",
         "^roles/requirements\\.ya?ml$",
         "^requirements\\.ya?ml$$",
         "^requirements\\.txt$"
@@ -252,6 +254,13 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
+    },
+    {
+      "matchManagers": [
+        "bundler"
+      ],
+      "rangeStrategy": "update-lockfile",
+      "groupName": "Bundler dependencies"
     }
   ],
   "customManagers": [
