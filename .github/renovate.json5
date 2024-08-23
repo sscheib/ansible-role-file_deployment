@@ -263,7 +263,7 @@
         "bundler"
       ],
       "rangeStrategy": "update-lockfile",
-      "matchFiles": [
+      "matchFileNames": [
         "^docs/Gemfile$"
       ],
       "groupName": "Bundler dependencies"
