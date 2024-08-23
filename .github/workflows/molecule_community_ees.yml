@@ -68,7 +68,6 @@ jobs:
     permissions:
       contents: 'read'
     container:
-      # yamllint disable-line rule:line-length
       image: '${{ matrix.container.image }}'
       credentials:
         username: '${{ github.actor }}'
