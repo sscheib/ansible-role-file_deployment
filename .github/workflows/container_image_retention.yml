@@ -82,6 +82,9 @@ jobs:
           # fail if a variable is unbound or any command fails, as well as make pipes fail
           set -eux && set -o pipefail
 
+          # install jq
+          dnf install -y jq
+
           # podman arguments to search for tags
           declare -ra podmanArguments=(
             "search"
