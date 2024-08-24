@@ -144,6 +144,7 @@ jobs:
       - name: 'Delete container versions'
         uses: 'snok/container-retention-policy@4f22ef80902ad409ed55a99dc5133cc1250a0d03' # v3.0.0
         with:
+          account: 'user'
           cut-off: '1h'
           image-names: '${{ env.IMAGE_NAME }}'
           image-tags: '!latest !buildcache'
