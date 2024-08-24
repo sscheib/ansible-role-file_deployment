@@ -19,6 +19,19 @@ concurrency:
   group: 'ci-${{ github.workflow }}-${{ github.ref }}'
   cancel-in-progress: false
 
+env:
+  # name of the image to delete versions from
+  IMAGE_NAME: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll'
+
+  # number of versions to keep
+  KEEP_VERSIONS: 3
+
+  # regular expression for tags to filter/ignore
+  IGNORE_TAGS: '^(latest|buildcache)$|^sha([[:digit:]]+?)?-'
+
+  # additional tags to resolve and keep the digests from, space seperated
+  ADDITIONAL_KEEP_TAGS: 'latest buildcache'
+
 jobs:
   check-user-permissions:
     runs-on: 'ubuntu-22.04'
@@ -51,14 +64,70 @@ jobs:
           echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
           echo "Job originally triggered by ${{ github.actor }}"
 
-  container-image-retention:
-    name: 'Clean old container images'
+  prepare-vars:
+    name: 'Prepare variables for building the container image'
     if: "needs.check-user-permissions.outputs.require-result == 'true'"
     needs: 'check-user-permissions'
     runs-on: 'ubuntu-22.04'
+    container:
+      # yamllint disable-line rule:line-length
+      image: 'registry.access.redhat.com/ubi9/podman:9.4-12@sha256:ebfabcb68ba7c60a4bf0c85fc83495bdd18fa55d544122d9dcd352af11bcd633'
+      options: '--privileged'
+    outputs:
+      skip-digests: '${{ steps.digests.outputs.skip-digests }}'
+    steps:
+      - name: 'Gather image digests to ignore'
+        id: 'digests'
+        run: |
+          # fail if a variable is unbound or any command fails, as well as make pipes fail
+          set -eux && set -o pipefail
+
+          # podman arguments to search for tags
+          declare -ra podmanArguments=(
+            "search"
+            "--list-tags"
+            "--no-trunc"
+            "--limit"
+            "999999"
+            "--format"
+            "{{.Tag}}"
+            "${{ env.IMAGE_NAME }}"
+          )
+
+          # retrieve all tags for the image, sort it reverse and keep the last N versions
+          read -ra keepTags <<<"$(podman "${podmanArguments[@]}" | \
+                                    grep -vE "${{ env.IGNORE_TAGS }}" | \
+                                    sort -Vr | \
+                                    head -n "${{ env.KEEP_VERSIONS }}" | \
+                                    xargs \
+                                )"
+
+          # add additional user tags to keep
+          declare -a allKeepTags=("${keepTags[@]}" "${{ env.ADDITIONAL_KEEP_TAGS }}")
+
+          # iterate over all tags and retrieve their digests
+          declare -a ignoreDigests=()
+          for keepTag in "${allKeepTags[@]}"; do
+            echo "INFO: Retrieving digests for tag ${keepTag}"
+            while read -r digest; do
+              echo "INFO: Found digest '${digest}'"
+              digests+=("${digest}")
+            done < <(podman manifest inspect "${{ env.IMAGE_NAME }}:${keepTag}" | jq -r '.manifests[] | .digest')
+            # ^ extract the digests of a tag
+          done
+
+          # save the digests for a later step
+          echo "skip-digests=${digests[@]}" >> "${GITHUB_OUTPUT}"
+
+  container-image-retention:
+    name: 'Clean old container images'
+    if: "needs.check-user-permissions.outputs.require-result == 'true'"
+    needs:
+      - 'check-user-permissions'
+      - 'prepare-vars'
+    runs-on: 'ubuntu-22.04'
     permissions:
       packages: 'write'
-
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde' # v2.9.1
@@ -70,10 +139,15 @@ jobs:
             github.com:443
 
       - name: 'Delete container versions'
-        uses: 'actions/delete-package-versions@e5bc658cc4c965c472efe991f8beea3981499c55' # v5.0.0
+        uses: 'snok/container-retention-policy@4f22ef80902ad409ed55a99dc5133cc1250a0d03' # v3.0.0
         with:
-          package-name: 'jekyll-build'
-          package-type: 'container'
-          min-versions-to-keep: 10
-          token: '${{ secrets.GITHUB_TOKEN }}'
+          cut-off: '1h'
+          image-names: '${{ env.IMAGE_NAME }}'
+          image-tags: '!latest !buildcache'
+          keep-n-most-recent: 3
+          tag-selection: 'both'
+          skip-shas: '${{ needs.prepare-vars.outputs.skip-digests }}'
+          timestamp-to-use: 'created_at'
+          dry-run: true
+          rust-log: 'container_retention_policy=debug'
 ...
