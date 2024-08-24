@@ -89,6 +89,19 @@ matrix:
               content: '[\S\s]+'
               close: '\1#\s+?end\s+?nospell$'
 
+            # ignore CI/CD tooling arguments
+            #
+            # examples:
+            #
+            # # renovate: datasource=pypi
+            #
+            # # yamllint disable-line rule:line-length
+            #
+            # # kics-scan disable=6b376af8-cfe8-49ab-a08d-f32de23661a4 - WORKDIR Path Not Absolute
+            #
+            - open: '(?s)[^\n]#(?:\s+)?(?:yamllint|renovate|kics-scan)[^\n]+?'
+              close: '$'
+
       - pyspelling.filters.context:
           context_visible_first: false
           delimiters:

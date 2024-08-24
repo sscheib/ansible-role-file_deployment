@@ -12,4 +12,4 @@ Dev
 Nav
 frontmatter
 OpenWrt
-yamllint
+init
