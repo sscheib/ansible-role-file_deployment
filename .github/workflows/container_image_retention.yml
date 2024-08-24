@@ -23,6 +23,9 @@ env:
   # name of the image to delete versions from
   IMAGE_NAME: 'ansible-role-file_deployment-jekyll'
 
+  # full image name including the complete path of the registry
+  FULL_IMAGE_NAME: 'ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}'
+
   # number of versions to keep
   KEEP_VERSIONS: 3
 
@@ -99,7 +102,7 @@ jobs:
             "999999"
             "--format"
             "{{.Tag}}"
-            "ghcr.io/${{ github.repository_owner}}/${{ env.IMAGE_NAME }}"
+            "${{ env.FULL_IMAGE_NAME }}"
           )
 
           # retrieve all tags for the image, sort it reverse and keep the last N versions
@@ -121,7 +124,7 @@ jobs:
             while read -r digest; do
               echo "INFO: Found digest '${digest}'"
               digests+=("${digest}")
-            done < <(podman manifest inspect "${{ env.IMAGE_NAME }}:${keepTag}" | jq -r '.manifests[] | .digest')
+            done < <(podman manifest inspect "${{ env.FULL_IMAGE_NAME }}:${keepTag}" | jq -r '.manifests[] | .digest')
             # ^ extract the digests of a tag
           done
 
