@@ -99,7 +99,7 @@ jobs:
             "999999"
             "--format"
             "{{.Tag}}"
-            "${{ env.IMAGE_NAME }}"
+            "ghcr.io/${{ github.repository_owner}}/${{ env.IMAGE_NAME }}"
           )
 
           # retrieve all tags for the image, sort it reverse and keep the last N versions
