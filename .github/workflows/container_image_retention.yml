@@ -21,7 +21,7 @@ concurrency:
 
 env:
   # name of the image to delete versions from
-  IMAGE_NAME: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll'
+  IMAGE_NAME: 'ansible-role-file_deployment-jekyll'
 
   # number of versions to keep
   KEEP_VERSIONS: 3
