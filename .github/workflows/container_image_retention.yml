@@ -149,6 +149,7 @@ jobs:
           image-names: '${{ env.IMAGE_NAME }}'
           image-tags: '!latest !buildcache'
           keep-n-most-recent: 3
+          token: '${{ secrets.GITHUB_TOKEN }}'
           tag-selection: 'both'
           skip-shas: '${{ needs.prepare-vars.outputs.skip-digests }}'
           timestamp-to-use: 'created_at'
