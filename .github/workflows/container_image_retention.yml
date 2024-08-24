@@ -20,11 +20,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # name of the image to delete versions from
-  IMAGE_NAME: 'ansible-role-file_deployment-jekyll'
-
   # full image name including the complete path of the registry
-  FULL_IMAGE_NAME: 'ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}'
+  IMAGE_NAME: 'ghcr.io/${{ github.repository_owner }}/ansible-role-file_deployment-jekyll'
 
   # number of versions to keep
   KEEP_VERSIONS: 3
@@ -77,10 +74,11 @@ jobs:
       image: 'registry.access.redhat.com/ubi9/podman:9.4-12@sha256:ebfabcb68ba7c60a4bf0c85fc83495bdd18fa55d544122d9dcd352af11bcd633'
       options: '--privileged'
     outputs:
-      skip-digests: '${{ steps.digests.outputs.skip-digests }}'
+      short-image-name: '${{ steps.prepare-vars.outputs.short-image-name }}'
+      skip-digests: '${{ steps.prepare-vars.outputs.skip-digests }}'
     steps:
-      - name: 'Gather image digests to ignore'
-        id: 'digests'
+      - name: 'Prepare variables'
+        id: 'prepare-vars'
         run: |
           # enable trace and
           # fail if:
@@ -102,7 +100,7 @@ jobs:
             "999999"
             "--format"
             "{{.Tag}}"
-            "${{ env.FULL_IMAGE_NAME }}"
+            "${{ env.IMAGE_NAME }}"
           )
 
           # retrieve all tags for the image, sort it reverse and keep the last N versions
@@ -124,13 +122,18 @@ jobs:
             while read -r digest; do
               echo "INFO: Found digest '${digest}'"
               digests+=("${digest}")
-            done < <(podman manifest inspect "${{ env.FULL_IMAGE_NAME }}:${keepTag}" | jq -r '.manifests[] | .digest')
+            done < <(podman manifest inspect "${{ env.IMAGE_NAME }}:${keepTag}" | jq -r '.manifests[] | .digest')
             # ^ extract the digests of a tag
           done
 
           # save the digests for a later step
           skipDigests="${digests[@]}"
           echo "skip-digests=${skipDigests}" >> "${GITHUB_OUTPUT}"
+
+          declare -r imageName="${{ env.IMAGE_NAME }}"
+          declare -r shortImageName="${imageName##*/}"
+          # save the image short name (without registry path)
+          echo "short-image-name=${shortImageName}" >> "${GITHUB_OUTPUT}"
 
   container-image-retention:
     name: 'Clean old container images'
@@ -156,7 +159,7 @@ jobs:
         with:
           account: 'user'
           cut-off: '1h'
-          image-names: '${{ env.IMAGE_NAME }}'
+          image-names: '${{ needs.prepare-vars.outputs.short-image-name }}'
           image-tags: '!latest !buildcache'
           keep-n-most-recent: 3
           token: '${{ secrets.GITHUB_TOKEN }}'
