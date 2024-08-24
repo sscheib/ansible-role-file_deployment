@@ -166,6 +166,6 @@ jobs:
           tag-selection: 'both'
           skip-shas: '${{ needs.prepare-vars.outputs.skip-digests }}'
           timestamp-to-use: 'created_at'
-          dry-run: true
+          dry-run: false
           rust-log: 'container_retention_policy=debug'
 ...
