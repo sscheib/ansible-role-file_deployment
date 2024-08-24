@@ -120,7 +120,8 @@ jobs:
           done
 
           # save the digests for a later step
-          echo "skip-digests=${digests[@]}" >> "${GITHUB_OUTPUT}"
+          skipDigests="${digests[@]}"
+          echo "skip-digests=${skipDigests}" >> "${GITHUB_OUTPUT}"
 
   container-image-retention:
     name: 'Clean old container images'
