@@ -29,8 +29,8 @@ env:
   # regular expression for tags to filter/ignore
   IGNORE_TAGS: '^(latest|buildcache)$|^sha([[:digit:]]+?)?-'
 
-  # additional tags to resolve and keep the digests from, space seperated
-  ADDITIONAL_KEEP_TAGS: 'latest buildcache'
+  # additional tags to resolve and keep the digests from, comma-seperated
+  ADDITIONAL_KEEP_TAGS: 'latest,buildcache'
 
 jobs:
   check-user-permissions:
@@ -106,6 +106,7 @@ jobs:
                                 )"
 
           # add additional user tags to keep
+          IFS="," read -ra additionalKeepTags <<< "${{ env.ADDITIONAL_KEEP_TAGS }}"
           declare -a allKeepTags=("${keepTags[@]}" "${{ env.ADDITIONAL_KEEP_TAGS }}")
 
           # iterate over all tags and retrieve their digests
