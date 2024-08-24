@@ -112,7 +112,7 @@ jobs:
 
           # add additional user tags to keep
           IFS="," read -ra additionalKeepTags <<< "${{ env.ADDITIONAL_KEEP_TAGS }}"
-          declare -a allKeepTags=("${keepTags[@]}" "${{ env.ADDITIONAL_KEEP_TAGS }}")
+          declare -a allKeepTags=("${keepTags[@]}" "${additionalKeepTags}")
 
           # iterate over all tags and retrieve their digests
           declare -a ignoreDigests=()
