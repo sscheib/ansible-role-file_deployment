@@ -29,6 +29,7 @@
   },
   "lockFileMaintenance": {
     "enabled": true,
+    "automerge": true,
     "schedule": [
       "* * * * *"
     ]
