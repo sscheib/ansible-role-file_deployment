@@ -74,6 +74,7 @@ jobs:
       image: 'registry.access.redhat.com/ubi9/podman:9.4-12@sha256:ebfabcb68ba7c60a4bf0c85fc83495bdd18fa55d544122d9dcd352af11bcd633'
       options: '--privileged'
     outputs:
+      action-debug: '${{ steps.prepare-vars.outputs.short-image-name }}'
       short-image-name: '${{ steps.prepare-vars.outputs.short-image-name }}'
       skip-digests: '${{ steps.prepare-vars.outputs.skip-digests }}'
       skip-tags: '${{ steps.prepare-vars.outputs.skip-tags }}'
@@ -87,6 +88,15 @@ jobs:
           # - a command in a pipe fails
           # - a command in a sub-shell fails
           set -Eeuo pipefail
+
+          echo "action-debug=container_retention_policy=info" >> "${GITHUB_OUTPUT}"
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+            echo "INFO: Defining 'action-debug' with: container_retention_policy=debug";
+            echo "action-debug=container_retention_policy=debug" >> "${GITHUB_OUTPUT}";
+          };
 
           # install jq
           dnf install -y jq
@@ -171,11 +181,11 @@ jobs:
           cut-off: '1m'
           image-names: '${{ needs.prepare-vars.outputs.short-image-name }}'
           image-tags: '${{ needs.prepare-vars.outputs.skip-tags }}'
-          keep-n-most-recent: 3
+          keep-n-most-recent: '${{ env.KEEP_VERSIONS }}'
           token: '${{ secrets.GITHUB_TOKEN }}'
           tag-selection: 'both'
           skip-shas: '${{ needs.prepare-vars.outputs.skip-digests }}'
           timestamp-to-use: 'created_at'
           dry-run: false
-          rust-log: 'container_retention_policy=debug'
+          rust-log: '${{ needs.prepare-vars.outputs.action-debug }}'
 ...
