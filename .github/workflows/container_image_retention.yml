@@ -74,7 +74,7 @@ jobs:
       image: 'registry.access.redhat.com/ubi9/podman:9.4-12@sha256:ebfabcb68ba7c60a4bf0c85fc83495bdd18fa55d544122d9dcd352af11bcd633'
       options: '--privileged'
     outputs:
-      action-debug: '${{ steps.prepare-vars.outputs.short-image-name }}'
+      action-debug: '${{ steps.prepare-vars.outputs.action-debug }}'
       short-image-name: '${{ steps.prepare-vars.outputs.short-image-name }}'
       skip-digests: '${{ steps.prepare-vars.outputs.skip-digests }}'
       skip-tags: '${{ steps.prepare-vars.outputs.skip-tags }}'
