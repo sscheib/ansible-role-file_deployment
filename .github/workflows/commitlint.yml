@@ -34,7 +34,21 @@ jobs:
           node-version: '20.17.0'
 
       - name: 'Install commitlint'
+        shell: 'bash'
         run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
           # renovate: datasource=npm
           npm install conventional-changelog-conventionalcommits@8.0.0
           # renovate: datasource=npm
@@ -44,11 +58,41 @@ jobs:
 
       - name: 'Validate current commit (last commit) with commitlint'
         if: "github.event_name == 'push'"
-        run: 'npx commitlint --last --verbose'
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          npx commitlint --last --verbose
 
       - name: 'Validate pull request commits with commitlint'
         if: "github.event_name == 'pull_request'"
-        run: >-
-          npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }}
-          --to ${{ github.event.pull_request.head.sha }} --verbose
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          npx commitlint --from \
+            ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} \
+            --to ${{ github.event.pull_request.head.sha }} --verbose
 ...

@@ -59,7 +59,20 @@ jobs:
 
       - name: 'Check User Permission'
         if: "steps.check-access.outputs.require-result == 'false'"
+        shell: 'bash'
         run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
           echo "${{ github.triggering_actor }} does not have permissions on this repo."
           echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
           echo "Job originally triggered by ${{ github.actor }}"
@@ -81,6 +94,7 @@ jobs:
     steps:
       - name: 'Prepare variables'
         id: 'prepare-vars'
+        shell: 'bash'
         run: |
           # fail if:
           # - a variable is unbound

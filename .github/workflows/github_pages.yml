@@ -50,9 +50,20 @@ jobs:
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
 
       - name: 'Build Jekyll site'
+        shell: 'bash'
         run: |
-          # ensure script fails on failed commands and make pipes fail as well
-          set -eux && set -o pipefail
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
 
           # create _site directory with correct permissions
           mkdir "./docs/_site" && \
