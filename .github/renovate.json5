@@ -299,8 +299,8 @@
         "^\\.github/workflows/.+?\\.ya?ml$"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\s+-\s+['\"]?(?<depName>[^=@]+)(?:==|@)\s{0,}(?<currentValue>[^'\"\s\n]+)",
-        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+?(?:npm|pip[^\\s]+?)\\s+?install\\s+?(?<depName>[^=@]+)(?:(?:==|@)\\s?)(?<currentValue>[^\\s\\n]+)"
+        "# renovate: datasource=(?<datasource>.*?)(\\sversioning=(?<versioning>.*?))?\\s+-\\s+['\"]?(?<depName>[^=@]+)(?:==|@)\\s{0,}(?<currentValue>[^'\"\\s\\n]+)",
+        "# renovate: datasource=(?<datasource>.*?)(\\sversioning=(?<versioning>.*?))?\\s+?(?:npm|pip[^\\s]+?)\\s+?install\\s+?(?<depName>[^=@]+)(?:(?:==|@)\\s?)(?<currentValue>[^\\s\\n]+)"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
