@@ -21,6 +21,7 @@
     "enabled": true
   },
   "internalChecksFilter": "strict",
+  "separateMinorPatch": true,
   "bundler": {
     "fileMatch": [
       "^docs/Gemfile$",
