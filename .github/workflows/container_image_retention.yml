@@ -76,17 +76,17 @@ jobs:
     outputs:
       short-image-name: '${{ steps.prepare-vars.outputs.short-image-name }}'
       skip-digests: '${{ steps.prepare-vars.outputs.skip-digests }}'
+      skip-tags: '${{ steps.prepare-vars.outputs.skip-tags }}'
     steps:
       - name: 'Prepare variables'
         id: 'prepare-vars'
         run: |
-          # enable trace and
           # fail if:
           # - a variable is unbound
           # - any command fails
           # - a command in a pipe fails
           # - a command in a sub-shell fails
-          set -Eeuox pipefail
+          set -Eeuo pipefail
 
           # install jq
           dnf install -y jq
@@ -113,26 +113,36 @@ jobs:
 
           # add additional user tags to keep
           IFS="," read -ra additionalKeepTags <<< "${{ env.ADDITIONAL_KEEP_TAGS }}"
-          declare -a allKeepTags=("${keepTags[@]}" "${additionalKeepTags}")
+          declare -a allKeepTags=("${keepTags[@]}" "${additionalKeepTags[@]}")
 
           # iterate over all tags and retrieve their digests
-          declare -a ignoreDigests=()
+          declare -a skipDigests=()
           for keepTag in "${allKeepTags[@]}"; do
             echo "INFO: Retrieving digests for tag ${keepTag}"
             while read -r digest; do
               echo "INFO: Found digest '${digest}'"
-              digests+=("${digest}")
+              skipDigests+=("${digest}")
             done < <(podman manifest inspect "${{ env.IMAGE_NAME }}:${keepTag}" | jq -r '.manifests[] | .digest')
             # ^ extract the digests of a tag
           done
 
+          # prepare tags to skip
+          declare -a skipTags=()
+          for tag in "${allKeepTags[@]}"; do
+            skipTags+=("!${tag}")
+          done
+
+          echo "INFO: Defining 'skip-tags' with value: ${skipTags[@]}"
+          echo "skip-tags=${skipTags[@]}" >> "${GITHUB_OUTPUT}"
+
           # save the digests for a later step
-          skipDigests="${digests[@]}"
-          echo "skip-digests=${skipDigests}" >> "${GITHUB_OUTPUT}"
+          echo "INFO: Defining 'skip-digests' with value: ${skipDigests[@]}"
+          echo "skip-digests=${skipDigests[@]}" >> "${GITHUB_OUTPUT}"
 
           declare -r imageName="${{ env.IMAGE_NAME }}"
           declare -r shortImageName="${imageName##*/}"
           # save the image short name (without registry path)
+          echo "INFO: Defininig 'short-image-name' with value: ${shortImageName}"
           echo "short-image-name=${shortImageName}" >> "${GITHUB_OUTPUT}"
 
   container-image-retention:
@@ -158,9 +168,9 @@ jobs:
         uses: 'snok/container-retention-policy@4f22ef80902ad409ed55a99dc5133cc1250a0d03' # v3.0.0
         with:
           account: 'user'
-          cut-off: '1h'
+          cut-off: '1m'
           image-names: '${{ needs.prepare-vars.outputs.short-image-name }}'
-          image-tags: '!latest !buildcache'
+          image-tags: '${{ needs.prepare-vars.outputs.skip-tags }}'
           keep-n-most-recent: 3
           token: '${{ secrets.GITHUB_TOKEN }}'
           tag-selection: 'both'
