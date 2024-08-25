@@ -115,6 +115,13 @@ jobs:
         id: 'secret-check'
         shell: 'bash'
         run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
           (
             [[ "${{ secrets.CRC_USERNAME }}" != '' ]] &&
             [[ "${{ secrets.CRC_PASSWORD }}" != '' ]]
@@ -151,6 +158,19 @@ jobs:
         id: 'cache-check'
         shell: 'bash'
         run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
           (
             [[ "${{ github.event_name }}" != "schedule" ]] &&
             [[ "${{ github.event.schedule }}" != "30 2 * * 1" ]]

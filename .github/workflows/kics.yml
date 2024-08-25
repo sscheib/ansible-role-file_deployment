@@ -43,7 +43,22 @@ jobs:
           persist-credentials: false
 
       - name: 'Create results directory'
-        run: 'mkdir -p results'
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          mkdir -p results
 
       - name: 'Run KICS scan'
         uses: 'checkmarx/kics-github-action@530ac1f8efe6202b0f12c9a6e952597ae707b755' # v2.1.2
