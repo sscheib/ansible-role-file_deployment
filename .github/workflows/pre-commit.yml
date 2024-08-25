@@ -60,6 +60,7 @@ jobs:
           github.event.inputs.repoCache != 'disabled' &&
           github.event.inputs.repoCache != 'reset' &&
           github.event_name != 'schedule'
+        id: 'artifact-download'
         with:
           name: '${{ env.cache_key }}'
           path: 'cache-download'
@@ -69,7 +70,8 @@ jobs:
         if: >-
           github.event.inputs.repoCache != 'disabled' &&
           github.event.inputs.repoCache != 'reset' &&
-          github.event_name != 'schedule'
+          github.event_name != 'schedule' &&
+          steps.artifact-download.outputs.found_artifact == 'true'
         shell: 'bash'
         run: |
           # fail if:
@@ -83,13 +85,6 @@ jobs:
           [[ "${{ runner.debug }}" -ne 1 ]] || {
             echo "INFO: Enabling bash trace";
             set -x;
-          };
-
-          # skip is no cache directory is present
-          # that might happen due to the cache being expired or on the first run
-          [[ ! -d "cache-download" ]] || {
-            echo "INFO: No cache found";
-            exit 0;
           };
 
           # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
