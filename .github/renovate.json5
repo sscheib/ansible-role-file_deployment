@@ -21,7 +21,10 @@
     "enabled": true
   },
   "internalChecksFilter": "strict",
+  "separateMajorMinor": true,
   "separateMinorPatch": true,
+  "separateMultipleMajor": true,
+  "separateMultipleMinor": true,
   "bundler": {
     "fileMatch": [
       "^docs/Gemfile$",
