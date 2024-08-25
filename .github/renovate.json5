@@ -30,7 +30,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": [
-      "* 18-22 * * 7"
+      "* * * * *"
     ]
   },
   "packageRules": [
