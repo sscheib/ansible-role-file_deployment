@@ -23,7 +23,14 @@
   "internalChecksFilter": "strict",
   "bundler": {
     "fileMatch": [
-      "^docs/Gemfile$"
+      "^docs/Gemfile$",
+      "^docs/Gemfile.lock$"
+    ]
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "* 18-22 * * 7"
     ]
   },
   "packageRules": [
@@ -239,9 +246,10 @@
       "minimumReleaseAge": "21 days"
     },
     {
-      "description": "Enable auto-merge specifically for python-jsonschema/check-jsonschema as it is versioned in the 0.x version range",
+      "description": "Enable auto-merge specifically for selected dependencies as they are versioned in the 0.x version range",
       "matchDepNames": [
-        "python-jsonschema/check-jsonschema"
+        "python-jsonschema/check-jsonschema",
+        "rojopolis/spellcheck-github-actions"
       ],
       "matchUpdateTypes": [
         "minor",
@@ -263,9 +271,6 @@
         "bundler"
       ],
       "rangeStrategy": "update-lockfile",
-      "matchFileNames": [
-        "^docs/Gemfile$"
-      ],
       "groupName": "Bundler dependencies"
     }
   ],
