@@ -167,10 +167,10 @@ jobs:
         if: >-
           github.event.inputs.repoCache != 'disabled' &&
           github.event.inputs.repoCache != 'reset'
-        continue-on-error: true
         with:
           name: '${{ env.cache_key }}-${{ matrix.container.cache_key_suffix }}'
           path: 'cache-download'
+          if_no_artifact_found: 'ignore'
 
       - name: 'Extract molecule cache to improve performance'
         if: >-
