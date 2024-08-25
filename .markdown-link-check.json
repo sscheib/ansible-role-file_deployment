@@ -21,7 +21,7 @@
       "pattern": "^https://scorecard.dev"
     }
   ],
-  "timeout": "20s",
+  "timeout": "120s",
   "retryOn429": true,
   "retryCount": 5,
   "fallbackRetryDelay": "30s",

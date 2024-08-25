@@ -24,6 +24,8 @@ This is a *very* simple role that will copy files to the managed nodes using `an
 | [![hadolint](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/hadolint.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/hadolint.yml) | |
 | [![Trivy](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/trivy.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/trivy.yml) | |
 | [![GitHub pages deployment](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/github_pages.yml/badge.svg?branch=main)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/github_pages.yml) | |
+| [![Docs image build](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/docs_image.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/docs_image.yml) | |
+| [![Container image retention](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/container_image_retention.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/container_image_retention.yml) | |
 <!-- markdownlint-enable MD013 -->
 
 **Note**: The badges don't follow a specific order. Wherever possible, a general badge refers to the corresponding workflow that implements the respective action, which allows
