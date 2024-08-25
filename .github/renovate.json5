@@ -202,27 +202,6 @@
       }
     },
     {
-      "description": "Limit Ansible Core in pre-commit to patch updates",
-      "matchDepNames": [
-        "ansible-core"
-      ],
-      "matchFileNames": [
-        "^\\.pre-commit-config\\.yaml$"
-      ],
-      "matchDatasources": [
-        "pypi"
-      ],
-      "major": {
-        "enabled": false
-      },
-      "minor": {
-        "enabled": false
-      },
-      "patch": {
-        "enabled": true
-      }
-    },
-    {
       "description": "Remove container registry names to avoid too long commit message subjects",
       "matchDatasources": [
         "docker"
@@ -273,6 +252,27 @@
       ],
       "rangeStrategy": "update-lockfile",
       "groupName": "Bundler dependencies"
+    },
+    {
+      "description": "Limit Ansible Core in pre-commit to patch updates",
+      "matchDepNames": [
+        "ansible-core"
+      ],
+      "matchFileNames": [
+        "^\\.pre-commit-config\\.yaml$"
+      ],
+      "matchDatasources": [
+        "pypi"
+      ],
+      "major": {
+        "enabled": false
+      },
+      "minor": {
+        "enabled": false
+      },
+      "patch": {
+        "enabled": true
+      }
     }
   ],
   "customManagers": [
