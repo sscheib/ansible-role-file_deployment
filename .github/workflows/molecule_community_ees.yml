@@ -98,7 +98,7 @@ jobs:
               - 'fuse-overlayfs'
 
           # yamllint disable-line rule:line-length
-          - image: 'ghcr.io/ansible-community/community-ee-base:2.16.6-1@sha256:742e6eb0ffde84f8a1c916a5eae217da317b4a4705a7636c70696bcd7f6a8cdd'
+          - image: 'ghcr.io/ansible-community/community-ee-base:2.16.7-1@sha256:754c578dc8f40e610ed69b4cb2993a5f59c1dcdbee4a80e91a2bad2516ba7a72'
             # renovate yaml: datasource=pypi
             molecule: '24.8.0'
             configure_podman: true
