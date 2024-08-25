@@ -53,6 +53,22 @@
       "rangeStrategy": "bump"
     },
     {
+      "description": "Enable auto-merge for minor and patch updates but exclude version 0.x, as these can introduce breaking changes at any time as per SemVer conventions",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    },
+    {
+      "matchManagers": [
+        "bundler"
+      ],
+      "rangeStrategy": "update-lockfile",
+      "groupName": "Bundler dependencies"
+    },
+    {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
       "matchFileNames": [
         "^\\.github/workflows/molecule_certified_ees\\.ya?ml$",
@@ -236,22 +252,6 @@
         "patch"
       ],
       "automerge": true
-    },
-    {
-      "description": "Enable auto-merge for minor and patch updates but exclude version 0.x, as these can introduce breaking changes at any time as per SemVer conventions",
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "matchCurrentVersion": "!/^0/",
-      "automerge": true
-    },
-    {
-      "matchManagers": [
-        "bundler"
-      ],
-      "rangeStrategy": "update-lockfile",
-      "groupName": "Bundler dependencies"
     },
     {
       "description": "Limit Ansible Core in pre-commit to patch updates",
