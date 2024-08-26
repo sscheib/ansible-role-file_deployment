@@ -273,21 +273,8 @@
       "patch": {
         "enabled": true
       },
-      "separateMajorMinor": true,
-      "separateMinorPatch": true,
-      "separateMultipleMajor": true,
-      "separateMultipleMinor": true
-    },
-    {
-      "description": "Deny upgrading Ansible Core to 2.17.N in pre-commit configuration",
-      "matchDepNames": [
-        "ansible-core"
-      ],
-      "matchFileNames": [
-        "^\\.pre-commit-config\\.yaml$"
-      ],
-      "matchCurrentVersion": "/^2.17.+?$/",
-      "enabled": false
+      "matchCurrentVersion": "^/2.16.+?$/",
+      "allowedVersions": "/^2.16.+$/"
     },
     {
       "description": "Enable separation of (multiple) major and minor versions for specific dependencies",
