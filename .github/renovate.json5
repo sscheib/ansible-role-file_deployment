@@ -286,7 +286,8 @@
       "matchFileNames": [
         "^\\.pre-commit-config\\.yaml$"
       ],
-      "matchCurrentVersion": "/^2.17.+?$/"
+      "matchCurrentVersion": "/^2.17.+?$/",
+      "enabled": false
     },
     {
       "description": "Enable separation of (multiple) major and minor versions for specific dependencies",
