@@ -21,10 +21,6 @@
     "enabled": true
   },
   "internalChecksFilter": "strict",
-  "separateMajorMinor": true,
-  "separateMinorPatch": true,
-  "separateMultipleMajor": true,
-  "separateMultipleMinor": true,
   "bundler": {
     "fileMatch": [
       "^docs/Gemfile$",
@@ -122,7 +118,11 @@
       },
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.+(?<patch>\\d+)(?<build>-\\d+)?$",
       "rangeStrategy": "bump",
-      "groupName": "execution environments"
+      "groupName": "execution environments",
+      "separateMajorMinor": true,
+      "separateMinorPatch": true,
+      "separateMultipleMajor": true,
+      "separateMultipleMinor": true
     },
     {
       "description": "Update Debian images only on the minor and patch level",
@@ -140,7 +140,11 @@
       },
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)$",
       "rangeStrategy": "bump",
-      "groupName": "Debian molecule images"
+      "groupName": "Debian molecule images",
+      "separateMajorMinor": true,
+      "separateMinorPatch": true,
+      "separateMultipleMajor": true,
+      "separateMultipleMinor": true
     },
     {
       "description": "Update OpenWrt images only on the minor and patch level",
@@ -158,7 +162,11 @@
       },
       "versioning": "regex:^x86_64(?:-openwrt)?-(?<major>\\d+)\\.(?<minor>\\d+)(?:\\.(?<patch>\\d+))?$",
       "rangeStrategy": "bump",
-      "groupName": "OpenWrt molecule images"
+      "groupName": "OpenWrt molecule images",
+      "separateMajorMinor": true,
+      "separateMinorPatch": true,
+      "separateMultipleMajor": true,
+      "separateMultipleMinor": true
     },
     {
       "description": "Update UBI images only on the minor and patch level",
@@ -179,7 +187,11 @@
       },
       "versioning": "redhat",
       "rangeStrategy": "bump",
-      "groupName": "RHEL UBI molecule images"
+      "groupName": "RHEL UBI molecule images",
+      "separateMajorMinor": true,
+      "separateMinorPatch": true,
+      "separateMultipleMajor": true,
+      "separateMultipleMinor": true
     },
     {
       "description": "These collections should be retrieved from console.redhat.com",
