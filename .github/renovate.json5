@@ -27,6 +27,9 @@
       "^docs/Gemfile.lock$"
     ]
   },
+  "major": {
+    "dependencyDashboardApproval": true
+  },
   "separateMajorMinor": true,
   "separateMinorPatch": true,
   "separateMultipleMajor": true,
