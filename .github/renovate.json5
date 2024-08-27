@@ -27,22 +27,29 @@
       "^docs/Gemfile.lock$"
     ]
   },
+  "separateMajorMinor": true,
+  "separateMinorPatch": true,
+  "separateMultipleMajor": true,
+  "separateMultipleMinor": true,
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
     "schedule": [
-      "* * * * *"
+      "* 18-22 * * 7"
     ]
   },
   "packageRules": [
     {
       "matchFileNames": [
-        "^\\.github/workflows/.+?\\.ya?ml$",
-        "^\\.pre-commit-config\\.yaml$",
-        "^collections/requirements\\.ya?ml$",
-        "^roles/requirements\\.ya?ml$",
-        "^requirements\\.ya?ml$$",
-        "^requirements\\.txt$"
+        ".github/workflows/**",
+        ".pre-commit-config.yaml",
+        "collections/requirements.yaml",
+        "collections/requirements.yml",
+        "roles/requirements.yaml",
+        "roles/requirements.yml",
+        "requirements.txt",
+        "requirements.yaml",
+        "requirements.yml"
       ],
       "major": {
         "enabled": true
@@ -71,8 +78,10 @@
     {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
       "matchFileNames": [
-        "^\\.github/workflows/molecule_certified_ees\\.ya?ml$",
-        "^\\.github/workflows/molecule_community_ees\\.ya?ml$"
+        ".github/workflows/wf_call_molecule_certified_ees.yaml",
+        ".github/workflows/wf_call_molecule_certified_ees.yml",
+        ".github/workflows/molecule_community_ees.yaml",
+        ".github/workflows/molecule_community_ees.yml"
       ],
       "minor": {
         "enabled": true
@@ -206,7 +215,11 @@
       "pinDigests": false,
       "schedule": [
         "* 18-22 * * 7"
-      ]
+      ],
+      "separateMajorMinor": false,
+      "separateMinorPatch": false,
+      "separateMultipleMajor": false,
+      "separateMultipleMinor": false
     },
     {
       "description": "Limit NodeJS to minor updates",
@@ -225,16 +238,10 @@
       "commitMessageTopic": "{{{replace '(?:registry(?:\.access)?\.redhat\.(?:io|com)|docker\.io|ghcr\.io)\/' '' depName}}}"
     },
     {
-      "description": "Remove container registry names to avoid too long commit message subjects",
-      "matchDatasources": [
-        "docker"
-      ],
-      "commitMessageTopic": "{{{replace '(?:registry(?:\.access)?\.redhat\.(?:io|com)|docker\.io|ghcr\.io)\/' '' depName}}}"
-    },
-    {
       "description": "Wait three weeks for Python updates to allow GitHub action setup-python to include the latest version",
       "matchFileNames": [
-        "^\\.github/workflows/pre-commit\\.ya?ml$"
+        ".github/workflows/pre-commit.yaml",
+        ".github/workflows/pre-commit.yml"
       ],
       "matchDatasources": [
         "python-version"
@@ -254,46 +261,17 @@
       "automerge": true
     },
     {
-      "description": "Limit Ansible Core in pre-commit to patch updates",
+      "description": "Limit Ansible Core in pre-commit to version <2.17 as it breaks RHEL 8 support pre-commit",
       "matchDepNames": [
         "ansible-core"
       ],
       "matchFileNames": [
-        "^\\.pre-commit-config\\.yaml$"
+        ".pre-commit-config.yaml"
       ],
       "matchDatasources": [
         "pypi"
       ],
-      "major": {
-        "enabled": false
-      },
-      "minor": {
-        "enabled": false
-      },
-      "patch": {
-        "enabled": true
-      },
-      "separateMinorPatch": true,
-      "matchCurrentVersion": "^/2.16.+?$/",
-      "allowedVersions": "/^2.16.+$/"
-    },
-    {
-      "description": "Enable separation of (multiple) major and minor versions for specific dependencies",
-      "matchDepNames": [
-        "docker.io/debian",
-        "docker.io/openwrt/rootfs",
-        "ghcr.io/ansible-community/community-ee-base",
-        "registry.access.redhat.com/ubi7/ubi",
-        "registry.access.redhat.com/ubi8/ubi",
-        "registry.access.redhat.com/ubi9/ubi",
-        "registry.access.redhat.com/ubi9/podman",
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
-      ],
-      "separateMajorMinor": true,
-      "separateMinorPatch": true,
-      "separateMultipleMajor": true,
-      "separateMultipleMinor": true
+      "allowedVersions": "<2.17"
     }
   ],
   "customManagers": [
