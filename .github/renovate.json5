@@ -225,15 +225,6 @@
       "separateMultipleMinor": false
     },
     {
-      "description": "Limit NodeJS to minor updates",
-      "matchDepNames": [
-        "node"
-      ],
-      "major": {
-        "enabled": false
-      }
-    },
-    {
       "description": "Remove container registry names to avoid too long commit message subjects",
       "matchDatasources": [
         "docker"
