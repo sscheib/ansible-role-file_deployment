@@ -27,9 +27,6 @@
       "^docs/Gemfile.lock$"
     ]
   },
-  "major": {
-    "dependencyDashboardApproval": true
-  },
   "separateMajorMinor": true,
   "separateMinorPatch": true,
   "separateMultipleMajor": true,
@@ -266,6 +263,17 @@
         "pypi"
       ],
       "allowedVersions": "<2.17"
+    },
+    {
+      "matchDepNames": [
+        "node"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "major": {
+        "dependencyDashboardApproval": true
+      }
     }
   ],
   "customManagers": [
