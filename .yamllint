@@ -30,6 +30,7 @@ rules:
   key-ordering: 'disable'
   line-length:
     max: 120
+    allow-non-breakable-words: false
   new-line-at-end-of-file: 'enable'
   new-lines:
     type: 'unix'
