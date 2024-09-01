@@ -381,7 +381,7 @@
         "docs/molecule_tests.md"
       ],
       "matchStrings": [
-        "(?<depNameCustom>ansible-community\\/community-ee-base):(?<currentValue>\\d+\\.\\d{1,}\\.\\d+(?:-\\d+)?)",
+        "(?<depName>ansible-community\\/community-ee-base):(?<currentValue>\\d+\\.\\d{1,}\\.\\d+(?:-\\d+)?)",
         "(?<depName>ansible\\/community-ansible-dev-tools):(?<currentValue>v?\\d+\\.\\d{1,}\\.\\d+(?:-\\d+)?)"
       ],
       "datasourceTemplate": "docker",
