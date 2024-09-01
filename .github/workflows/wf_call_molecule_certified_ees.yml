@@ -132,18 +132,6 @@ jobs:
             # renovate yaml: datasource=pypi
             molecule: '6.0.3'
 
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.12.10-43@sha256:fd371e70235031d150741055f3b63a43bf7a8faf143040fd14a689b9a858e83f'
-            cache_key_suffix: 'rhel8-2.12'
-            # renovate yaml: datasource=pypi
-            molecule: '4.0.4'
-
-          # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.11.6-5@sha256:848ae1998882388fe095457948e1cf723ac6f82fe614e9a0424d953a02a0cb5e'
-            cache_key_suffix: 'rhel8-2.11'
-            # renovate yaml: datasource=pypi
-            molecule: '4.0.4'
-
           #
           # UBI 9
           #
