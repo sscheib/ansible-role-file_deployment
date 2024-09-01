@@ -93,6 +93,7 @@
       "matchDepNames": [
         "!registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
         "!registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9",
+        "!ghcr.io/ansible/community-ansible-dev-tools",
         "!ghcr.io/ansible-community/community-ee-base"
       ]
     },
@@ -125,7 +126,7 @@
       "patch": {
         "enabled": true
       },
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.+(?<patch>\\d+)(?<build>-\\d+)?$",
+      "versioning": "redhat",
       "rangeStrategy": "bump",
       "groupName": "execution environments"
     },
