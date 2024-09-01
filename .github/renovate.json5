@@ -307,6 +307,17 @@
       "datasourceTemplate": "docker"
     },
     {
+      "description": "Extract image versions defined via <prefix_with_suffixed_dash>image, e.g. gitleaks-image: 'ghcr.io/..'",
+      "customType": "regex",
+      "fileMatch": [
+        "^\\.github/workflows/.+?\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "[\\s+]?[\\w_-]+image:\\s?\\[\"']?(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?[\"']?"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
       "description": "Extract in-line dependencies for Python and NodeJS",
       "customType": "regex",
       "fileMatch": [
