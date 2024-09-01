@@ -313,7 +313,7 @@
         "^\\.github/workflows/.+?\\.ya?ml$"
       ],
       "matchStrings": [
-        "[\\s+]?[\\w_-]+image:\\s?\\[\"']?(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?[\"']?"
+        "[\\s+]?[\\w_-]+image:\\s+?[\\'\"]?(?<depName>[^:]+):(?<currentValue>[^@]+)(?<currentDigest>@[^\\'\"]+)?"
       ],
       "datasourceTemplate": "docker"
     },
@@ -363,17 +363,6 @@
         "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>.*?)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    },
-    {
-      "description": "Extract Jekyll docs image",
-      "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/github_pages\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "\\s+?jekyll_image:\\s+?[\\'\"](?<depName>[^:]+):(?<currentValue>[^@]+)@(?<currentDigest>[^\\'\"]+)"
-      ],
-      "datasourceTemplate": "docker"
     },
     {
       "description": "Extract dependencies in Containerfiles specified via ENV PACKAGE_NAME_VERSION=\"N\"",
