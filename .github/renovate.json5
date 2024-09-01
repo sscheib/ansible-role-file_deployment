@@ -275,6 +275,19 @@
       "major": {
         "dependencyDashboardApproval": true
       }
+    },
+    {
+      "description": "Disable pinning of Execution Environment image digests in docs",
+      "matchDepNames": [
+        "ghcr.io/ansible/community-ansible-dev-tools",
+        "ghcr.io/ansible-community/community-ee-base",
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
+      ],
+      "matchFileNames": [
+        "docs/molecule_tests.md"
+      ],
+      "pinDigests": false
     }
   ],
   "customManagers": [
