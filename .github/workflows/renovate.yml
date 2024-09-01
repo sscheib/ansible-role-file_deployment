@@ -61,7 +61,7 @@ env:
   cache_key: 'renovate-cache'
 
   # yamllint disable rule:line-length
-  # renovate: datasource=docker
+  # renovate dep: datasource=docker
   gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba'
   # yamllint enable rule:line-length
 
