@@ -94,7 +94,7 @@ jobs:
       credentials:
         username: '${{ secrets.crc_username }}'
         password: '${{ secrets.crc_password }}'
-      options: '--privileged'
+      options: '--privileged --platform linux/amd64'
     strategy:
       matrix:
         container:
