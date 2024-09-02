@@ -152,7 +152,7 @@ jobs:
           # check whether there has been a release this month
           #
           declare highestVersion=""
-          if podman "${podmanArguments[@]}" | grep -qvE "${ignoreTags}" | grep -q "${baseVersion}"; then
+          if podman "${podmanArguments[@]}" | grep -vE "${ignoreTags}" | grep -q "${baseVersion}"; then
 
             # sort the versions with the highest showing first and select it
             highestVersion="$(podman "${podmanArguments[@]}" | sort -Vr | head -n1)"
