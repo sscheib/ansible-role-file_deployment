@@ -29,6 +29,13 @@ concurrency:
   group: 'ci-${{ github.workflow }}-${{ github.ref }}'
   cancel-in-progress: false
 
+env:
+  # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
+  # yamllint disable rule:line-length
+  # renovate image dep:
+  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba'
+  # yamllint enable rule:line-length
+
 jobs:
   check-user-permissions:
     runs-on: 'ubuntu-22.04'
@@ -269,6 +276,29 @@ jobs:
           path: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           retention-days: 5
 
+      - name: >-
+          Scan trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif to ensure it contains no secrets
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          docker run -v "./trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif:/scan" \
+            "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+              echo "ERROR: Secret found, failing workflow";
+              exit 1;
+          };
+
       - name: 'Upload to code-scanning'
         uses: 'github/codeql-action/upload-sarif@4dd16135b69a43b6c8efb853346f8437d92d3c93' # v3.26.6
         with:
@@ -308,6 +338,29 @@ jobs:
           output: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           trivy-config: 'trivy.yaml'
           scan-type: 'image'
+
+      - name: >-
+          Scan trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif to ensure it contains no secrets
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          docker run -v "./trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif:/scan" \
+            "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+              echo "ERROR: Secret found, failing workflow";
+              exit 1;
+          };
 
       - name: 'Upload artifact'
         if: "${{ github.event_name != 'pull_request' }}"
