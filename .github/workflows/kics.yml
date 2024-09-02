@@ -5,6 +5,10 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - 'main'
 
+  push:
+    branches:
+      - 'main'
+
   workflow_dispatch: {}
   schedule:
     - cron: '43 18 * * 4'
