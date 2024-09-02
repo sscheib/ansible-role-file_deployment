@@ -17,13 +17,6 @@ on:  # yamllint disable-line rule:truthy
 # Declare default permissions as read only.
 permissions: 'read-all'
 
-env:
-  # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
-  # yamllint disable rule:line-length
-  # renovate image dep:
-  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba'
-  # yamllint enable rule:line-length
-
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'
@@ -86,7 +79,9 @@ jobs:
             api.securityscorecards.dev:443
             fulcio.sigstore.dev:443
             github.com:443
+            ghcr.io:443
             oss-fuzz-build-logs.storage.googleapis.com:443
+            pkg-containers.githubusercontent.com:443
             rekor.sigstore.dev:443
             tuf-repo-cdn.sigstore.dev:443
             www.bestpractices.dev:443
@@ -113,6 +108,7 @@ jobs:
 
       - name: 'Scan results.sarif to ensure it contains no secrets'
         shell: 'bash'
+        # yamllint disable rule:line-length
         run: |
           # fail if:
           # - a variable is unbound
@@ -127,10 +123,16 @@ jobs:
             set -x;
           };
 
-          docker run -v ./results.sarif:/scan "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+          # Specifying the gitleaks-image in the job as Scorecard does not permit top level env vars, see:
+          # https://github.com/ossf/scorecard-action#workflow-restrictions
+          # renovate image dep:
+          gitleaksImage="ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba"
+
+          docker run -v ./results.sarif:/scan "${gitLeaksimage}" detect --source "/scan" --no-git || {
             echo "ERROR: Secret found, failing workflow";
             exit 1;
           };
+        # yamllint enable rule:line-length
 
       - name: 'Upload artifact'
         uses: 'actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874' # v4.4.0
