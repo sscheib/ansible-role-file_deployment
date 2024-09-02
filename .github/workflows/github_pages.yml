@@ -29,7 +29,7 @@ concurrency:
 env:
   # Jekyll image to use
   # yamllint disable-line rule:line-length
-  jekyll_image: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll:v24.9.7@sha256:6d7777b146ef62627c51d41ae4fb40c1a4e7ccaeecc50747e361dea0952ce94e'
+  jekyll-image: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll:v24.9.0@sha256:ce1c6cf25d35c749176c1f9d2ee8dc0f45774f437d985954b468ac3e0df2c00d'
 
 jobs:
   build:
@@ -70,7 +70,7 @@ jobs:
           sudo chown -R 1000:1000 "./docs/_site"
 
           # build documentation
-          docker run --rm --volume "./docs:/srv/jekyll" "${{ env.jekyll_image }}" \
+          docker run --rm --volume "./docs:/srv/jekyll" "${{ env.jekyll-image }}" \
             bundler exec jekyll build --disable-disk-cache
 
       - name: 'Upload artifact to pass the build to the deploy job'
