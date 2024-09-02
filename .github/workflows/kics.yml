@@ -11,6 +11,13 @@ on:  # yamllint disable-line rule:truthy
 
 permissions: 'read-all'
 
+env:
+  # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
+  # yamllint disable rule:line-length
+  # renovate image dep:
+  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba'
+  # yamllint enable rule:line-length
+
 jobs:
   analysis:
     name: 'KICS analysis'
@@ -68,8 +75,27 @@ jobs:
           config_path: './kics.config'
           output_formats: 'sarif'
 
-      # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
-      # format to the repository Actions tab.
+      - name: 'Scan results/resulits.sarif to ensure it contains no secrets'
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          docker run -v ./results/results.sarif:/scan "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+            echo "ERROR: Secret found, failing workflow";
+            exit 1;
+          };
+
       - name: 'Upload artifact'
         uses: 'actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874' # v4.4.0
         with:
@@ -77,8 +103,6 @@ jobs:
           path: 'results/results.sarif'
           retention-days: 5
 
-      # Upload the results to GitHub's code scanning dashboard (optional).
-      # Commenting out will disable upload of results to your repo's Code Scanning dashboard
       - name: 'Upload to code-scanning'
         uses: 'github/codeql-action/upload-sarif@4dd16135b69a43b6c8efb853346f8437d92d3c93' # v3.26.6
         with:
