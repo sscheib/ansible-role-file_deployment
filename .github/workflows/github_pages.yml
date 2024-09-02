@@ -33,6 +33,12 @@ env:
   jekyll-image: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll:v24.9.0@sha256:ce1c6cf25d35c749176c1f9d2ee8dc0f45774f437d985954b468ac3e0df2c00d'
   # yamllint enable rule:line-length
 
+  # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
+  # yamllint disable rule:line-length
+  # renovate image dep:
+  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba'
+  # yamllint enable rule:line-length
+
 jobs:
   build:
     name: 'Build documentation'
@@ -74,6 +80,27 @@ jobs:
           # build documentation
           docker run --rm --volume "./docs:/srv/jekyll" "${{ env.jekyll-image }}" \
             bundler exec jekyll build --disable-disk-cache
+
+      - name: 'Scan site directory to ensure it contains no secrets prior to uploading'
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          docker run -v "./docs/_site:/scan" "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+            echo "ERROR: Secret found, failing workflow";
+            exit 1;
+          };
 
       - name: 'Upload artifact to pass the build to the deploy job'
         if: "${{ github.event_name != 'pull_request' }}"
@@ -118,6 +145,27 @@ jobs:
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           enablement: false
+
+      - name: 'Scan site directory to ensure it contains no secrets prior to uploading'
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          docker run -v "./docs/_site:/scan" "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+            echo "ERROR: Secret found, failing workflow";
+            exit 1;
+          };
 
       - name: 'Upload GitHub pages artifact'
         uses: 'actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa' # v3.0.1
