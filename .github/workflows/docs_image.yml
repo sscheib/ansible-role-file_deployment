@@ -267,15 +267,6 @@ jobs:
           trivy-config: 'trivy.yaml'
           scan-type: 'image'
 
-      - name: 'Upload artifact'
-        uses: 'actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874' # v4.4.0
-        with:
-          name: >-
-            Trivy scan test build of ${{ needs.prepare-vars.outputs.repository-name }}-jekyll
-            ${{ needs.prepare-vars.outputs.next-version }}
-          path: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
-          retention-days: 5
-
       - name: >-
           Scan trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif to ensure it contains no secrets
         shell: 'bash'
@@ -298,6 +289,15 @@ jobs:
               echo "ERROR: Secret found, failing workflow";
               exit 1;
           };
+
+      - name: 'Upload artifact'
+        uses: 'actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874' # v4.4.0
+        with:
+          name: >-
+            Trivy scan test build of ${{ needs.prepare-vars.outputs.repository-name }}-jekyll
+            ${{ needs.prepare-vars.outputs.next-version }}
+          path: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
+          retention-days: 5
 
       - name: 'Upload to code-scanning'
         uses: 'github/codeql-action/upload-sarif@4dd16135b69a43b6c8efb853346f8437d92d3c93' # v3.26.6
