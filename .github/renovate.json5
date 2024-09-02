@@ -349,7 +349,7 @@
         "^\\.github/workflows/.+?\\.ya?ml$"
       ],
       "matchStrings": [
-        "# renovate image dep:(?:\\s+?versioning=(?<versioning>[^\\s]+))?(?:\\s+?registryUrl=(?<registryUrl>[^\\s]+))?\\s+?[\\w_-]+:\\s+?['\"]?(?<depName>[^:]+):(?<currentValue>[^@\\s]+)(?:@(?<currentDigest>[^\\s]+))?['\"]?"
+        "# renovate image dep:(?:\\s+?versioning=(?<versioning>[^\\s]+))?(?:\\s+?registryUrl=(?<registryUrl>[^\\s]+))?\\s+?[\\w_-]+:\\s+?['\"]?(?<depName>[^:]+):(?<currentValue>[^@\\s'\"]+)(?:@(?<currentDigest>[^\\s'\"]+))?"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
