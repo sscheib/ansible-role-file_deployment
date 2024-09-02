@@ -354,6 +354,18 @@
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
     {
+      "description": "Extract custom container image dependency definitions",
+      "customType": "regex",
+      "fileMatch": [
+        "^\\.github/workflows/.+?\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "# renovate image dep:(?:\s+?versioning=(?<versioning>[^\s]+))?(?:\s+?registryUrl=(?<registryUrl>[^\s]+))?\s+?[\w_-]+:\s+?['\"]?(?<depName>[^:]+):(?<currentValue>[^@\s]+)(?:@(?<currentDigest>[^\s]+))?['\"]?"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
       "description": "Extract renovate container version",
       "customType": "regex",
       "fileMatch": [
