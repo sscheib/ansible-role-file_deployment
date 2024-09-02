@@ -39,6 +39,7 @@ jobs:
           disable-sudo: true
           allowed-endpoints: >
             api.github.com:443
+            ghcr.io:443
             github.com:443
             kics.io:443
             packages.wolfi.dev:443
