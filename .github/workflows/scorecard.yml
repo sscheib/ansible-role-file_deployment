@@ -1,4 +1,7 @@
 ---
+# Note: Scorecard does not allow running jobs in BASH, therefore the sarif file is uploaded unchecked, see
+# https://github.com/ossf/scorecard-action#workflow-restrictions
+
 name: 'Scorecard'
 on:  # yamllint disable-line rule:truthy
   # For Branch-Protection check. Only the default branch is supported. See
@@ -13,9 +16,6 @@ on:  # yamllint disable-line rule:truthy
       - 'main'
 
   workflow_dispatch: {}
-
-# Note: Scorecard does not allow running jobs in BASH, therefore the sarif file is uploaded unchecked, see
-# https://github.com/ossf/scorecard-action#workflow-restrictions
 
 # Declare default permissions as read only.
 permissions: 'read-all'
