@@ -408,8 +408,7 @@
         "^\\.pre-commit-config\\.yaml$"
       ],
       "matchStrings": [
-        "repo:\\s+?['\"]?https?:\\/\\/(?<hostname>[^\\/]+)\\/(?<depName>[^\\s]+?)['\"]?\\n(?<indendation>\\s+)rev:\\s+?['\"]?(?<currentValue>[^\\s'\"]+)['\"]?",
-        "repo:\\s+?['\"]?https?:\\/\\/(?<hostname>[^\\/]+)\\/(?<depName>[^\\s]+?)['\"]?\\n(?<indendation>\\s+)rev:\\s+?['\"]?(?<currentDigest>[a-z0-9]{40}|[a-z0-9]{64})['\"]\\s+?#\\s+?(?<currentValue>[^\\s]+)"
+        "repo:\\s+?['\"]https?:\\/\\/(?<hostname>[^\\/]+?)\\/(?<depName>[^\\s]+?)['\"]?\\n(?<indendation>\\s+?)rev:\\s+?['\"](?<currentValue>[^\\s'\"]+?)['\"]"
       ],
       "datasourceTemplate": "github-tags",
       "autoReplaceStringTemplate": "repo: '{{{hostname}}}\\/{{{depName}}}'\n{{{indentation}}}rev: '{{#if newDigest}}{{{newDigest}}}' # {{{newValue}}}{{else}}{{{newValue}}}{{/if}}"
