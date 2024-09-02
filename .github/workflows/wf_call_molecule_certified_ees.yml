@@ -319,7 +319,7 @@ jobs:
             set -x;
           };
 
-          docker run -v "${{ env.cache_dir }}:/scan" "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+          podman run -v "${{ env.cache_dir }}:/scan" "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
             echo "ERROR: Secret found, failing workflow";
             exit 1;
           };
