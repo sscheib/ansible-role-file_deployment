@@ -1,4 +1,8 @@
 ---
+# Note: Scanning the pre-commit cache with gitleaks is impossible, as it contains all the secrets
+#       from the repositories included as hook. Building a list of secrets is not sustainable in
+#       the long run, as these will change regularly.
+
 name: 'pre-commit'
 on:  # yamllint disable-line rule:truthy
   pull_request:
@@ -43,12 +47,6 @@ env:
   # File that contains the pre-commit hooks to skip
   hook_skip_file: './.github/.pre-commit-skip-hooks'
 
-  # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
-  # yamllint disable rule:line-length
-  # renovate image dep:
-  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba'
-  # yamllint enable rule:line-length
-
 jobs:
   pre-commit:
     permissions:
@@ -62,6 +60,8 @@ jobs:
 
       - name: 'Checkout repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+        with:
+          persist-credentials: false
 
       - name: 'Download cache of the previous workflow run'
         uses: 'dawidd6/action-download-artifact@bf251b5aa9c2f7eeb574a96ee720e24f801b7c11' # v6
@@ -147,28 +147,6 @@ jobs:
             export SKIP="$(tr '\n' ',' < "${{ env.hook_skip_file }}")"
           fi
           pre-commit run --verbose --all-files --show-diff-on-failure
-
-      - name: 'Scan pre-commit cache directory to ensure it contains no secrets prior to uploading'
-        if: "github.event.inputs.repoCache != 'disabled'"
-        shell: 'bash'
-        run: |
-          # fail if:
-          # - a variable is unbound
-          # - any command fails
-          # - a command in a pipe fails
-          # - a command in a sub-shell fails
-          set -Eeuo pipefail
-
-          # enable debug if runner runs in debug
-          [[ "${{ runner.debug }}" -ne 1 ]] || {
-            echo "INFO: Enabling bash trace";
-            set -x;
-          };
-
-          docker run -v "${{ env.cache_dir }}:/scan" "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
-            echo "ERROR: Secret found, failing workflow";
-            exit 1;
-          };
 
       - name: 'Compress pre-commit cache to improve performance'
         if: "github.event.inputs.repoCache != 'disabled'"
