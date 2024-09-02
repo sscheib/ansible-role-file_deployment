@@ -400,18 +400,6 @@
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "ghcr.io/{{{depName}}}"
-    },
-    {
-      "description": "Pin digests for pre-commit",
-      "customType": "regex",
-      "fileMatch": [
-        "^\\.pre-commit-config\\.yaml$"
-      ],
-      "matchStrings": [
-        "repo:\\s+?['\"]https?:\\/\\/(?<hostname>[^\\/]+?)\\/(?<depName>[^\\s]+?)['\"]?\\n(?<indendation>\\s+?)rev:\\s+?['\"](?<currentValue>[^\\s'\"]+?)['\"]"
-      ],
-      "datasourceTemplate": "github-tags",
-      "autoReplaceStringTemplate": "repo: '{{{hostname}}}\\/{{{depName}}}'\n{{{indentation}}}rev: '{{#if newDigest}}{{{newDigest}}}' # {{{newValue}}}{{else}}{{{newValue}}}{{/if}}"
     }
   ]
 }
