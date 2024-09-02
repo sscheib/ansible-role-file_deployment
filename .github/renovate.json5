@@ -343,13 +343,13 @@
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
     {
-      "description": "Extract custom container image dependency definitions",
+      "description": "Extract custom container image dependency definitions either defined in YAML e.g. var: <image> or BASH, e.g. var=<image>",
       "customType": "regex",
       "fileMatch": [
         "^\\.github/workflows/.+?\\.ya?ml$"
       ],
       "matchStrings": [
-        "# renovate image dep:(?:\\s+?versioning=(?<versioning>[^\\s]+))?(?:\\s+?registryUrl=(?<registryUrl>[^\\s]+))?\\s+?[\\w_-]+:\\s+?['\"]?(?<depName>[^:]+):(?<currentValue>[^@\\s'\"]+)(?:@(?<currentDigest>[^\\s'\"]+))?"
+        "# renovate image dep:(?:\\s+?versioning=(?<versioning>[^\\s]+))?(?:\\s+?registryUrl=(?<registryUrl>[^\\s]+))?\\s+?[\\w_-]+(:?=|:\\s+?)['\"]?(?<depName>[^:]+):(?<currentValue>[^@\\s'\"]+)(?:@(?<currentDigest>[^\\s'\"]+))?"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
