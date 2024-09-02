@@ -30,15 +30,24 @@ permissions:
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
   cache_archive: 'pre-commit_cache.tar.gz'
-  # This is the dir renovate provides
+
+  # This is the dir pre-commit provides
   # If we set our own directory via cacheDir, we can run into permissions issues.
-  # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
-  # time gets faster, it also takes longer to upload the cache as it grows bigger.
+  # It is also possible to cache a higher level of the directory, but it has minimal benefit. While pre-commit
+  # execution time gets faster, it also takes longer to upload the cache as it grows bigger.
   cache_dir: '/tmp/.cache/pre-commit'
+
   # This can be manually changed to bust the cache if neccessary.
   cache_key: 'pre-commit-cache'
+
   # File that contains the pre-commit hooks to skip
   hook_skip_file: './.github/.pre-commit-skip-hooks'
+
+  # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
+  # yamllint disable rule:line-length
+  # renovate image dep:
+  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.18.4@sha256:75bdb2b2f4db213cde0b8295f13a88d6b333091bbfbf3012a4e083d00d31caba'
+  # yamllint enable rule:line-length
 
 jobs:
   pre-commit:
@@ -88,8 +97,8 @@ jobs:
           };
 
           # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
-          mkdir -p "${cache_dir}"
-          tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
+          mkdir -p "${{ env.cache_dir }}"
+          tar -xzf "cache-download/${{ env.cache_archive }}" -C "${{ env.cache_dir }}"
 
       - name: 'Install Python'
         uses: 'actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3' # v5.2.0
@@ -115,7 +124,7 @@ jobs:
 
           # renovate: datasource=pypi
           pip3 install pre-commit==3.8.0
-          mkdir -pv "${cache_dir}"
+          mkdir -pv "${{ env.cache_dir }}"
 
       - name: 'Run pre-commit'
         shell: 'bash'
@@ -133,11 +142,33 @@ jobs:
             set -x;
           };
 
-          export PRE_COMMIT_HOME="${cache_dir}"
-          if [[ -f "${hook_skip_file}" ]]; then
-            export SKIP="$(tr '\n' ',' < "${hook_skip_file}")"
+          export PRE_COMMIT_HOME="${{ env.cache_dir }}"
+          if [[ -f "${{ env.hook_skip_file }}" ]]; then
+            export SKIP="$(tr '\n' ',' < "${{ env.hook_skip_file }}")"
           fi
           pre-commit run --verbose --all-files --show-diff-on-failure
+
+      - name: 'Scan pre-commit cache directory to ensure it contains no secrets prior to uploading'
+        if: "github.event.inputs.repoCache != 'disabled'"
+        shell: 'bash'
+        run: |
+          # fail if:
+          # - a variable is unbound
+          # - any command fails
+          # - a command in a pipe fails
+          # - a command in a sub-shell fails
+          set -Eeuo pipefail
+
+          # enable debug if runner runs in debug
+          [[ "${{ runner.debug }}" -ne 1 ]] || {
+            echo "INFO: Enabling bash trace";
+            set -x;
+          };
+
+          docker run -v "${{ env.cache_dir }}:/scan" "${{ env.gitleaks-image }}" detect --source "/scan" --no-git || {
+            echo "ERROR: Secret found, failing workflow";
+            exit 1;
+          };
 
       - name: 'Compress pre-commit cache to improve performance'
         if: "github.event.inputs.repoCache != 'disabled'"
@@ -158,7 +189,7 @@ jobs:
 
           # The -C is important, as otherwise we end up extracting the files with
           # their full path, ultimately leading to a nested directory situation.
-          tar -czf "${cache_archive}" -C "${cache_dir}" .
+          tar -czf "${{ env.cache_archive }}" -C "${{ env.cache_dir }}" .
 
       - name: 'Upload compressed cache'
         uses: 'actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874' # v4.4.0
