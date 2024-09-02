@@ -28,8 +28,10 @@ concurrency:
 
 env:
   # Jekyll image to use
-  # yamllint disable-line rule:line-length
+  # yamllint disable rule:line-length
+  # renovate image dep:
   jekyll-image: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll:v24.9.0@sha256:ce1c6cf25d35c749176c1f9d2ee8dc0f45774f437d985954b468ac3e0df2c00d'
+  # yamllint enable rule:line-length
 
 jobs:
   build:
