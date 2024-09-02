@@ -47,6 +47,7 @@ jobs:
             github.com:443
             kics.io:443
             packages.wolfi.dev:443
+            pkg-containers.githubusercontent.com:443
             registry.npmjs.org:443
 
       - name: 'Checkout the repository'
