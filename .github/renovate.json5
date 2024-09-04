@@ -185,7 +185,7 @@
       },
       "versioning": "redhat",
       "rangeStrategy": "bump",
-      "groupName": "RHEL UBI molecule images"
+      "groupName": "RHEL UBI images"
     },
     {
       "description": "These collections should be retrieved from console.redhat.com",
