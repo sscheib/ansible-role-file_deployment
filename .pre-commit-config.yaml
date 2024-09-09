@@ -26,7 +26,7 @@ repos:
         additional_dependencies:
           # https://github.com/pre-commit/pre-commit/issues/1526
           # renovate: datasource=pypi
-          - 'ansible-core==2.16.10'
+          - 'ansible-core==2.16.11'
         always_run: true
         description: 'This hook runs ansible-lint.'
         entry: 'python3 -m ansiblelint -v --force-color'
