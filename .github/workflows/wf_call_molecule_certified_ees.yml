@@ -109,13 +109,13 @@ jobs:
           #
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.3-1@sha256:63aa5b5748b5d8da5ea7a187feb9d89dc64802572171f006e7115bf616d7182f'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.4-3@sha256:fb9eb2c6bd09a44f89dfe6a9cebdb7ce203004318899573606dc5d8653d8818b'
             cache_key_suffix: 'rhel8-2.17'
             # renovate yaml: datasource=pypi
             molecule: '24.9.0'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16.10-2@sha256:517f2464e614abe4f81b1afda2c9f49370b09f9f6ffbdb670d7a3bc7d3f34986'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16.11-3@sha256:e96cd824e2978be746f7e9e548b6fde35a0009d6edd134d557603b81e0d38ead'
             cache_key_suffix: 'rhel8-2.16'
             # renovate yaml: datasource=pypi
             molecule: '24.9.0'
@@ -143,7 +143,7 @@ jobs:
           #
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.17.3-2@sha256:7c61b114722b7f72a4f5be1c5774689b5f8b678b7ca037c1b73a77b43b7710af'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.17.4-4@sha256:cb504355e29f340470066156a0b03cc7af237d2bf8b04e6f56de6df830dab599'
             cache_key_suffix: 'rhel9-2.17'
             # renovate yaml: datasource=pypi
             molecule: '24.9.0'
@@ -151,7 +151,7 @@ jobs:
               - 'python-unversioned-command'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16.10-1@sha256:7a6a46565db188b875a13f8e1068cc37a9117548ccf6afe5e93b55ac4d808481'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16.11-4@sha256:52d4a17765949a61963921459517912d35807364ab68336af8f44e684554074e'
             cache_key_suffix: 'rhel9-2.16'
             # renovate yaml: datasource=pypi
             molecule: '24.9.0'
