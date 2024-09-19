@@ -300,7 +300,7 @@ jobs:
           retention-days: 5
 
       - name: 'Upload to code-scanning'
-        uses: 'github/codeql-action/upload-sarif@8214744c546c1e5c8f03dde8fab3a7353211988d' # v3.26.7
+        uses: 'github/codeql-action/upload-sarif@294a9d92911152fe08befb9ec03e240add280cb3' # v3.26.8
         with:
           sarif_file: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           category: 'Trivy-scan-test-image'
@@ -372,7 +372,7 @@ jobs:
 
       - name: 'Upload to code-scanning'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'github/codeql-action/upload-sarif@8214744c546c1e5c8f03dde8fab3a7353211988d' # v3.26.7
+        uses: 'github/codeql-action/upload-sarif@294a9d92911152fe08befb9ec03e240add280cb3' # v3.26.8
         with:
           sarif_file: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           category: 'Trivy-scan-final-image'
