@@ -42,13 +42,13 @@ platforms:
 
   - name: 'debian12'
     # yamllint disable-line rule:line-length
-    image: 'docker.io/debian:12.7@sha256:b8084b1a576c5504a031936e1132574f4ce1d6cc7130bbcc25a28f074539ae6b'
+    image: 'docker.io/debian:12.7@sha256:7b737b282634c66c22cbe56c4bf832f2def93bd447c2eb5cea81d53dcb6d3348'
     groups:
       - 'apt'
 
   - name: 'debian11'
     # yamllint disable-line rule:line-length
-    image: 'docker.io/debian:11.11@sha256:8ccc486c29a3ad02ad5af7f1156e2152dff3ba5634eec9be375269ef123457d8'
+    image: 'docker.io/debian:11.11@sha256:6d2123c04bcd1be0862ce848bce8f2dbd4579ec507f58d6b98bd70c3e5987e24'
     groups:
       - 'apt'
 
