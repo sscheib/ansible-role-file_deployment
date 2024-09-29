@@ -174,7 +174,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/rhysd/actionlint'
-    rev: 'v1.7.2'
+    rev: 'v1.7.3'
     hooks:
       - id: 'actionlint'
         verbose: true
