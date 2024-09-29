@@ -288,7 +288,7 @@ jobs:
         with:
           # yamllint disable-line rule:line-length
           # renovate self-update: datasource=docker depName=renovatebot/renovate registryUrl=https://ghcr.io
-          renovate-version: '38.93.1'
+          renovate-version: '38.101.1'
           configurationFile: '.github/renovate_global.js'
           token: '${{ secrets.RENOVATE_TOKEN }}'
         env:
