@@ -1,5 +1,12 @@
 # Change log
 
+## [1.4.7](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.6...v1.4.7) (2024-09-29)
+
+
+### Reverts
+
+* Revert "ci: Enforcing sentence-case" ([69d665e](https://github.com/sscheib/ansible-role-file_deployment/commit/69d665e5f41e7c71cca5949d5bb458de4469835c))
+
 ## [1.4.6](https://github.com/sscheib/ansible-role-file_deployment/compare/v1.4.5...v1.4.6) (2024-08-06)
 
 
