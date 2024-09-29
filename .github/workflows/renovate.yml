@@ -69,7 +69,7 @@ env:
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     permissions:
       contents: 'read'
     outputs:
@@ -113,7 +113,7 @@ jobs:
     uses: './.github/workflows/renovate_configuration_check.yml'
 
   check-user-permissions:
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     permissions:
       contents: 'read'
     needs: 'call-renovate-configuration-workflow'
@@ -159,7 +159,7 @@ jobs:
           echo "Job originally triggered by ${{ github.actor }}"
 
   renovate:
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     needs: 'check-user-permissions'
     if: "needs.check-user-permissions.outputs.require-result == 'true'"
     permissions:

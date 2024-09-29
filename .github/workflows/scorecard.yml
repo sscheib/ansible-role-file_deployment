@@ -23,7 +23,7 @@ permissions: 'read-all'
 jobs:
   check-secrets:
     name: 'Check if required secrets are available'
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     permissions:
       contents: 'read'
     outputs:
@@ -58,7 +58,7 @@ jobs:
     name: 'Scorecard analysis'
     if: "needs.check-secrets.outputs.secrets-defined == 'true'"
     needs: 'check-secrets'
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     permissions:
       # Needed to upload the results to code-scanning dashboard.
       security-events: 'write'

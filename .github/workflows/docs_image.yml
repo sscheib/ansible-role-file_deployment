@@ -38,7 +38,7 @@ env:
 
 jobs:
   check-user-permissions:
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     permissions:
       contents: 'read'
     outputs:
@@ -85,7 +85,7 @@ jobs:
     name: 'Prepare variables for building the container image'
     if: "needs.check-user-permissions.outputs.require-result == 'true'"
     needs: 'check-user-permissions'
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     container:
       # yamllint disable-line rule:line-length
       image: 'registry.access.redhat.com/ubi9/podman:9.4-14.1725850211@sha256:cc52c1745084660ecb1e2c4f4728b233291a72503ceed35ca57f4af7c60691a4'
@@ -182,7 +182,7 @@ jobs:
     needs:
       - 'check-user-permissions'
       - 'prepare-vars'
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     permissions:
       attestations: 'write'
       id-token: 'write'
