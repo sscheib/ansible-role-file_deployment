@@ -263,7 +263,10 @@
       "matchDatasources": [
         "pypi"
       ],
-      "allowedVersions": "<2.17"
+      "allowedVersions": "<2.17",
+      "vulnerabilityAlerts": {
+        "enabled": false
+      }
     },
     {
       "matchDepNames": [
