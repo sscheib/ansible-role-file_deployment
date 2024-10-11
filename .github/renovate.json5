@@ -238,7 +238,8 @@
       "matchDatasources": [
         "python-version"
       ],
-      "minimumReleaseAge": "21 days"
+      "minimumReleaseAge": "21 days",
+      "allowedVersions": "<3.13"
     },
     {
       "description": "Enable auto-merge specifically for selected dependencies as they are versioned in the 0.x version range",
@@ -263,10 +264,7 @@
       "matchDatasources": [
         "pypi"
       ],
-      "allowedVersions": "<2.17",
-      "vulnerabilityAlerts": {
-        "enabled": false
-      }
+      "allowedVersions": "<2.17"
     },
     {
       "matchDepNames": [
