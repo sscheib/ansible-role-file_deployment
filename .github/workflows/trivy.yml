@@ -41,6 +41,7 @@ jobs:
             api.github.com:443
             ghcr.io:443
             github.com:443
+            objects.githubusercontent.com:443
             pkg-containers.githubusercontent.com:443
             public.ecr.aws:443
 
@@ -51,8 +52,6 @@ jobs:
 
       - name: 'Scan repository with Trivy'
         uses: 'aquasecurity/trivy-action@5681af892cd0f4997658e2bacc62bd0a894cf564' # 0.27.0
-        env:
-          TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
         with:
           scan-type: 'fs'
           format: 'sarif'
