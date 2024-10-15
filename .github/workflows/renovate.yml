@@ -63,7 +63,7 @@ env:
   # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
   # yamllint disable rule:line-length
   # renovate image dep:
-  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.20.1@sha256:a83ee37c5eb2523689b15af8c645424c7eb1730541037e8ea805637d91372e85'
+  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.21.0@sha256:5a6d3338fe0e85fb63c079e0880dc10ee0bc6be54b75a2cf089964fbba7e9bd6'
   # yamllint enable rule:line-length
 
 jobs:
