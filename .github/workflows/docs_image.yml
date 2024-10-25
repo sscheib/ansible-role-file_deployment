@@ -262,15 +262,11 @@ jobs:
           tags: '${{ needs.prepare-vars.outputs.image-name }}:test'
 
       - name: 'Scan ${{ needs.prepare-vars.outputs.image-name }}:test with Trivy'
-<<<<<<< HEAD
-        uses: 'aquasecurity/trivy-action@915b19bbe73b92a6cf82a1bc12b087c9a19a5fe2' # 0.28.0
-=======
         uses: 'aquasecurity/trivy-action@5681af892cd0f4997658e2bacc62bd0a894cf564' # 0.27.0
         env:
           TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db'
           TRIVY_JAVA_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-java-db'
           TRIVY_CHECKS_BUNDLE_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-checks'
->>>>>>> 56565bd (ci: Pull Trivy databases from ecr.aws)
         with:
           format: 'sarif'
           image-ref: '${{ needs.prepare-vars.outputs.image-name }}:test'
