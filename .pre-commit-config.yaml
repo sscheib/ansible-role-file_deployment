@@ -106,7 +106,7 @@ repos:
         verbose: true
 
   - repo: 'https://github.com/tcort/markdown-link-check'
-    rev: 'v3.13.0'
+    rev: 'v3.13.5'
     hooks:
       - id: 'markdown-link-check'
         stages:
