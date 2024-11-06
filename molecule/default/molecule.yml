@@ -26,7 +26,7 @@ platforms:
 
   - name: 'rhel8-ubi'
     # yamllint disable-line rule:line-length
-    image: 'registry.access.redhat.com/ubi8/ubi:8.10-1088@sha256:d85bc4ef93c70be9396f7079262da29ae1f2b69eeb999aae57a5ef8301576dca'
+    image: 'registry.access.redhat.com/ubi8/ubi:8.10-1132@sha256:ea3c2237c17bd2cdca0c3fbce95d9bc35b1ad4410a8ac9603762c5a46f83529e'
     groups:
       - 'dnf'
     skip_versions:
