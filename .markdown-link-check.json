@@ -19,6 +19,10 @@
     {
       "___comment___": "scorecard.dev *always* returns 0",
       "pattern": "^https://scorecard.dev"
+    },
+    {
+      "___comment___": "ignore mails",
+      "pattern": "^mailto:[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
     }
   ],
   "timeout": "120s",
