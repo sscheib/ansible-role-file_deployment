@@ -1,7 +1,9 @@
 ---
 name: 'commitlint'
 on:  # yamllint disable-line rule:truthy
-  push: {}
+  push:
+    branches-ignore:
+      - 'main'
   pull_request: {}
 
 permissions:
