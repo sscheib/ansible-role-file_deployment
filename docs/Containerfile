@@ -1,5 +1,5 @@
 # kics-scan disable=6b376af8-cfe8-49ab-a08d-f32de23661a4 - WORKDIR Path Not Absolute
-FROM docker.io/ruby:3.3.6-alpine3.20@sha256:b90c1eeedf08f48988eee07c7c813286c7bce45be65c5835aa2aac6af84e7f58
+FROM docker.io/ruby:3.3.6-alpine3.20@sha256:caeab43b356463e63f87af54a03de1ae4687b36da708e6d37025c557ade450f8
 
 #
 # build arguments
