@@ -4,33 +4,58 @@
   gather_facts: false
 
   tasks:
-    - name: 'Update package lists'
-      ansible.builtin.raw: |
-        apt-get update
-      changed_when: true
+    - name: 'Include tasks to filter incompatible platforms'
+      ansible.builtin.include_tasks:
+        file: 'tasks/filter_incompatible_platforms.yml'
+      run_once: true
 
-    - name: 'Install Python'
-      ansible.builtin.raw: |
-        apt-get install -y python3
-      changed_when: true
+    - name: 'Block: Handle installation of python3 on Debian'
+      when: >-
+        inventory_hostname in molecule_yml.platforms |
+        map(attribute='name') |
+        ansible.builtin.flatten
+      block:
+        - name: 'Update package lists'
+          ansible.builtin.raw: |
+            apt-get update
+          changed_when: true
+
+        - name: 'Install Python'
+          ansible.builtin.raw: |
+            apt-get install -y python3
+          changed_when: true
 
 - name: 'Bootstrap Python on OpenWrt'
   hosts: 'opkg'
   gather_facts: false
-  vars:
-    install_full_python: true
-  roles:
-    - role: 'sscheib.openwrt_bootstrap'
-
-  pre_tasks:
-    - name: 'Create opkg lock file directory'
-      ansible.builtin.raw: |
-        mkdir -p /var/lock
-      changed_when: true
-
   tasks:
-    - name: 'Install BASH and shadow-su'
-      ansible.builtin.raw: |
-        opkg install bash shadow-su
-      changed_when: true
+    - name: 'Include tasks to filter incompatible platforms'
+      ansible.builtin.include_tasks:
+        file: 'tasks/filter_incompatible_platforms.yml'
+      run_once: true
+
+    - name: 'Block: Handle installation of python3 on Debian'
+      when: >-
+        inventory_hostname in molecule_yml.platforms |
+        map(attribute='name') |
+        ansible.builtin.flatten
+      block:
+
+        - name: 'Create opkg lock file directory'
+          ansible.builtin.raw: |
+            mkdir -p /var/lock
+          changed_when: true
+
+        - name: 'Include role to bootstrap Python'
+          ansible.builtin.include_role:
+            name: 'sscheib.openwrt_bootstrap'
+          vars:
+            install_full_python: true
+
+        - name: 'Install BASH and shadow-su'
+          ansible.builtin.package:
+            name:
+              - 'bash'
+              - 'shadow-su'
+            state: 'present'
 ...

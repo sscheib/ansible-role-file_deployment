@@ -3,31 +3,10 @@
   hosts: 'localhost'
   gather_facts: false
   tasks:
-
-    - name: 'Filter out platforms that are not compatible with the Ansible Core version being used'
-      ansible.builtin.set_fact:
-        molecule_yml: >-
-          {{
-            molecule_yml | ansible.builtin.combine(
-              {
-                'platforms':
-                  (
-                    molecule_yml.platforms |
-                    selectattr('skip_versions', 'defined') |
-                    length > 0
-                  ) | ansible.builtin.ternary(
-                    molecule_yml.platforms |
-                    selectattr('skip_versions', 'defined') |
-                    rejectattr('skip_versions', 'contains', ansible_version.major ~ '.' ~ ansible_version.minor)
-                    +
-                    molecule_yml.platforms |
-                    selectattr('skip_versions', 'undefined'),
-                    molecule_yml.platforms
-                  )
-              },
-              list_merge='replace'
-            )
-          }}
+    - name: 'Include tasks to filter incompatible platforms'
+      ansible.builtin.include_tasks:
+        file: 'tasks/filter_incompatible_platforms.yml'
+      run_once: true
 
     - name: 'Set fact: Disable IPv6 via sysctl'
       ansible.builtin.set_fact:
