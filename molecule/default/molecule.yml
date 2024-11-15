@@ -30,6 +30,7 @@ platforms:
     groups:
       - 'dnf'
     skip_versions:
+      - '2.18'
       - '2.17'
 
   - name: 'rhel7-ubi'
@@ -38,6 +39,7 @@ platforms:
     groups:
       - 'yum'
     skip_versions:
+      - '2.18'
       - '2.17'
 
   - name: 'debian12'
