@@ -1,0 +1,27 @@
+---
+- name: >-
+    filter_incompatible_platforms | Filter platforms that are not compatible with the Ansible Core version being used
+  ansible.builtin.set_fact:
+    molecule_yml: >-
+      {{
+        molecule_yml | ansible.builtin.combine(
+          {
+            'platforms':
+              (
+                molecule_yml.platforms |
+                selectattr('skip_versions', 'defined') |
+                length > 0
+              ) | ansible.builtin.ternary(
+                molecule_yml.platforms |
+                selectattr('skip_versions', 'defined') |
+                rejectattr('skip_versions', 'contains', ansible_version.major ~ '.' ~ ansible_version.minor)
+                +
+                molecule_yml.platforms |
+                selectattr('skip_versions', 'undefined'),
+                molecule_yml.platforms
+              )
+          },
+          list_merge='replace'
+        )
+      }}
+...

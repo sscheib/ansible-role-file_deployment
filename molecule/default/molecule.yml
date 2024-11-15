@@ -30,6 +30,7 @@ platforms:
     groups:
       - 'dnf'
     skip_versions:
+      - '2.18'
       - '2.17'
 
   - name: 'rhel7-ubi'
@@ -38,6 +39,7 @@ platforms:
     groups:
       - 'yum'
     skip_versions:
+      - '2.18'
       - '2.17'
 
   - name: 'debian12'
@@ -57,6 +59,8 @@ platforms:
     image: 'docker.io/debian:10.13@sha256:58ce6f1271ae1c8a2006ff7d3e54e9874d839f573d8009c20154ad0f2fb0a225'
     groups:
       - 'apt'
+    skip_versions:
+      - '2.18'
 
   - name: 'openwrt23.05'
     # yamllint disable-line rule:line-length
