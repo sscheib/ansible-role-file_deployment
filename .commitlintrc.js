@@ -1,3 +1,4 @@
+// jshint esversion: 6
 module.exports = {
     parserPreset: 'conventional-changelog-conventionalcommits',
     rules: {
@@ -6,12 +7,12 @@ module.exports = {
         'footer-leading-blank': [1, 'always'],
         'footer-max-line-length': [2, 'always', 100],
         'header-max-length': [2, 'always', 100],
+        'signed-off-and-coauthored': [2, 'always'],
         'subject-case': [
             2,
             'always',
             ['sentence-case'],
         ],
-        'signed-off-by': [2, 'always', 'Signed-off-by:'],
         'subject-empty': [2, 'never'],
         'subject-full-stop': [2, 'never', '.'],
         'type-case': [2, 'always', 'lower-case'],
@@ -35,6 +36,63 @@ module.exports = {
             ],
         ],
     },
+    plugins: [
+      {
+	rules: {
+	  'signed-off-and-coauthored': ({ body }) => {
+	    const lines = body.trim().split('\n');
+	    const signOffPattern = /^Signed-off-by: .+ <.+>$/;
+	    const coAuthorPattern = /^Co-authored-by: .+ <.+>$/;
+
+	    let signOffLines = [];
+	    let coAuthorsBeforeSignOff = false;
+
+	    // scan the commit message lines
+	    for (let i = 0; i < lines.length; i++) {
+	      const line = lines[i];
+
+	      if (signOffPattern.test(line)) {
+		signOffLines.push(i); // collect indexes of Signed-off-by lines
+	      } else if (coAuthorPattern.test(line)) {
+		// check if Co-authored-by lines appear before any Signed-off-by
+		if (signOffLines.length === 0) {
+		  coAuthorsBeforeSignOff = true;
+		}
+	      }
+	    }
+
+	    // ensure at least one Signed-off-by is present
+	    if (signOffLines.length === 0) {
+	      return [false, 'Commit message must include at least one valid "Signed-off-by" footer.'];
+	    }
+
+	    // ensure no Co-authored-by lines appear before Signed-off-by
+	    if (coAuthorsBeforeSignOff) {
+	      return [
+		false,
+		'"Co-authored-by" lines must appear after the last "Signed-off-by" footer.',
+	      ];
+	    }
+
+	    // ensure all lines after the last Signed-off-by are Co-authored-by
+	    const lastSignOffIndex = signOffLines[signOffLines.length - 1];
+	    for (let i = lastSignOffIndex + 1; i < lines.length; i++) {
+	      if (!coAuthorPattern.test(lines[i])) {
+		return [
+		  false,
+		  'All lines after the last "Signed-off-by" must be valid "Co-authored-by" footers.',
+		];
+	      }
+	    }
+
+	    return [
+	      true,
+	      'Commit message has valid "Signed-off-by" footers and correctly placed "Co-authored-by" lines.',
+	    ];
+	  },
+	},
+      },
+    ],
     prompt: {
         questions: {
             type: {
