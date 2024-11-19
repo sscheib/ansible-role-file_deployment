@@ -52,7 +52,7 @@ jobs:
           # renovate: datasource=npm
           npm install conventional-changelog-conventionalcommits@8.0.0
           # renovate: datasource=npm
-          npm install commitlint@19.5.0
+          npm install commitlint@19.6.0
           # renovate: datasource=npm
           npm install commitlint-plugin-selective-scope@1.0.1
 
