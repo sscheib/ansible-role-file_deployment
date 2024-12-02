@@ -180,7 +180,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/sirosen/texthooks'
-    rev: '0.6.7'
+    rev: '0.6.8'
     hooks:
       - id: 'alphabetize-codeowners'
         verbose: true
