@@ -152,9 +152,9 @@ jobs:
             set -x;
           };
 
-          if command dnf 2>&1 > /dev/null; then
+          if command -v dnf 2>&1 > /dev/null; then
             dnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
-          elif command microdnf 2>&1 > /dev/null; then
+          elif command -v microdnf 2>&1 > /dev/null; then
             microdnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
           else
             echo "ERROR: Neither dnf nor microdnf found!"
