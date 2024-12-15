@@ -284,11 +284,11 @@ jobs:
           echo RENOVATE_AUTOMATION_HUB_AUTH_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
 
       - name: 'Run Renovate'
-        uses: 'renovatebot/github-action@936628dfbff213ab2eb95033c5e123cfcaf09ebb' # v41.0.5
+        uses: 'renovatebot/github-action@e3a862510f27d57a380efb11f0b52ad7e8dbf213' # v41.0.6
         with:
           # yamllint disable-line rule:line-length
           # renovate self-update: datasource=docker depName=renovatebot/renovate registryUrl=https://ghcr.io
-          renovate-version: '39.57.4'
+          renovate-version: '39.69.2'
           configurationFile: '.github/renovate_global.js'
           token: '${{ secrets.RENOVATE_TOKEN }}'
         env:
