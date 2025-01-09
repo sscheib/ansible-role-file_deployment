@@ -43,7 +43,22 @@ GEM
       fiber-storage
     fiber-storage (1.0.0)
     forwardable-extended (2.6.0)
-    google-protobuf (4.29.2)
+    google-protobuf (4.29.3)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-aarch64-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-x86-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-x86_64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.29.3-x86_64-linux)
       bigdecimal
       rake (>= 13)
     hashery (2.1.2)
@@ -88,7 +103,7 @@ GEM
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     json (2.9.1)
-    just-the-docs (0.10.0)
+    just-the-docs (0.10.1)
       jekyll (>= 3.8.5)
       jekyll-include-cache
       jekyll-seo-tag (>= 2.0)
@@ -202,7 +217,7 @@ DEPENDENCIES
   html-proofer (= 5.0.9)
   jekyll-github-metadata (= 2.16.1)
   jekyll-include-cache (= 0.2.1)
-  just-the-docs (= 0.10.0)
+  just-the-docs (= 0.10.1)
 
 BUNDLED WITH
    2.5.9
