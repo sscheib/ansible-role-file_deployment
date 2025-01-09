@@ -142,4 +142,9 @@ compress_html:
   startings: []
   blanklines: false
   profile: false
+
+# avoid Deprecation Warning: darken() is deprecated. Suggestions: in just-the-docs
+# see https://github.com/just-the-docs/just-the-docs/issues/1541
+sass:
+  quiet_deps: true
 ...
