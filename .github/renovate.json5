@@ -69,11 +69,22 @@
       "automerge": true
     },
     {
+      "description": "Group docs image dependencies to avoid breaking dependencies during update",
       "matchManagers": [
         "bundler"
       ],
       "rangeStrategy": "update-lockfile",
-      "groupName": "Bundler dependencies"
+      "groupName": "Docs image dependencies"
+    },
+    {
+      "description": "Group docs image dependencies to avoid breaking dependencies during update",
+      "matchFileNames": [
+        "docs/Containerfile"
+      ],
+      "groupName": "Docs image dependencies",
+      "schedule": [
+	"* 18-22 * * 7"
+      ]
     },
     {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
