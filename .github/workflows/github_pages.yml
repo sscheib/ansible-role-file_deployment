@@ -77,6 +77,9 @@ jobs:
           mkdir "./docs/_site" && \
           sudo chown -R 1000:1000 "./docs/_site"
 
+          # ensure Gemfile and Gemfile.lock have the correct permissions
+          sudo chown 1000:1000 "./docs/Gemfile" "./docs/Gemfile.lock"
+
           # build documentation
           docker run --rm --volume "./docs:/srv/jekyll" "${{ env.jekyll-image }}" \
             bundler exec jekyll build --disable-disk-cache
