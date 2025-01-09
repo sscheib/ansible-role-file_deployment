@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
 gem "just-the-docs", "0.10.1"
+gem "csv", "3.3.2"
+gem "base64", "0.2.0"
 gem "jekyll-github-metadata", "2.16.1"
 gem "jekyll-include-cache", "0.2.1", group: :jekyll_plugins
 gem "html-proofer", "5.0.9", :group => :development
