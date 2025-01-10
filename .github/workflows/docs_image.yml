@@ -298,7 +298,7 @@ jobs:
           };
 
       - name: 'Upload artifact'
-        uses: 'actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b' # v4.5.0
+        uses: 'actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08' # v4.6.0
         with:
           name: >-
             Trivy scan test build of ${{ needs.prepare-vars.outputs.repository-name }}-jekyll
@@ -375,7 +375,7 @@ jobs:
 
       - name: 'Upload artifact'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b' # v4.5.0
+        uses: 'actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08' # v4.6.0
         with:
           name: 'Trivy scan of ${{ needs.prepare-vars.outputs.next-version }}'
           path: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
