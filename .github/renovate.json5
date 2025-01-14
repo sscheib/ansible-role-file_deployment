@@ -81,10 +81,21 @@
       "matchFileNames": [
         "docs/Containerfile"
       ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "lockFileMaintenance",
+        "bump",
+        "rollback",
+        "replacement"
+      ],
       "groupName": "Docs image dependencies",
       "schedule": [
 	"* 18-22 * * 7"
-      ]
+      ],
+      "automerge": true
     },
     {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
