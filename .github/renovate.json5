@@ -98,6 +98,26 @@
       "automerge": true
     },
     {
+      "description": "Wait two weeks for Ruby updates as the Ruby Docker image is slow in pushing all architectures and allow auto-merge",
+      "matchFileNames": [
+        "docs/Containerfile"
+      ],
+      "matchDepNames": [
+        "docker.io/ruby"
+      ],
+      "minimumReleaseAge": "14 days",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "bump",
+        "rollback",
+        "replacement"
+      ],
+      "automerge": true
+    },
+    {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
       "matchFileNames": [
         ".github/workflows/wf_call_molecule_certified_ees.yaml",
