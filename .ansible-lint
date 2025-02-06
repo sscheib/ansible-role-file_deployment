@@ -29,4 +29,12 @@ mock_modules:
 mock_roles:
   - 'sscheib.file_deployment'
   - 'sscheib.openwrt_bootstrap'
+
+# Ansible Core 2.18 introduced .ansible for caching and mocked modules will
+# end up being examined by ansible-lint causing load-failures (expected)
+# to work around this, .ansible/ needs to be excluded from being processed
+# by ansible-lint
+# see: https://github.com/ansible/ansible-lint/issues/4503
+exclude_paths:
+  - '.ansible/'
 ...
