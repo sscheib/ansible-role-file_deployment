@@ -105,7 +105,7 @@
       "matchDepNames": [
         "docker.io/ruby"
       ],
-      "minimumReleaseAge": "14 days",
+      "minimumReleaseAge": "5 days",
       "matchUpdateTypes": [
         "minor",
         "patch",
