@@ -88,8 +88,8 @@
         "pinDigest",
         "lockFileMaintenance",
         "bump",
-        "rollback",
-        "replacement"
+        "replacement",
+        "digest"
       ],
       "groupName": "Docs image dependencies",
       "schedule": [
@@ -98,7 +98,7 @@
       "automerge": true
     },
     {
-      "description": "Wait two weeks for Ruby updates as the Ruby Docker image is slow in pushing all architectures and allow auto-merge",
+      "description": "Wait 5 days for Ruby updates as the Ruby Docker image is slow in pushing all architectures and allow auto-merge",
       "matchFileNames": [
         "docs/Containerfile"
       ],
@@ -113,7 +113,8 @@
         "pinDigest",
         "bump",
         "rollback",
-        "replacement"
+        "replacement",
+        "digest"
       ],
       "automerge": true
     },
