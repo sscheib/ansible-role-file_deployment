@@ -329,7 +329,7 @@ jobs:
 
       - name: 'Generate artifact attestation'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'actions/attest-build-provenance@f9eaf234fc1c2e333c1eca18177db0f44fa6ba52' # v2.2.1
+        uses: 'actions/attest-build-provenance@bd77c077858b8d561b7a36cbe48ef4cc642ca39d' # v2.2.2
         with:
           subject-name: '${{ needs.prepare-vars.outputs.image-name }}'
           subject-digest: '${{ steps.build-push.outputs.digest }}'
