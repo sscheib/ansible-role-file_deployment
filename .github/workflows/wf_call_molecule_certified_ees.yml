@@ -112,19 +112,19 @@ jobs:
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.18.4-1@sha256:54910674fa0e9b317c69c138178b7d8176b47f58caf4dc6a0ef7517ddd11b929'
             cache_key_suffix: 'rhel8-2.18'
             # renovate yaml: datasource=pypi
-            molecule: '25.3.1'
+            molecule: '25.4.0'
 
           # yamllint disable-line rule:line-length
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.10-1@sha256:751f60cd2ed7e06d1458c6d41ef46bfa96193efc27708ede6676f891cd355be8'
             cache_key_suffix: 'rhel8-2.17'
             # renovate yaml: datasource=pypi
-            molecule: '25.3.1'
+            molecule: '25.4.0'
 
           # yamllint disable-line rule:line-length
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16.14-13@sha256:b6bcdf6e6475371b29aae07a80c8b64e636c580ad95489e7e2015f0cb92b2778'
             cache_key_suffix: 'rhel8-2.16'
             # renovate yaml: datasource=pypi
-            molecule: '25.3.1'
+            molecule: '25.4.0'
 
           # yamllint disable-line rule:line-length
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15.13-15@sha256:270089770fc10643e99995c66a1dacd88695239078f147e9dc30a7956f565806'
@@ -152,7 +152,7 @@ jobs:
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18.4-2@sha256:d3050b5ff3ba58b0a489dd15399841921dfabd44e1a47b1908f531660ee185e6'
             cache_key_suffix: 'rhel9-2.18'
             # renovate yaml: datasource=pypi
-            molecule: '25.3.1'
+            molecule: '25.4.0'
             additional_packages:
               - 'python-unversioned-command'
 
@@ -160,7 +160,7 @@ jobs:
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.17.10-2@sha256:1ac0c87d10057404b8e60efffb52e0f2fa7054774dbbb83e5468406698c2cbf2'
             cache_key_suffix: 'rhel9-2.17'
             # renovate yaml: datasource=pypi
-            molecule: '25.3.1'
+            molecule: '25.4.0'
             additional_packages:
               - 'python-unversioned-command'
 
@@ -168,7 +168,7 @@ jobs:
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16.14-14@sha256:d6452ee0d8b9f029197f0399b59b1271c6701507430dd5209307e29269ceb15e'
             cache_key_suffix: 'rhel9-2.16'
             # renovate yaml: datasource=pypi
-            molecule: '25.3.1'
+            molecule: '25.4.0'
             additional_packages:
               - 'python-unversioned-command'
 
