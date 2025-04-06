@@ -67,6 +67,6 @@ jobs:
           };
 
           # renovate: datasource=npm
-          npm install renovate@39.222.0
+          npm install renovate@39.233.5
           npx --yes --package renovate -- renovate-config-validator --strict || exit 1
 ...
