@@ -154,7 +154,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/Checkmarx/kics'
-    rev: 'v2.1.6'
+    rev: 'v2.1.7'
     hooks:
       - id: 'kics-scan'
         verbose: true
