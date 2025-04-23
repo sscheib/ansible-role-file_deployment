@@ -109,37 +109,37 @@ jobs:
           #
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.18.4-1@sha256:54910674fa0e9b317c69c138178b7d8176b47f58caf4dc6a0ef7517ddd11b929'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.18.5-2@sha256:0a2120a56566e378c83acbd300b31f1d4dbc0842571a5990b609d8d3db609c6e'
             cache_key_suffix: 'rhel8-2.18'
             # renovate yaml: datasource=pypi
             molecule: '25.4.0'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.10-1@sha256:751f60cd2ed7e06d1458c6d41ef46bfa96193efc27708ede6676f891cd355be8'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.17.11-1@sha256:5e1c2d07b8116659ddeefea10e417f3e29db7441725eec7938282f5c74e8d7f0'
             cache_key_suffix: 'rhel8-2.17'
             # renovate yaml: datasource=pypi
             molecule: '25.4.0'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16.14-13@sha256:b6bcdf6e6475371b29aae07a80c8b64e636c580ad95489e7e2015f0cb92b2778'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16.14-17@sha256:3c6cf54069e2e3bef37f8bb94002929c77e43e25032eb08f953a9a73ed34be32'
             cache_key_suffix: 'rhel8-2.16'
             # renovate yaml: datasource=pypi
             molecule: '25.4.0'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15.13-15@sha256:270089770fc10643e99995c66a1dacd88695239078f147e9dc30a7956f565806'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15.13-20@sha256:0ea7f051ee93c6d15be52d89ec63aa682821fc83f6769eb843d5cb61ac15a4b3'
             cache_key_suffix: 'rhel8-2.15'
             # renovate yaml: datasource=pypi
             molecule: '6.0.3'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14.13-29@sha256:7556fd007fd4337dc179cd4496a5dd513faacf1a7cd570c7e20516b104fb689a'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14.13-31@sha256:8b89139ff9f1088ca34d8172f05e24fa2f833936bfae1d23b6015cb676b5cd42'
             cache_key_suffix: 'rhel8-2.14'
             # renovate yaml: datasource=pypi
             molecule: '6.0.3'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.13.10-42@sha256:0a11f9e39e61dfcaeec919579c24fd7db921b0e615c0cb755af867d8a43588bb'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.13.10-44@sha256:3669de0002443d289f517837acfd33b13090046dae986180d27026cba4d09304'
             cache_key_suffix: 'rhel8-2.13'
             # renovate yaml: datasource=pypi
             molecule: '6.0.3'
@@ -149,7 +149,7 @@ jobs:
           #
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18.4-2@sha256:d3050b5ff3ba58b0a489dd15399841921dfabd44e1a47b1908f531660ee185e6'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18.5-1@sha256:ac0cc30917dc056efcc99d505b215a16d595d49e9112f9b4c985dcc0095dc011'
             cache_key_suffix: 'rhel9-2.18'
             # renovate yaml: datasource=pypi
             molecule: '25.4.0'
@@ -157,7 +157,7 @@ jobs:
               - 'python-unversioned-command'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.17.10-2@sha256:1ac0c87d10057404b8e60efffb52e0f2fa7054774dbbb83e5468406698c2cbf2'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.17.11-2@sha256:85a695f29b184ef1640690c1519b2941aea0500db7d829f3c6545ae68175580e'
             cache_key_suffix: 'rhel9-2.17'
             # renovate yaml: datasource=pypi
             molecule: '25.4.0'
@@ -165,7 +165,7 @@ jobs:
               - 'python-unversioned-command'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16.14-14@sha256:d6452ee0d8b9f029197f0399b59b1271c6701507430dd5209307e29269ceb15e'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16.14-18@sha256:48717970e30b696929deba4dbf407453a4a94b1b0e0e846674d5e33f0cc06590'
             cache_key_suffix: 'rhel9-2.16'
             # renovate yaml: datasource=pypi
             molecule: '25.4.0'
@@ -173,7 +173,7 @@ jobs:
               - 'python-unversioned-command'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.15.13-16@sha256:38017ade9ac5dd0cdd592bcaf337b67fbd16e1164a7c8a5d484851c504afb91c'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.15.13-19@sha256:582a80ea8aece2cbf8e2f40804676da94ef301dcf129b919429667f5e902836c'
             cache_key_suffix: 'rhel9-2.15'
             # renovate yaml: datasource=pypi
             molecule: '6.0.3'
