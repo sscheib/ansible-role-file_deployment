@@ -89,7 +89,7 @@ jobs:
           #
 
           # yamllint disable-line rule:line-length
-          - image: 'ghcr.io/ansible-community/community-ee-base:2.18.4-1@sha256:602efcf8b18eb9cdab2b9642b51e6f21f09f33699b5f077331f925bc9ff16587'
+          - image: 'ghcr.io/ansible-community/community-ee-base:2.18.5-1@sha256:726ebf4fcb2951241195fa2e6908c8a0a9d0c61433375ab118770c33da3e7ac0'
             # renovate yaml: datasource=pypi
             molecule: '25.4.0'
             configure_podman: true

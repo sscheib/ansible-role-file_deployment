@@ -133,12 +133,12 @@ which prevents adding it to the tested scenarios, as all `EE` versions should be
 
 | Operating system control node | Operating system managed node | Ansible Core Version | Automation Execution Environment name                 |
 | :---------------------------- | :---------------------------- | :------------------- | :---------------------------------------------------- |
-| Fedora 41                     | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.4-1`        |
-| Fedora 41                     | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.4-1`        |
-| Fedora 41                     | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.4-1`        |
-| Fedora 41                     | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.4-1`        |
-| Fedora 41                     | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.4-1`        |
-| Fedora 41                     | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.4-1`        |
+| Fedora 41                     | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.5-1`        |
+| Fedora 41                     | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.5-1`        |
+| Fedora 41                     | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.5-1`        |
+| Fedora 41                     | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.5-1`        |
+| Fedora 41                     | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.5-1`        |
+| Fedora 41                     | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible-community/community-ee-base:2.18.5-1`        |
 | Fedora 40                     | RHEL 9 (UBI)                  | Ansible Core 2.17    | `ansible-community/community-ee-base:2.17.7-1`        |
 | Fedora 40                     | Debian 12 (Bookworm)          | Ansible Core 2.17    | `ansible-community/community-ee-base:2.17.7-1`        |
 | Fedora 40                     | Debian 11 (Bullseye)          | Ansible Core 2.17    | `ansible-community/community-ee-base:2.17.7-1`        |
