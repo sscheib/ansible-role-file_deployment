@@ -38,7 +38,7 @@ repos:
         # e.g. python3.12.4 -> python3.12. This would defeat the purpose of being very specific,
         # therefore limitting the language to a minor version only
         # renovate dep: datasource=python-version versioning=python depName=python
-        language_version: '3.13'
+        language_version: '3.12'
 
   - repo: 'https://github.com/pre-commit/pre-commit-hooks'
     rev: 'v5.0.0'
@@ -153,13 +153,13 @@ repos:
         stages:
           - 'pre-commit'
 
-  - repo: 'https://github.com/Checkmarx/kics'
-    rev: 'v2.1.7'
+  - repo: 'local'
     hooks:
-      - id: 'kics-scan'
+      - id: 'kics-scan-local'
+        name: 'Kics scan'
+        language: 'docker_image'
+        entry: 'docker.io/checkmarx/kics:latest scan -p /src --no-progress'
         verbose: true
-        stages:
-          - 'pre-commit'
 
   - repo: 'https://github.com/python-jsonschema/check-jsonschema'
     rev: '0.33.0'
