@@ -88,7 +88,7 @@ jobs:
     runs-on: 'ubuntu-24.04'
     container:
       # yamllint disable-line rule:line-length
-      image: 'registry.access.redhat.com/ubi9/podman:9.5-1741858495@sha256:9226c21704ac1f95445e3f21f8e1186fd2b08848058380f8cf3ee6f912f939ca'
+      image: 'registry.access.redhat.com/ubi9/podman:9.5-1741858495@sha256:4704931a5679333f329325de58296fa5651f30a2b4c35cf21d0e2b36c316acc3'
       options: '--privileged'
     outputs:
       repository-name: '${{ steps.prepare-vars.outputs.repository-name }}'
