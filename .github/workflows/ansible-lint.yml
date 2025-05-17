@@ -91,5 +91,5 @@ jobs:
             declare __DEBUG="-vvvv"
           };
 
-          cd "${GITHUB_WORKSPACE}" && ansible-lint "${__DEBUG:=}"
+          ansible-lint "${__DEBUG:=}"
 ...
