@@ -81,7 +81,7 @@ jobs:
           #
 
           # yamllint disable-line rule:line-length
-          - image: 'ghcr.io/ansible/community-ansible-dev-tools:v25.4.4@sha256:58769e13dc5b8ea5b7d4d22225d05f3274d096667987f1536bb03e3e157021f4'
+          - image: 'ghcr.io/ansible/community-ansible-dev-tools:v25.5.1@sha256:eeef5223272875cf73137ecbff90572c2e3eccc98f35d971e942dbbc48bf5f66'
             molecule: '24.7.0'
 
           #
@@ -120,7 +120,7 @@ jobs:
         uses: 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' # v4.4.0
         with:
           # renovate dep: datasource=npm depName=node
-          node-version: '20.19.1'
+          node-version: '20.19.2'
 
       - name: 'Checkout repository'
         uses: 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' # v4.2.2

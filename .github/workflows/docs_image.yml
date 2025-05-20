@@ -33,7 +33,7 @@ env:
   # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
   # yamllint disable rule:line-length
   # renovate image dep:
-  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.24.3@sha256:e1b35e12a8c6fa8901f060459cfb6b2fc4c484d3afbe3b029733a3bbfab07055'
+  gitleaks-image: 'ghcr.io/gitleaks/gitleaks:v8.26.0@sha256:a6d5fa4bde3316d4ea9b969ebd3bd36a6529a31efdc5248f5779e6471196b85f'
   # yamllint enable rule:line-length
 
 jobs:
@@ -45,7 +45,7 @@ jobs:
       require-result: '${{ steps.check-access.outputs.require-result }}'
     steps:
       - name: 'Harden Runner'
-        uses: 'step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481' # v2.11.0
+        uses: 'step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0' # v2.12.0
         with:
           egress-policy: 'block'
           allowed-endpoints: >
@@ -88,7 +88,7 @@ jobs:
     runs-on: 'ubuntu-24.04'
     container:
       # yamllint disable-line rule:line-length
-      image: 'registry.access.redhat.com/ubi9/podman:9.5-1741858495@sha256:9226c21704ac1f95445e3f21f8e1186fd2b08848058380f8cf3ee6f912f939ca'
+      image: 'registry.access.redhat.com/ubi9/podman:9.6-1747641984@sha256:973a71d851373e8e94ea8df1cf2a68aa0d7e98766fcbb2457fef0b625ec2b1a2'
       options: '--privileged'
     outputs:
       repository-name: '${{ steps.prepare-vars.outputs.repository-name }}'
@@ -190,7 +190,7 @@ jobs:
       security-events: 'write'
     steps:
       - name: 'Harden Runner'
-        uses: 'step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481' # v2.11.0
+        uses: 'step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0' # v2.12.0
         with:
           egress-policy: 'block'
           allowed-endpoints: >
@@ -250,7 +250,7 @@ jobs:
         uses: 'docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2' # v3.10.0
 
       - name: 'Test build of the image'
-        uses: 'docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1' # v6.16.0
+        uses: 'docker/build-push-action@1dc73863535b631f98b2378be8619f83b136f4a0' # v6.17.0
         with:
           annotations: '${{ steps.metadata.outputs.annotations }}'
           cache-from: 'type=registry,ref=${{ needs.prepare-vars.outputs.image-name }}:buildcache'
@@ -307,14 +307,14 @@ jobs:
           retention-days: 5
 
       - name: 'Upload to code-scanning'
-        uses: 'github/codeql-action/upload-sarif@28deaeda66b76a05916b6923827895f2b14ab387' # v3.28.16
+        uses: 'github/codeql-action/upload-sarif@ff0a06e83cb2de871e5a09832bc6a81e7276941f' # v3.28.18
         with:
           sarif_file: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           category: 'Trivy-scan-test-image'
 
       - name: 'Build and push image'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1' # v6.16.0
+        uses: 'docker/build-push-action@1dc73863535b631f98b2378be8619f83b136f4a0' # v6.17.0
         id: 'build-push'
         with:
           annotations: '${{ steps.metadata.outputs.annotations }}'
@@ -329,7 +329,7 @@ jobs:
 
       - name: 'Generate artifact attestation'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'actions/attest-build-provenance@c074443f1aee8d4aeeae555aebba3282517141b2' # v2.2.3
+        uses: 'actions/attest-build-provenance@db473fddc028af60658334401dc6fa3ffd8669fd' # v2.3.0
         with:
           subject-name: '${{ needs.prepare-vars.outputs.image-name }}'
           subject-digest: '${{ steps.build-push.outputs.digest }}'
@@ -383,7 +383,7 @@ jobs:
 
       - name: 'Upload to code-scanning'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'github/codeql-action/upload-sarif@28deaeda66b76a05916b6923827895f2b14ab387' # v3.28.16
+        uses: 'github/codeql-action/upload-sarif@ff0a06e83cb2de871e5a09832bc6a81e7276941f' # v3.28.18
         with:
           sarif_file: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           category: 'Trivy-scan-final-image'
