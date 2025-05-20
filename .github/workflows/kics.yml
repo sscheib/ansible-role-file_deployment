@@ -111,6 +111,7 @@ jobs:
           };
 
           # allow broader access after scanning to the results file to allow upload artifact to pick it up
+          # see: https://github.com/Checkmarx/kics-github-action/issues/130
           sudo chmod 755 "./results/results.sarif"
 
       - name: 'Upload artifact'
