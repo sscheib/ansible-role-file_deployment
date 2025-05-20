@@ -160,6 +160,8 @@ repos:
         language: 'docker_image'
         entry: 'docker.io/checkmarx/kics:latest scan -p /src --no-progress'
         verbose: true
+        stages:
+          - 'pre-commit'
 
   - repo: 'https://github.com/python-jsonschema/check-jsonschema'
     rev: '0.33.0'
