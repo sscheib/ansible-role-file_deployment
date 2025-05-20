@@ -104,13 +104,14 @@ jobs:
             set -x;
           };
 
-          docker run -v ./results/results.sarif:/scan:ro "${{ env.gitleaks-image }}" \
+          docker run -v "./results/results.sarif:/scan:ro" "${{ env.gitleaks-image }}" \
             detect --source "/scan" --no-git || {
               echo "ERROR: Secret found, failing workflow";
               exit 1;
           };
 
-          ls -la ./results/results.sarif
+          # allow broader access after scanning to the results file to allow upload artifact to pick it up
+          chmod 755 "./results/results.sarif"
 
       - name: 'Upload artifact'
         uses: 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' # v4.6.2
