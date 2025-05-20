@@ -19,7 +19,7 @@ GEM
       fiber-annotation
       fiber-local (~> 1.1)
       json
-    csv (3.3.2)
+    csv (3.3.4)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -235,7 +235,7 @@ PLATFORMS
 
 DEPENDENCIES
   base64 (= 0.2.0)
-  csv (= 3.3.2)
+  csv (= 3.3.4)
   html-proofer (= 5.0.10)
   jekyll-github-metadata (= 2.16.1)
   jekyll-include-cache (= 0.2.1)
