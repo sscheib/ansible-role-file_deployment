@@ -22,9 +22,9 @@
   },
   "internalChecksFilter": "strict",
   "bundler": {
-    "fileMatch": [
-      "^docs/Gemfile$",
-      "^docs/Gemfile.lock$"
+    "managerFilePatterns": [
+      "/^docs/Gemfile$/",
+      "/^docs/Gemfile.lock$/"
     ]
   },
   "separateMajorMinor": true,
@@ -338,11 +338,11 @@
     {
       "description": "Extract execution environments and molecule platforms defined via image:",
       "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/molecule_community_ees\\.ya?ml$",
-        "^\\.github/workflows/docs_image\\.ya?ml$",
-        "^\\.github/workflows/wf_call_molecule_certified_ees\\.ya?ml$",
-        "^molecule/default/molecule\\.ya?ml$"
+      "managerFilePatterns": [
+        "/^\\.github/workflows/molecule_community_ees\\.ya?ml$/",
+        "/^\\.github/workflows/docs_image\\.ya?ml$/",
+        "/^\\.github/workflows/wf_call_molecule_certified_ees\\.ya?ml$/",
+        "/^molecule/default/molecule\\.ya?ml$/"
       ],
       "matchStrings": [
         "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\'"
@@ -353,9 +353,9 @@
     {
       "description": "Extract in-line dependencies for Python and NodeJS",
       "customType": "regex",
-      "fileMatch": [
-        "^\\.pre-commit-config\\.yaml$",
-        "^\\.github/workflows/.+?\\.ya?ml$"
+      "managerFilePatterns": [
+        "/^\\.pre-commit-config\\.yaml$/",
+        "/^\\.github/workflows/.+?\\.ya?ml$/"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?)(\\sversioning=(?<versioning>.*?))?\\s+-\\s+['\"]?(?<depName>[^=@]+)(?:==|@)\\s{0,}(?<currentValue>[^'\"\\s\\n]+)",
@@ -366,8 +366,8 @@
     {
       "description": "Extract in-line dependencies defined in YAML, e.g. molecule: 'X.Y.Z'",
       "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/.*?\\.ya?ml$"
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.*?\\.ya?ml$/"
       ],
       "matchStrings": [
         "# renovate yaml: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+(?<depName>[^:]+):\\s+?'(?:(?<currentValue>[^'\"\\s]*))?"
@@ -377,9 +377,9 @@
     {
       "description": "Extract custom dependency definitions",
       "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/.+?\\.ya?ml$",
-        "^\\.pre-commit-config\\.yaml$"
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.+?\\.ya?ml$/",
+        "/^\\.pre-commit-config\\.yaml$/"
       ],
       "matchStrings": [
         "# renovate dep: datasource=(?<datasource>.*?)(\\s+?versioning=(?<versioning>.*?))?\\s+?depName=(?<depName>[^\\s]+)(?:\\s+registryUrl=(?<registryUrl>.*?))?\\s+[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
@@ -389,8 +389,8 @@
     {
       "description": "Extract custom container image dependency definitions either defined in YAML e.g. var: <image> or BASH, e.g. var=<image>",
       "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/.+?\\.ya?ml$"
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.+?\\.ya?ml$/"
       ],
       "matchStrings": [
         "# renovate image dep:(?:\\s+?versioning=(?<versioning>[^\\s]+))?(?:\\s+?registryUrl=(?<registryUrl>[^\\s]+))?\\s+?[\\w_-]+(:?=|:\\s+?)['\"]?(?<depName>[^:]+):(?<currentValue>[^@\\s'\"]+)(?:@(?<currentDigest>[^\\s'\"]+))?"
@@ -401,8 +401,8 @@
     {
       "description": "Extract renovate container version",
       "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/renovate\\.ya?ml$"
+      "managerFilePatterns": [
+        "/^\\.github/workflows/renovate\\.ya?ml$/"
       ],
       "matchStrings": [
         "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>.*?)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
@@ -412,8 +412,8 @@
     {
       "description": "Extract dependencies in Containerfiles specified via ENV PACKAGE_NAME_VERSION=\"N\"",
       "customType": "regex",
-      "fileMatch": [
-        "^docs/Containerfile$"
+      "managerFilePatterns": [
+        "/^docs/Containerfile$/"
       ],
       "matchStrings": [
         "# renovate:\\s+?datasource=(?<datasource>.+?)\\s+?depName=(?<depName>.+?)(\\s+?versioning=(?<versioning>.+?))?\\s+?ENV\\s+?.+?_VERSION=\"(?<currentValue>.*)\"(?:\\s+)?"
@@ -423,8 +423,8 @@
     {
       "description": "Extract certified EEs from docs",
       "customType": "regex",
-      "fileMatch": [
-        "docs/molecule_tests.md"
+      "managerFilePatterns": [
+        "/docs/molecule_tests.md/"
       ],
       "matchStrings": [
         "(?<depName>ansible-automation-platform\\/ee-minimal-rhel\\d+):(?<currentValue>\\d+\\.\\d{1,}\\.\\d+(?:-\\d+)?)"
@@ -435,8 +435,8 @@
     {
       "description": "Extract community EEs from docs",
       "customType": "regex",
-      "fileMatch": [
-        "docs/molecule_tests.md"
+      "managerFilePatterns": [
+        "/docs/molecule_tests.md/"
       ],
       "matchStrings": [
         "(?<depName>ansible-community\\/community-ee-base):(?<currentValue>\\d+\\.\\d{1,}\\.\\d+(?:-\\d+)?)",
