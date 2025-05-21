@@ -40,7 +40,7 @@ module.exports = {
       {
 	rules: {
 	  'signed-off-and-coauthored': ({ body }) => {
-	    const lines = body.trim().split('\n');
+	    const lines = (body || '').trim().split('\n');
 	    const signOffPattern = /^Signed-off-by: .+ <.+>$/;
 	    const coAuthorPattern = /^Co-authored-by: .+ <.+>$/;
 
