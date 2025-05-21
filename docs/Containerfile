@@ -1,5 +1,5 @@
 # kics-scan disable=6b376af8-cfe8-49ab-a08d-f32de23661a4 - WORKDIR Path Not Absolute
-FROM docker.io/ruby:3.4.1-alpine3.20@sha256:d799fbab7da903c8e709be7df0734b8593ef884242cd34b7a7369b527f06aec3
+FROM docker.io/ruby:3.4.3-alpine3.20@sha256:1f36990c9ea23df2182c4f61c34106eb4b0e4f54e8a30a581f7290dcd29ec039
 
 #
 # build arguments
@@ -21,11 +21,20 @@ ENV BUILD_BASE_VERSION="0.5-r3"
 # renovate: datasource=repology depName=alpine_3_20/dumb-init versioning=loose
 ENV DUMB_INIT_VERSION="1.2.5-r3"
 
+# renovate: datasource=repology depName=alpine_3_20/libffi-dev versioning=loose
+ENV LIBFFI_DEV_VERSION="3.4.6-r0"
+
+# renovate: datasource=repology depName=alpine_3_20/linux-headers versioning=loose
+ENV LINUX_HEADERS_VERSION="6.6-r0"
+
+# renovate: datasource=repology depName=alpine_3_20/pkgconf versioning=loose
+ENV PKGCONF_VERSION="2.2.0-r0"
+
 # renovate: datasource=repology depName=alpine_3_20/zlib-dev versioning=loose
 ENV ZLIB_DEV_VERSION="1.3.1-r1"
 
 # renovate: datasource=rubygems depName=bundler
-ENV BUNDLER_VERSION="2.6.5"
+ENV BUNDLER_VERSION="2.6.9"
 
 # jekyll segfaults when executed via bundler in Alpine when not all dependencies are
 # correctly detected and installed via bundler
@@ -65,7 +74,10 @@ RUN set -eux; \
     apk add --no-cache --virtual build-deps \
       build-base="${BUILD_BASE_VERSION}" \
       zlib-dev="${ZLIB_DEV_VERSION}" \
-    ;
+      libffi-dev="${LIBFFI_DEV_VERSION}" \
+      linux-headers="${LINUX_HEADERS_VERSION}" \
+      pkgconf="${PKGCONF_VERSION}" \
+;
 
 # install dumb-init
 RUN set -eux; \
