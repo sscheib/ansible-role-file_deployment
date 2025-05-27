@@ -95,6 +95,12 @@ repos:
           - 'pre-commit'
         args:
           - '--markdown-linebreak-ext=md'
+      - id: 'file-contents-sorter'
+        stages:
+          - 'pre-commit'
+        files: '^.gitignore$'
+        args:
+          - '--unique'
 
   - repo: 'https://github.com/adrienverge/yamllint'
     rev: 'v1.37.1'

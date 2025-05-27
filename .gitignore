@@ -1,3 +1,4 @@
-docs/_site/
-docs/.jekyll_cache/
 **.swp
+.ansible
+docs/.jekyll_cache/
+docs/_site/
