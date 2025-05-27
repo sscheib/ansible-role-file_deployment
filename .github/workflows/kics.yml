@@ -40,7 +40,7 @@ jobs:
         uses: 'step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0' # v2.12.0
         with:
           egress-policy: 'block'
-          disable-sudo: false
+          disable-sudo: true
           allowed-endpoints: >
             api.github.com:443
             ghcr.io:443
@@ -109,10 +109,6 @@ jobs:
               echo "ERROR: Secret found, failing workflow";
               exit 1;
           };
-
-          # allow broader access after scanning to the results file to allow upload artifact to pick it up
-          # see: https://github.com/Checkmarx/kics-github-action/issues/130
-          sudo chmod 755 "./results/results.sarif"
 
       - name: 'Upload artifact'
         uses: 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' # v4.6.2
