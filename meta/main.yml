@@ -10,6 +10,7 @@ galaxy_info:
   platforms:
     - name: 'EL'
       versions:
+        - '10'
         - '9'
         - '8'
         - '7'
@@ -22,6 +23,7 @@ galaxy_info:
 
     - name: 'OpenWrt'
       versions:
+        - '24.10'
         - '23.05'
         - '22.03'
         - '21.02'

@@ -18,6 +18,16 @@ driver:
       ansible_become_method: 'su'
 
 platforms:
+  - name: 'rhel10-ubi'
+    # yamllint disable-line rule:line-length
+    image: 'registry.access.redhat.com/ubi10/ubi:10.0-1747220028@sha256:835f0c9321be6101a06c6f49049c5c197b095d704e94df69881124645e9f53a0'
+    groups:
+      - 'dnf'
+    skip_versions:
+      - '2.15'
+      - '2.14'
+      - '2.13'
+
   - name: 'rhel9-ubi'
     # yamllint disable-line rule:line-length
     image: 'registry.access.redhat.com/ubi9/ubi:9.6-1747219013@sha256:304b50df1ea4db9706d8a30f4bbf26f582936ebc80c7e075c72ff2af99292a54'
@@ -61,6 +71,12 @@ platforms:
       - 'apt'
     skip_versions:
       - '2.18'
+
+  - name: 'openwrt24.10'
+    # yamllint disable-line rule:line-length
+    image: 'docker.io/openwrt/rootfs:x86_64-24.10.1@sha256:767b9225a8718b48db1af8344034a70c215cb580b5333c9f9684b5f108c4312c'
+    groups:
+      - 'opkg'
 
   - name: 'openwrt23.05'
     # yamllint disable-line rule:line-length
