@@ -285,6 +285,16 @@
       "allowedVersions": "<3.13"
     },
     {
+      "description": "Limit Python to <3.13 in pre-commit to support RHEL 9 as development machine",
+      "matchFileNames": [
+        ".pre-commit-config.yaml"
+      ],
+      "matchDatasources": [
+        "python-version"
+      ],
+      "allowedVersions": "<3.13"
+    },
+    {
       "description": "Enable auto-merge specifically for selected dependencies as they are versioned in the 0.x version range",
       "matchDepNames": [
         "python-jsonschema/check-jsonschema",
