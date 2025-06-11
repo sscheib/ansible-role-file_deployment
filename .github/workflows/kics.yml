@@ -43,6 +43,8 @@ jobs:
           disable-sudo: true
           allowed-endpoints: >
             api.github.com:443
+            apk.cgr.dev:443
+            *.cloudflarestorage.com:443
             ghcr.io:443
             github.com:443
             kics.io:443
