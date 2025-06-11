@@ -38,7 +38,7 @@ repos:
         # e.g. python3.12.4 -> python3.12. This would defeat the purpose of being very specific,
         # therefore limitting the language to a minor version only
         # renovate dep: datasource=python-version versioning=python depName=python
-        language_version: '3.12'
+        language_version: '3.13'
 
   - repo: 'https://github.com/pre-commit/pre-commit-hooks'
     rev: 'v5.0.0'
