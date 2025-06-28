@@ -21,6 +21,14 @@ concurrency:
   group: 'ci-config-check-${{ github.workflow }}-${{ github.ref }}'
   cancel-in-progress: false
 
+env:
+  # renovate image to check the configuration file
+  # yamllint disable rule:line-length
+  # renovate image dep:
+  renovate-image: 'ghcr.io/renovatebot/renovate:41.12.1@sha256:de3f7cf3087a0f69ff3e399dac5ab71869b184f2601a5ee14b6d41b351354838'
+  # yamllint enable rule:line-length
+
+
 jobs:
   validate-renovate-configuration:
     name: 'Validate renovate configuration'
@@ -46,12 +54,6 @@ jobs:
       - name: 'Checkout the repository'
         uses: 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' # v4.2.2
 
-#      - name: 'Install NodeJS'
-#        uses: 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' # v4.4.0
-#        with:
-#          # renovate dep: datasource=npm depName=node
-#          node-version: '22.17.0'
-
       - name: 'Install renovate and run renovate-config-validator'
         shell: 'bash'
         run: |
@@ -68,9 +70,9 @@ jobs:
             set -x;
           };
 
-          # renovate self-update: datasource=docker depName=renovatebot/renovate registryUrl=https://ghcr.io
-          docker run --rm -v "${PWD}:/mnt" -w "/mnt" \
-            ghcr.io/renovatebot/renovate:41.12.1 renovate-config-validator --strict || {
-            exit 1;
+          docker run --rm -v "${PWD}:/mnt" -w "/mnt" \ "${{ env.renovate-image }}" \
+            renovate-config-validator --strict || {
+              echo "ERROR: Renovate configuration check failed, failing workflow!";
+              exit 1;
           };
 ...
