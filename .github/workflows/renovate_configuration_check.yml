@@ -70,7 +70,7 @@ jobs:
             set -x;
           };
 
-          docker run --rm -v "${PWD}:/mnt" -w "/mnt" \ "${{ env.renovate-image }}" \
+          docker run --rm -v "${{ github.workspace }}:/mnt" -w "/mnt" "${{ env.renovate-image }}" \
             renovate-config-validator --strict || {
               echo "ERROR: Renovate configuration check failed, failing workflow!";
               exit 1;
