@@ -250,6 +250,7 @@
     {
       "description": "Update renovate related dependencies once a week to avoid spamming",
       "matchDepNames": [
+        "ghcr.io/renovatebot/renovate",
         "renovatebot/github-action",
         "renovatebot/pre-commit-hooks",
         "renovatebot/renovate",
