@@ -20,7 +20,7 @@ driver:
 platforms:
   - name: 'rhel10-ubi'
     # yamllint disable-line rule:line-length
-    image: 'registry.access.redhat.com/ubi10/ubi:10.0-1750857300@sha256:7d97bc1d8c42a5bed9abb4ab0fafae74c367ed965c0e7c691b7dcc8bef400b10'
+    image: 'registry.access.redhat.com/ubi10/ubi:10.0-1751465707@sha256:75b236c2b4a2db04825f86821ae01963521e892825805b19a8ba94e12a6f759e'
     groups:
       - 'dnf'
     skip_versions:
