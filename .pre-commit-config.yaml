@@ -139,7 +139,7 @@ repos:
           - 'commit-msg'
         additional_dependencies:
           # renovate: datasource=npm
-          - 'conventional-changelog-conventionalcommits@9.0.0'
+          - 'conventional-changelog-conventionalcommits@9.1.0'
           # renovate: datasource=npm
           - 'commitlint-plugin-selective-scope@1.0.1'
 
