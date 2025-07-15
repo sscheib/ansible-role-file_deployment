@@ -67,6 +67,7 @@ platforms:
   - name: 'debian10'
     # yamllint disable-line rule:line-length
     image: 'docker.io/debian:10.13@sha256:58ce6f1271ae1c8a2006ff7d3e54e9874d839f573d8009c20154ad0f2fb0a225'
+    change_sources_list: true
     groups:
       - 'apt'
     skip_versions:
