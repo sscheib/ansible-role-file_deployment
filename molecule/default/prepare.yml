@@ -15,6 +15,17 @@
         map(attribute='name') |
         ansible.builtin.flatten
       block:
+        - name: 'Change sources list'
+          ansible.builtin.raw: |
+            sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list
+          changed_when: true
+          when: >-
+            molecule_yml.platforms |
+            selectattr('name', '==', inventory_hostname) |
+            selectattr('change_sources_list', 'defined') |
+            selectattr('change_sources_list', '==', true) |
+            length == 1
+
         - name: 'Update package lists'
           ansible.builtin.raw: |
             apt-get update
