@@ -42,6 +42,7 @@ jobs:
             ghcr.io:443
             github.com:443
             objects.githubusercontent.com:443
+            release-assets.githubusercontent.com:443
             pkg-containers.githubusercontent.com:443
             public.ecr.aws:443
 
