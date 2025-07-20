@@ -25,7 +25,7 @@ env:
   # renovate image to check the configuration file
   # yamllint disable rule:line-length
   # renovate image dep:
-  renovate-image: 'ghcr.io/renovatebot/renovate:41.32.0@sha256:51416fe84e2199ef20b6012d5fda8a3fe9e4e181b49610d81733ee04f0c8454f'
+  renovate-image: 'ghcr.io/renovatebot/renovate:41.40.0@sha256:21e2e5e8c51537649b5d9d1e85c0085aa5f53d5d198e2400d5ecc1e2448f9e9a'
   # yamllint enable rule:line-length
 
 
@@ -48,6 +48,7 @@ jobs:
             nodejs.org:443
             objects.githubusercontent.com:443
             pkg-containers.githubusercontent.com:443
+            release-assets.githubusercontent.com:443
             registry.npmjs.org:443
             rubygems.org:443
 

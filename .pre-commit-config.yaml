@@ -164,7 +164,7 @@ repos:
       - id: 'kics-scan-local'
         name: 'Kics scan'
         language: 'docker_image'
-        entry: 'docker.io/checkmarx/kics:latest scan -p /src --no-progress'
+        entry: 'docker.io/checkmarx/kics:latest scan -v ./:/src -p /src --no-progress'
         verbose: true
         stages:
           - 'pre-commit'
@@ -219,7 +219,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/renovatebot/pre-commit-hooks'
-    rev: '41.23.5'
+    rev: '41.40.0'
     hooks:
       - id: 'renovate-config-validator'
         verbose: true
