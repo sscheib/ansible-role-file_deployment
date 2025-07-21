@@ -225,7 +225,7 @@ jobs:
           export PIP_BREAK_SYSTEM_PACKAGES=1
 
           # renovate: datasource=pypi
-          pip3 install ansible-core==2.18.7
+          pip3 install ansible-core==2.19.0
 
           # renovate: datasource=pypi
           pip3 install ansible-lint==25.6.1
