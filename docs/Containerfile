@@ -34,7 +34,7 @@ ENV PKGCONF_VERSION="2.2.0-r0"
 ENV ZLIB_DEV_VERSION="1.3.1-r1"
 
 # renovate: datasource=rubygems depName=bundler
-ENV BUNDLER_VERSION="2.7.0"
+ENV BUNDLER_VERSION="2.7.1"
 
 # jekyll segfaults when executed via bundler in Alpine when not all dependencies are
 # correctly detected and installed via bundler
