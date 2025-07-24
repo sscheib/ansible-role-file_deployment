@@ -35,108 +35,108 @@ Below you'll find the complete test matrix for molecule.
 
 | Operating system control node | Operating system managed node | Ansible Core Version | Automation Execution Environment name                       |
 | :---------------------------- | :---------------------------- | :------------------- | :---------------------------------------------------------- |
-| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.6-2`     |
-| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.12-2`     |
-| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-20`     |
-| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
-| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-22`    |
+| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel9:2.18.7-4`     |
+| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel9:2.17.13-4`     |
+| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel9:2.16.14-24`     |
+| RHEL 9 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
+| RHEL 9 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel9:2.15.13-25`    |
 
 ## RHEL 8 (UBI) operating system control node
 
 | Operating system control node | Operating system managed node | Ansible Core Version | Automation Execution Environment name                       |
 | :---------------------------- | :---------------------------- | :------------------- | :---------------------------------------------------------- |
-| RHEL 8 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.6-1`     |
-| RHEL 8 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-19`     |
-| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-21`    |
-| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-32`    |
-| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
-| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-45`   |
+| RHEL 8 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.17    | `ansible-automation-platform/ee-minimal-rhel8:2.18.7-3`     |
+| RHEL 8 (UBI)                  | RHEL 10 (UBI)                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.16    | `ansible-automation-platform/ee-minimal-rhel8:2.16.14-23`     |
+| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.15    | `ansible-automation-platform/ee-minimal-rhel8:2.15.13-26`    |
+| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.14    | `ansible-automation-platform/ee-minimal-rhel8:2.14.13-34`    |
+| RHEL 8 (UBI)                  | RHEL 9 (UBI)                  | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | RHEL 8 (UBI)                  | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | RHEL 7 (UBI)                  | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | Debian 12 (Bookworm)          | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | Debian 11 (Bullseye)          | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | Debian 10 (Buster)            | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | OpenWrt 24.10                 | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | OpenWrt 23.05                 | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | OpenWrt 22.03.5               | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
+| RHEL 8 (UBI)                  | OpenWrt 21.02.7               | Ansible Core 2.13    | `ansible-automation-platform/ee-minimal-rhel8:2.13.10-47`   |
 
 ## Ansible Community Execution Environments
 
