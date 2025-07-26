@@ -205,6 +205,11 @@ repos:
         stages:
           - 'pre-commit'
 
+      - id: 'fix-unicode-dashes'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
       - id: 'forbid-bidi-controls'
         verbose: true
         stages:
