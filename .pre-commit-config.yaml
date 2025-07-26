@@ -188,7 +188,7 @@ repos:
           - 'pre-commit'
 
   - repo: 'https://github.com/sirosen/texthooks'
-    rev: '0.6.8'
+    rev: '0.7.1'
     hooks:
       - id: 'alphabetize-codeowners'
         verbose: true
@@ -200,7 +200,17 @@ repos:
         stages:
           - 'pre-commit'
 
+      - id: 'fix-smartquotes'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
       - id: 'fix-spaces'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'fix-unicode-dashes'
         verbose: true
         stages:
           - 'pre-commit'
