@@ -200,6 +200,11 @@ repos:
         stages:
           - 'pre-commit'
 
+      - id: 'fix-smartquotes'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
       - id: 'fix-spaces'
         verbose: true
         stages:
