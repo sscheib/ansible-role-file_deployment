@@ -20,7 +20,7 @@ driver:
 platforms:
   - name: 'rhel10-ubi'
     # yamllint disable-line rule:line-length
-    image: 'registry.access.redhat.com/ubi10/ubi:10.0-1752573517@sha256:158b70012c4898a0951abc5b4f98cefff6ec6bff3fb99957ff2f1793df7c681a'
+    image: 'registry.access.redhat.com/ubi10/ubi:10.0-1753787353@sha256:ceba546c5876f319e9dfa9beb4dd5ada6f33bd0f017bbaa4cb3974d626442a08'
     groups:
       - 'dnf'
     skip_versions:
@@ -30,13 +30,13 @@ platforms:
 
   - name: 'rhel9-ubi'
     # yamllint disable-line rule:line-length
-    image: 'registry.access.redhat.com/ubi9/ubi:9.6-1752625787@sha256:61bf5be4fcf7fa4d1ce6c8c0376dcb8b06e68aae6a0a54c4cf39c06116684962'
+    image: 'registry.access.redhat.com/ubi9/ubi:9.6-1753978585@sha256:0fa3e48369775f03b640a28cd5b55e6410569fa149f1827240619169463a7833'
     groups:
       - 'dnf'
 
   - name: 'rhel8-ubi'
     # yamllint disable-line rule:line-length
-    image: 'registry.access.redhat.com/ubi8/ubi:8.10-1752733233@sha256:b5cf5cbc9a2bb40b5216a3d15fd71ae9bda1491ab374246523dcdfa2e468fc5b'
+    image: 'registry.access.redhat.com/ubi8/ubi:8.10-1754001560@sha256:a463a8eb2e360f83a7f6baf32c53f7a07c13ff012658a203a7f5331fe93a4924'
     groups:
       - 'dnf'
     skip_versions:
