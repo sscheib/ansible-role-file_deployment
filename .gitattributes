@@ -3,14 +3,18 @@
 .commitlintrc.js -linguist-detectable
 .gitattributes -linguist-detectable
 .github/** -linguist-detectable
-kics.config -linguist-detectable
+.gitignore -linguist-detectable
+.hadolint.yml -linguist-detectable
 .markdown-link-check.json -linguist-detectable
 .markdownlintignore -linguist-detectable
 .markdownlint.yml -linguist-detectable
 .pre-commit-config.yaml -linguist-detectable
 .pyspelling -linguist-detectable
-release.config.js -linguist-detectable
+.trivyignore.yml -linguist-detectable
 .yamllint -linguist-detectable
+kics.config -linguist-detectable
+release.config.js -linguist-detectable
+triy.yml -linguist-detectable
 
 # enable detection for Ansible related YAML and Jinja2 paths
 defaults/** linguist-detectable
@@ -21,6 +25,23 @@ tasks/** linguist-detectable
 templates/** linguist-detectable
 
 # explicitly marking paths where Python can be found in a role as detectable
+action_plugins/** linguist-detectable
+become_plugins/** linguist-detectable
+cliconf_plugins/** linguist-detectable
+doc_fragments/** linguist-detectable
+filter_plugins/** linguist-detectable
+httpapi_plugins/** linguist-detectable
 library/** linguist-detectable
-module_utils/** linguist-detectable
 lookup_plugins/** linguist-detectable
+module_utils/** linguist-detectable
+netconf_plugins/** linguist-detectable
+shell_plugins/** linguist-detectable
+terminal_plugins/** linguist-detectable
+test_plugins/** linguist-detectable
+vars_plugins/** linguist-detectable
+
+# unsure if these are valid for Ansible
+callback_plugins/** linguist-detectable
+cache_plugins/** linguist-detectable
+inventory_plugins/** linguist-detectable
+strategy_plugins/** linguist-detectable
