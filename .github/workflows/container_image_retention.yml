@@ -84,7 +84,7 @@ jobs:
     runs-on: 'ubuntu-24.04'
     container:
       # yamllint disable-line rule:line-length
-      image: 'registry.access.redhat.com/ubi9/podman:9.6-1754870997@sha256:a21b7263e032db459a3ea2b78c85fb409f33025bbfa3f855f91feb1a5286c593'
+      image: 'registry.access.redhat.com/ubi9/podman:9.6-1755762222@sha256:59e276ff47e1e733899d212d6e473a9ec76da1cfccbe0ce20df479ada5eed6c4'
       options: '--privileged'
     outputs:
       action-debug: '${{ steps.prepare-vars.outputs.action-debug }}'
