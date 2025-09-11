@@ -91,7 +91,7 @@ jobs:
         uses: 'cycjimmy/semantic-release-action@16ca923e6ccbb50770c415a0ccd43709a8c5f7a4' # v4.2.2
         with:
           # renovate dep: datasource=npm depName=semantic-release
-          semantic_version: '24.2.7'
+          semantic_version: '24.2.8'
           extra_plugins: |
             @semantic-release/changelog@${semantic_release_changelog_version}
             @semantic-release/git@${semantic_release_git_version}
