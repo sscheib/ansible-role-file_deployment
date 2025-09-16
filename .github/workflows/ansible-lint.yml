@@ -228,7 +228,7 @@ jobs:
           pip3 install ansible-core==2.19.2
 
           # renovate: datasource=pypi
-          pip3 install ansible-lint==25.8.2
+          pip3 install ansible-lint==25.9.0
 
       - name: 'Install Ansible Collections and Roles'
         shell: 'bash'
