@@ -308,7 +308,7 @@ jobs:
           retention-days: 5
 
       - name: 'Upload to code-scanning'
-        uses: 'github/codeql-action/upload-sarif@014f16e7ab1402f30e7c3329d33797e7948572db' # v4.31.3
+        uses: 'github/codeql-action/upload-sarif@e12f0178983d466f2f6028f5cc7a6d786fd97f4b' # v4.31.4
         with:
           sarif_file: 'trivy-results-test-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           category: 'Trivy-scan-test-image'
@@ -330,7 +330,7 @@ jobs:
 
       - name: 'Generate artifact attestation'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be' # v2.4.0
+        uses: 'actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a' # v3.0.0
         with:
           subject-name: '${{ needs.prepare-vars.outputs.image-name }}'
           subject-digest: '${{ steps.build-push.outputs.digest }}'
@@ -384,7 +384,7 @@ jobs:
 
       - name: 'Upload to code-scanning'
         if: "${{ github.event_name != 'pull_request' }}"
-        uses: 'github/codeql-action/upload-sarif@014f16e7ab1402f30e7c3329d33797e7948572db' # v4.31.3
+        uses: 'github/codeql-action/upload-sarif@e12f0178983d466f2f6028f5cc7a6d786fd97f4b' # v4.31.4
         with:
           sarif_file: 'trivy-results-${{ needs.prepare-vars.outputs.next-version }}.sarif'
           category: 'Trivy-scan-final-image'
