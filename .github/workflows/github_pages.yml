@@ -30,7 +30,7 @@ env:
   # Jekyll image to use
   # yamllint disable rule:line-length
   # renovate image dep:
-  jekyll-image: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll:v25.12.3@sha256:60db8c9647a5fd6b5e8709904e1543782346660ba8be0ffbeb128f201fd481c9'
+  jekyll-image: 'ghcr.io/sscheib/ansible-role-file_deployment-jekyll:v25.12.4@sha256:85051a44caebc49b63aae4c63927788d98b15ecfb1445c2726a1726c2b55f764'
   # yamllint enable rule:line-length
 
   # gitleaks image to use to check files prior to uploading them to prevent sensitive data being leaked
