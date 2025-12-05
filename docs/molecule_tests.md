@@ -185,12 +185,12 @@ with `molecule` and do not *seem* to support multiple versions of Ansible Core, 
 
 | Operating system control node | Operating system managed node | Ansible Core Version | Automation Execution Environment name                 |
 | :---------------------------- | :---------------------------- | :------------------- | :---------------------------------------------------- |
-| Fedora 41                     | RHEL 10 (UBI)                 | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | Debian 10 (Buster)            | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | OpenWrt 24.10                 | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
-| Fedora 41                     | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.8.3`         |
+| Fedora 41                     | RHEL 10 (UBI)                 | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | RHEL 9 (UBI)                  | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | Debian 12 (Bookworm)          | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | Debian 11 (Bullseye)          | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | Debian 10 (Buster)            | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | OpenWrt 24.10                 | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | OpenWrt 23.05                 | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | OpenWrt 22.03.5               | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
+| Fedora 41                     | OpenWrt 21.02.7               | Ansible Core 2.18    | `ansible/community-ansible-dev-tools:v25.11.0`         |
