@@ -25,7 +25,7 @@ env:
   # renovate image to check the configuration file
   # yamllint disable rule:line-length
   # renovate image dep:
-  renovate-image: 'ghcr.io/renovatebot/renovate:42.66.11@sha256:e702d489f4d47302b8c487313296db859722feca134e17f674368f913c4e388d'
+  renovate-image: 'ghcr.io/renovatebot/renovate:42.71.0@sha256:00b07c100a298085126b9e59f0d0004edb0cf827c22b59f18dd7385399482e9d'
   # yamllint enable rule:line-length
 
 
