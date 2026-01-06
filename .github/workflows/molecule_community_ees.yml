@@ -81,7 +81,7 @@ jobs:
           #
 
           # yamllint disable-line rule:line-length
-          - image: 'ghcr.io/ansible/community-ansible-dev-tools:v25.8.3@sha256:aa1ebb0cd5af73d77abc4e5f143769d5152c2355de3e10cf399367078e9afd32'
+          - image: 'ghcr.io/ansible/community-ansible-dev-tools:v25.11.0@sha256:c3ee333e84517404d0940e9fd97b247b18cf60e957cbd1bb45e79ca84848beaa'
             molecule: '24.7.0'
 
           #
