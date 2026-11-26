@@ -76,7 +76,7 @@ jobs:
           mkdir -p results
 
       - name: 'Run KICS scan'
-        uses: 'checkmarx/kics-github-action@63fca4ca72e56edbb5a599ee756e6af1fdb1e785' # v2.1.18
+        uses: 'checkmarx/kics-github-action@9972ef1336d0246f5d3f75d2d2a4218852c955cc' # v2.1.18
         with:
           bom: true
           comments_with_queries: true
